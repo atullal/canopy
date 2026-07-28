@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import posthog from '../../utils/posthog';
 import scenarioData from '../../scenarios/app-permissions.json';
 
@@ -46,9 +47,6 @@ export default function AppPermissions() {
           message: scenarioData.feedback.gentleFailureNecessaryDeny.message,
           type: 'info' // The spec frame feels more informative here
         });
-        // We will keep them on the same challenge to try again, as implied by "Let's try again!"
-        // So we won't increment index in handleNextChallenge for this specific case... wait, let's just let handleNextChallenge advance and loop around, or we can add a state to retry.
-        // For simplicity, let's just let the normal flow happen, or reset.
       } else {
         // Correct Action (Allow Camera)
         setFeedback({
@@ -61,70 +59,130 @@ export default function AppPermissions() {
   };
 
   const handleModalClose = () => {
-    // If we just got the gentleFailureNecessaryDeny, we should probably stay on the same challenge to "try again"
     if (feedback?.title === scenarioData.feedback.gentleFailureNecessaryDeny.title) {
-      setFeedback(null);
+      setFeedback(null); // Stay on challenge to try again
     } else {
       handleNextChallenge();
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 font-sans">
-      <h1 className="text-3xl font-bold mb-4">{scenarioData.title}</h1>
-      <div className="bg-green-100 border-2 border-green-500 p-4 rounded-lg text-lg mb-6 text-green-900">
-        {scenarioData.description}
-      </div>
-
-      <div className="border-[12px] border-gray-900 rounded-[2.5rem] bg-gray-900 overflow-hidden shadow-2xl max-w-sm mx-auto h-[600px] flex flex-col relative">
-        <div className="flex-1 bg-gray-800 flex flex-col items-center justify-center text-white relative">
-          
-          <div className="text-[6rem] mb-4">{scenarioData.appContext.icon}</div>
-          <div className="text-2xl font-bold">{scenarioData.appContext.appName}</div>
-          
-          {/* Simulated System Permission Pop-up */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4/5 bg-gray-100 text-gray-900 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
-            <div className="p-6 text-center font-semibold text-lg leading-snug">
-              {currentChallenge.requestText}
-            </div>
-            <div className="flex border-t border-gray-300">
-              <button
-                onClick={() => handleAction('deny')}
-                className="flex-1 py-4 text-red-600 font-semibold border-r border-gray-300 hover:bg-gray-200 transition"
-              >
-                {scenarioData.actions.find(a => a.id === 'deny')?.label}
-              </button>
-              <button
-                onClick={() => handleAction('allow')}
-                className="flex-1 py-4 text-blue-600 font-semibold hover:bg-gray-200 transition"
-              >
-                {scenarioData.actions.find(a => a.id === 'allow')?.label}
-              </button>
-            </div>
-          </div>
-
+    <main className="max-w-4xl mx-auto p-4 md:p-8 font-sans text-gray-900 bg-gray-50 min-h-screen">
+      <header className="mb-10 text-center">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-black">
+          {scenarioData.title}
+        </h1>
+        <div 
+          role="region" 
+          aria-label="Scenario Description"
+          className="bg-white border-4 border-blue-100 p-6 rounded-2xl text-2xl leading-relaxed text-gray-800 shadow-sm inline-block text-left max-w-3xl"
+        >
+          {scenarioData.description}
         </div>
-      </div>
+      </header>
 
-      {/* Feedback Modal */}
-      {feedback && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50">
-          <div className="bg-white p-8 rounded-2xl max-w-lg w-full text-center shadow-xl">
-            <h3 className={`text-2xl font-bold mb-4 ${feedback.type === 'failure' ? 'text-red-600' : feedback.type === 'success' ? 'text-green-600' : 'text-blue-600'}`}>
-              {feedback.title}
-            </h3>
-            <div className="text-lg text-gray-700 whitespace-pre-wrap mb-6 text-left leading-relaxed">
-              {feedback.message}
-            </div>
-            <button 
-              onClick={handleModalClose}
-              className="bg-blue-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-blue-700 w-full transition"
+      <div className="max-w-[420px] mx-auto border-[16px] border-black rounded-[3.5rem] bg-gray-900 overflow-hidden shadow-2xl h-[750px] flex flex-col relative">
+        <div className="flex-1 bg-gradient-to-b from-gray-800 to-gray-950 flex flex-col items-center justify-center text-white relative">
+          
+          {/* Background App Interface */}
+          <div className="text-[8rem] mb-6 drop-shadow-xl select-none">{scenarioData.appContext.icon}</div>
+          <div className="text-3xl font-extrabold tracking-wide mb-2 select-none">{scenarioData.appContext.appName}</div>
+          
+          {/* OS-Level Backdrop Blur & Pop-up */}
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={challengeIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.15 } }}
+              className="absolute inset-0 bg-black/40 backdrop-blur-[6px] flex items-center justify-center p-6 z-10"
+              aria-hidden={feedback !== null}
             >
-              Continue
-            </button>
-          </div>
+              <motion.div 
+                role="alertdialog"
+                aria-modal="true"
+                initial={{ scale: 0.8, opacity: 0, y: 15 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.9, opacity: 0, transition: { duration: 0.15 } }}
+                transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+                className="w-full max-w-[320px] bg-white/90 backdrop-blur-2xl rounded-3xl overflow-hidden shadow-2xl flex flex-col border border-white/20"
+              >
+                {/* OS Dialog Content */}
+                <div className="p-6 text-center text-gray-900">
+                  <h3 className="font-semibold text-[22px] leading-tight mb-2 tracking-tight">
+                    {currentChallenge.requestText.split('.')[0]}.
+                  </h3>
+                  <p className="text-[17px] leading-snug font-medium text-gray-700">
+                    {currentChallenge.requestText.split('.').slice(1).join('.').trim() || currentChallenge.requestText}
+                  </p>
+                </div>
+                
+                {/* OS Dialog Buttons - Stacked for extreme tappability */}
+                <div className="flex flex-col border-t border-gray-300/50">
+                  <motion.button
+                    whileTap={{ backgroundColor: 'rgba(0,0,0,0.05)' }}
+                    onClick={() => handleAction('deny')}
+                    className="w-full py-4 text-blue-600 font-normal text-2xl border-b border-gray-300/50 transition-colors focus:outline-none focus-visible:bg-gray-200"
+                  >
+                    {scenarioData.actions.find((a: any) => a.id === 'deny')?.label || "Don't Allow"}
+                  </motion.button>
+                  <motion.button
+                    whileTap={{ backgroundColor: 'rgba(0,0,0,0.05)' }}
+                    onClick={() => handleAction('allow')}
+                    className="w-full py-4 text-blue-600 font-semibold text-2xl transition-colors focus:outline-none focus-visible:bg-gray-200"
+                  >
+                    {scenarioData.actions.find((a: any) => a.id === 'allow')?.label || "Allow"}
+                  </motion.button>
+                </div>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
+
         </div>
-      )}
-    </div>
+      </div>
+
+      {/* Feedback Modal with Framer Motion */}
+      <AnimatePresence>
+        {feedback && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm"
+              onClick={handleModalClose}
+              aria-hidden="true"
+            />
+            
+            <motion.div 
+              role="alertdialog"
+              aria-modal="true"
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25, mass: 1 }}
+              className="relative bg-white border-4 border-gray-200 p-8 md:p-12 rounded-3xl max-w-2xl w-full text-center shadow-2xl"
+            >
+              <h3 className={`text-4xl font-extrabold mb-8 ${feedback.type === 'failure' ? 'text-red-800' : feedback.type === 'success' ? 'text-green-800' : 'text-blue-800'}`}>
+                {feedback.title}
+              </h3>
+              <div className="text-2xl text-gray-900 leading-relaxed whitespace-pre-wrap mb-10 text-left bg-gray-50 p-6 rounded-xl border border-gray-200">
+                {feedback.message}
+              </div>
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleModalClose}
+                autoFocus
+                className="w-full sm:w-auto min-w-[14rem] bg-blue-700 text-white font-bold text-3xl py-6 px-10 rounded-xl hover:bg-blue-800 active:bg-blue-900 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 shadow-md"
+              >
+                Continue
+              </motion.button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </main>
   );
 }
