@@ -21,6 +21,18 @@ export default function Home() {
                 A safe, interactive environment to practice spotting scam emails. No real money or personal information is connected here.
               </p>
             </a>
+            
+            <a 
+              href="/fake-checkout" 
+              className="group block border border-gray-200 rounded-xl p-6 hover:border-blue-500 hover:shadow-md transition-all"
+            >
+              <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
+                🛒 Practice Checkout: Safe Payments &rarr;
+              </h3>
+              <p className="text-gray-600">
+                A zero-risk sandbox where you can practice checking website addresses for tricks and choosing the safest payment method.
+              </p>
+            </a>
           </div>
         </div>
       </main>
