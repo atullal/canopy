@@ -1,0 +1,51 @@
+{
+  "id": "update-screen",
+  "title": "Practice Updates",
+  "description": "Keeping your device updated is important for safety, but scammers often fake update screens. Look at the screens below. Decide if it is a real system update or a fake internet trick. You cannot break anything here!",
+  "actions": [
+    {
+      "id": "install",
+      "label": "⚙️ Install Update",
+      "type": "primary"
+    },
+    {
+      "id": "ignore",
+      "label": "🛑 Close and Ignore",
+      "type": "danger"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "challenge-1",
+      "type": "browser-popup",
+      "urlBar": "www.free-news-website.com",
+      "visualStyle": "loud, flashing red and yellow",
+      "message": "⚠️ WARNING! Your phone has a virus! It is severely damaged! You MUST click here to install an urgent update right now or lose all your photos!",
+      "isReal": false,
+      "flags": ["Urgency", "Fear", "Browser"]
+    },
+    {
+      "id": "challenge-2",
+      "type": "system-settings",
+      "urlBar": null,
+      "visualStyle": "calm, clean, plain text on white or gray background",
+      "message": "Software Update. A new update is available for your device. This update includes bug fixes and security improvements. It will take about 10 minutes to complete.",
+      "isReal": true,
+      "flags": ["Calm", "Settings App"]
+    }
+  ],
+  "feedback": {
+    "gentleFailureFakeInstall": {
+      "title": "Oops! That one was a sneaky trick.",
+      "message": "In the real world, clicking that warning might download a bad program. But **here in the simulator, you are completely safe!**\n\nRemember our Golden Rule: scammers try to make you panic. Real device updates never yell at you, flash red, or say you have a virus. They are quiet and polite. If a screen is trying to scare you into acting quickly, it is always a trick. Let's take a deep breath and try the next one!"
+    },
+    "gentleFailureRealIgnore": {
+      "title": "You chose to ignore the update. It is always good to be cautious!",
+      "message": "However, this one was a real, safe update. Notice how the screen was calm, polite, and didn't try to scare you? Real updates live in your device's 'Settings' app, not on websites.\n\nKeeping your device updated is like locking your front door—it is the best way to keep the bad guys out. When you see a calm, polite update in your settings, it is safe to install it. Let's try again!"
+    },
+    "success": {
+      "title": "Excellent work!",
+      "message": "You saw right through the scary fake pop-up and closed it. You also recognized the quiet, polite tone of a real system update and installed it to keep your device safe.\n\nRemember: if a screen tries to scare you or rush you, it's a trick. Real updates are calm and helpful. You are doing a wonderful job!"
+    }
+  }
+}
