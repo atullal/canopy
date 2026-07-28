@@ -1,0 +1,69 @@
+{
+  "id": "storage-full-gallery",
+  "title": "Practice Photo Gallery",
+  "description": "Your device storage is full! Let's make some space. Look at the photos below. Tap the ones that are blurry or mistakes, and tap 'Delete'. Don't worry—you cannot lose real photos here!",
+  "actions": [
+    {
+      "id": "delete",
+      "label": "🗑️ Delete Selected Photos",
+      "type": "danger"
+    },
+    {
+      "id": "undo",
+      "label": "↩️ Undo (Recently Deleted)",
+      "type": "secondary"
+    }
+  ],
+  "photos": [
+    {
+      "id": "photo-1",
+      "description": "Clear, smiling photo of a family at a birthday party.",
+      "isKeeper": true,
+      "type": "family"
+    },
+    {
+      "id": "photo-2",
+      "description": "Completely blurry, unrecognizable smear of colors.",
+      "isKeeper": false,
+      "type": "blurry"
+    },
+    {
+      "id": "photo-3",
+      "description": "Dark, blurry photo of the inside of a pocket or a foot.",
+      "isKeeper": false,
+      "type": "accidental"
+    },
+    {
+      "id": "photo-4",
+      "description": "Clear picture of a pet dog sitting still.",
+      "isKeeper": true,
+      "type": "pet"
+    },
+    {
+      "id": "photo-5",
+      "description": "Picture of a garden flower (looks exactly like Photo 6).",
+      "isKeeper": false,
+      "type": "duplicate"
+    },
+    {
+      "id": "photo-6",
+      "description": "Picture of the exact same garden flower, but slightly brighter and better framed.",
+      "isKeeper": true,
+      "type": "best-shot"
+    }
+  ],
+  "feedback": {
+    "gentleFailureKeeperDeleted": {
+      "title": "Oops! You deleted a nice, clear photo.",
+      "message": "In real life, deleting a precious memory can feel scary. But **here in the simulator, nothing is permanently lost!**\n\nEven on your real phone, when you delete a photo, it doesn't vanish immediately. It goes to a safe place called the **'Recently Deleted'** folder for about a month. If you make a mistake, you can always go into that folder and put the picture back.\n\nTry clicking the blue [ ↩️ Undo (Recently Deleted) ] button to bring the photo back, and then try selecting only the blurry ones."
+    },
+    "gentleFailureNotEnoughDeleted": {
+      "title": "You are being very careful, which is great!",
+      "message": "However, your storage is still a bit too full. To make room for new memories, we need to let go of the accidents. Try to find the photo that is completely blurry, the picture of the foot, and the extra picture of the flower.\n\nRemember, it's safe to practice here. Let's try again!"
+    },
+    "success": {
+      "title": "Wonderful job!",
+      "message": "You successfully cleared out the blurry mistakes and duplicates, leaving plenty of room for new, beautiful memories.\n\nRemember: managing your storage is like cleaning out a real closet. It's a normal part of owning a device, and the 'Recently Deleted' folder is always there to catch any accidental mistakes. You did great!"
+    }
+  }
+}
