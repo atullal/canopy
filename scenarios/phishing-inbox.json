@@ -1,0 +1,57 @@
+{
+  "id": "phishing-inbox",
+  "title": "Practice Inbox",
+  "description": "Welcome to your Practice Inbox! This is a safe space. No real money or personal information is connected here. Read the emails below and practice spotting the tricks. Click 'This is a Scam' or 'This is Safe' for each one.",
+  "emails": [
+    {
+      "id": "email-1",
+      "isScam": true,
+      "senderName": "Billing Department",
+      "senderAddress": "billing-update-992@scam-example.com",
+      "subject": "Receipt for your recent purchase - $499.99",
+      "body": "Dear Customer,\n\nYour credit card has been charged $499.99 for your annual computer support subscription. If you did not authorize this purchase, you must click the link below immediately to cancel the charge and get a refund.",
+      "linkText": "Cancel Charge Now",
+      "flags": ["Urgency", "Money"]
+    },
+    {
+      "id": "email-2",
+      "isScam": true,
+      "senderName": "Emergency",
+      "senderAddress": "helpme-221@random-mail.com",
+      "subject": "Please help, I'm in trouble!",
+      "body": "Hi, it's me. I lost my phone and I am stranded. Please don't tell mom and dad, they will be so mad at me. I need you to buy $200 in Apple gift cards and send me the codes so I can get a ride home. Please hurry!",
+      "linkText": "How to buy gift cards",
+      "flags": ["Urgency", "Secrecy", "Money"]
+    },
+    {
+      "id": "email-3",
+      "isScam": true,
+      "senderName": "Bank Security",
+      "senderAddress": "security-alert@not-a-real-bank.com",
+      "subject": "URGENT: Your account will be locked",
+      "body": "We noticed unusual activity on your account. For your safety, we will permanently lock your account in 12 hours unless you verify your identity. Click the link below to log in and confirm your password.",
+      "linkText": "Verify Password Now",
+      "flags": ["Urgency", "Threats"]
+    },
+    {
+      "id": "email-4",
+      "isScam": false,
+      "senderName": "Martha",
+      "senderAddress": "martha.friend@email.com",
+      "subject": "Sunday dinner recipe",
+      "body": "Hi! I was hoping you could send me that wonderful chicken recipe you made last week? No rush at all, just whenever you have a moment. Hope you are doing well!\n\nLove, Martha.",
+      "linkText": null,
+      "flags": []
+    }
+  ],
+  "feedback": {
+    "gentleFailure": {
+      "title": "Oops! That one was a trick.",
+      "message": "In the real world, clicking that link could be dangerous, but **here in the simulator, you are completely safe!** You did not break anything.\n\nRemember our golden rule: this email tried to make you panic by using urgency or asking for money/secrets. \n\nNext time you see a message like this, close the email. If you are worried, call the person or the company directly using a phone number you already know and trust. Let's take a deep breath and try the next one!"
+    },
+    "success": {
+      "title": "Great job! You spotted the trick.",
+      "message": "By slowing down and noticing the warning signs (like urgency or asking for money), you kept your information safe. You are doing wonderfully. Let's keep going!"
+    }
+  }
+}
