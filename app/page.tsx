@@ -69,6 +69,18 @@ export default function Home() {
                 A safe sandbox to practice telling the difference between real, safe device updates and fake, scary internet pop-up tricks.
               </p>
             </a>
+
+            <a 
+              href="/app-permissions" 
+              className="group block border border-gray-200 rounded-xl p-6 hover:border-blue-500 hover:shadow-md transition-all"
+            >
+              <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
+                ✋ Practice App Install: Permissions &rarr;
+              </h3>
+              <p className="text-gray-600">
+                A zero-risk sandbox where you can practice thinking critically about what personal information an app actually needs to do its job.
+              </p>
+            </a>
           </div>
         </div>
       </main>
