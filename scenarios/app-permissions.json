@@ -1,0 +1,55 @@
+{
+  "id": "app-permissions",
+  "title": "Practice App Install",
+  "description": "When you open a new app, it might ask for permission to see your personal information. You are in charge—you get to say yes or no! Let's practice with a new Flashlight app. You cannot break anything here!",
+  "appContext": {
+    "appName": "Super Bright Flashlight",
+    "icon": "🔦"
+  },
+  "actions": [
+    {
+      "id": "deny",
+      "label": "❌ Deny (Say No)",
+      "type": "danger"
+    },
+    {
+      "id": "allow",
+      "label": "✅ Allow (Say Yes)",
+      "type": "primary"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "permission-contacts",
+      "requestText": "Super Bright Flashlight would like to access your Contacts.",
+      "isNecessary": false,
+      "context": "A flashlight has no reason to know the phone numbers of your friends and family."
+    },
+    {
+      "id": "permission-microphone",
+      "requestText": "Super Bright Flashlight would like to access your Microphone.",
+      "isNecessary": false,
+      "context": "A flashlight does not need to listen to your conversations."
+    },
+    {
+      "id": "permission-camera",
+      "requestText": "Super Bright Flashlight would like to access your Camera.",
+      "isNecessary": true,
+      "context": "The bright light on a phone is physically built into the camera. The app needs camera permission just to turn the light bulb on!"
+    }
+  ],
+  "feedback": {
+    "gentleFailureUnnecessaryAllow": {
+      "title": "Oops! You clicked 'Allow' for that one.",
+      "message": "In the real world, an app could use that to read your address book or listen to you. But **here in the simulator, your privacy is completely safe!**\n\nWhen an app asks for permission, ask yourself: 'Does this app really need this to do its job?' A flashlight app only makes light. It does not need to call your friends, and it does not need to hear your voice. It is always safest to click 'Deny' if it doesn't make sense. Let's try the next one!"
+    },
+    "gentleFailureNecessaryDeny": {
+      "title": "You chose 'Deny'. It is always a great instinct to protect your privacy!",
+      "message": "However, this one is a little tricky. On most phones, the flashlight bulb is physically connected to the camera. So, a flashlight app *does* need permission to use the camera, just so it can turn the bulb on!\n\nIf you accidentally deny something an app actually needs, the app simply won't work, and you can always change it later in your Settings. You didn't break anything. Let's try again!"
+    },
+    "success": {
+      "title": "Fantastic job!",
+      "message": "You thought carefully about exactly what the app needed. You protected your friends' phone numbers and your microphone, but you correctly allowed the camera so the light bulb could work.\n\nRemember: you are the boss of your device. If a permission doesn't make sense to you, always click 'Deny'. You are doing wonderfully!"
+    }
+  }
+}
