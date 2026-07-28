@@ -33,6 +33,18 @@ export default function Home() {
                 A zero-risk sandbox where you can practice checking website addresses for tricks and choosing the safest payment method.
               </p>
             </a>
+            
+            <a 
+              href="/urgent-text-message" 
+              className="group block border border-gray-200 rounded-xl p-6 hover:border-blue-500 hover:shadow-md transition-all"
+            >
+              <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
+                📱 Practice Text Messages: Golden Rule &rarr;
+              </h3>
+              <p className="text-gray-600">
+                A safe space to practice reading text messages, looking for signs of scams, and safely deleting them without fear.
+              </p>
+            </a>
           </div>
         </div>
       </main>
