@@ -45,6 +45,18 @@ export default function Home() {
                 A safe space to practice reading text messages, looking for signs of scams, and safely deleting them without fear.
               </p>
             </a>
+
+            <a 
+              href="/storage-full-gallery" 
+              className="group block border border-gray-200 rounded-xl p-6 hover:border-blue-500 hover:shadow-md transition-all"
+            >
+              <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
+                🖼️ Practice Photo Gallery: Storage Full &rarr;
+              </h3>
+              <p className="text-gray-600">
+                A zero-risk sandbox where you can practice making space by deleting unwanted photos, and learn how to use the 'Recently Deleted' folder.
+              </p>
+            </a>
           </div>
         </div>
       </main>
