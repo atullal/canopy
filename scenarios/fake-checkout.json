@@ -1,0 +1,50 @@
+{
+  "id": "fake-checkout",
+  "title": "Practice Checkout",
+  "description": "Welcome to the Practice Checkout! No real money is used here. Your goal is to check if this store is real, and if it is, pick the safest way to pay.",
+  "paymentOptions": [
+    {
+      "id": "credit-card",
+      "label": "Credit Card",
+      "isSafe": true
+    },
+    {
+      "id": "debit-card",
+      "label": "Debit Card / Bank Transfer",
+      "isSafe": false
+    },
+    {
+      "id": "gift-card",
+      "label": "Target Gift Card",
+      "isSafe": false
+    }
+  ],
+  "challenges": [
+    {
+      "id": "challenge-1",
+      "urlBar": "www.amaz0n-update-store.com",
+      "isLegitimate": false,
+      "cartSummary": "1x Coffee Maker - $45.00"
+    },
+    {
+      "id": "challenge-2",
+      "urlBar": "www.amazon.com",
+      "isLegitimate": true,
+      "cartSummary": "1x Coffee Maker - $45.00"
+    }
+  ],
+  "feedback": {
+    "gentleFailureFakeSite": {
+      "title": "Oops! That one was a sneaky trick.",
+      "message": "If you look closely at the address bar, it says **'amaz0n-update-store.com'** instead of the real **'amazon.com'**. In the real world, this copycat website would steal your payment information. But **here in the simulator, you are completely safe!** You did not break anything or lose any money.\n\nAlways check the top of the screen to make sure the store's name is spelled perfectly. Let's take a deep breath and try another one!"
+    },
+    "gentleFailureUnsafePayment": {
+      "title": "You checked the website address, but...",
+      "message": "You chose a payment method that does not protect you very well. A Debit Card takes money directly out of your actual bank account immediately. If a mistake happens, it is very hard to get that money back. (And remember, Gift Cards should never be used to pay for everyday online shopping).\n\n**Credit Cards are the safest choice.** If a criminal steals a credit card number, they are spending the bank's money, not yours. The bank will usually cancel the fake charge for you. Let's try again!"
+    },
+    "success": {
+      "title": "Perfect!",
+      "message": "You did two very important things right:\n\n1. You checked the website address and saw it was the real, perfectly spelled store.\n2. You picked a Credit Card, which gives you the strongest protection if anything ever goes wrong.\n\nYou are becoming a very confident and safe online shopper. Great job!"
+    }
+  }
+}
