@@ -1,6 +1,23 @@
 import SwiftUI
 import ScenarioKit
 
+// MARK: - Motion & Styling
+public struct SpringSquishButtonStyle: ButtonStyle {
+    public init() {}
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: configuration.isPressed)
+    }
+}
+
+extension Color {
+    static let canopyNavy = Color(red: 0.12, green: 0.25, blue: 0.69) // #1E40AF
+    static let canopyRed = Color(red: 0.60, green: 0.11, blue: 0.11) // #991B1B
+    static let canopyGreen = Color(red: 0.08, green: 0.40, blue: 0.14) // Deep green
+    static let canopyText = Color(white: 0.1) // Near black for contrast
+}
+
 // MARK: - AdaptiveHesitationEngine
 public struct AdaptiveHesitationEngine<Content: View, Hint: View>: View {
     let idleTime: TimeInterval
@@ -33,11 +50,11 @@ public struct AdaptiveHesitationEngine<Content: View, Hint: View>: View {
                 VStack {
                     Spacer()
                     hintContent()
-                        .padding()
-                        .background(Color(white: 0.95))
+                        .padding(24)
+                        .background(Color.white)
                         .cornerRadius(16)
-                        .shadow(radius: 10)
-                        .padding()
+                        .shadow(color: .black.opacity(0.15), radius: 10)
+                        .padding(24)
                         .accessibilityElement(children: .combine)
                         .accessibilityLabel("Hint available")
                         .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -52,7 +69,7 @@ public struct AdaptiveHesitationEngine<Content: View, Hint: View>: View {
         showHint = false
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: idleTime, repeats: false) { _ in
-            withAnimation(.spring()) {
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
                 showHint = true
             }
         }
@@ -70,11 +87,11 @@ public struct SplitScreenComparative: View {
     
     public var body: some View {
         ViewThatFits {
-            HStack(alignment: .top, spacing: 20) {
+            HStack(alignment: .top, spacing: 24) {
                 column(title: leftTitle, content: leftContent, isRed: true)
                 column(title: rightTitle, content: rightContent, isRed: false)
             }
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 24) {
                 column(title: leftTitle, content: leftContent, isRed: true)
                 column(title: rightTitle, content: rightContent, isRed: false)
             }
@@ -82,12 +99,14 @@ public struct SplitScreenComparative: View {
     }
     
     private func column(title: String, content: AnyView, isRed: Bool) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 16) {
             Text(title)
                 .font(.title2)
-                .bold()
-                .foregroundColor(isRed ? Color(red: 0.6, green: 0, blue: 0) : Color(red: 0, green: 0.4, blue: 0))
+                .fontWeight(.black)
+                .foregroundColor(isRed ? Color.canopyRed : Color.canopyGreen)
             content
+                .font(.title3) // Base 20pt
+                .foregroundColor(.canopyText)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -125,26 +144,27 @@ public struct FakeFriendRequestView: View {
             ScrollView {
                 VStack(spacing: 32) {
                     // Header
-                    VStack(spacing: 16) {
+                    VStack(spacing: 24) {
                         Text(scenario.title)
                             .font(.largeTitle)
                             .fontWeight(.heavy)
                             .multilineTextAlignment(.center)
-                            .foregroundColor(.primary)
+                            .foregroundColor(.canopyText)
                         
                         Text(scenario.description)
-                            .font(.title3)
-                            .padding()
+                            .font(.title3) // 20pt base
+                            .foregroundColor(.canopyText)
+                            .padding(24)
                             .background(Color.white)
-                            .cornerRadius(16)
+                            .cornerRadius(24)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.blue.opacity(0.3), lineWidth: 4)
+                                RoundedRectangle(cornerRadius: 24)
+                                    .stroke(Color.canopyNavy.opacity(0.3), lineWidth: 4)
                             )
                             .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
                             .accessibilityElement(children: .combine)
                     }
-                    .padding(.horizontal)
+                    .padding(.horizontal, 24)
                     
                     // Card Container
                     VStack(spacing: 0) {
@@ -153,8 +173,8 @@ public struct FakeFriendRequestView: View {
                             .fontWeight(.black)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
-                            .background(Color(red: 0.1, green: 0.2, blue: 0.5)) // blue-900
+                            .padding(.vertical, 24)
+                            .background(Color.canopyNavy)
                             .zIndex(1)
                         
                         VStack(spacing: 24) {
@@ -174,103 +194,109 @@ public struct FakeFriendRequestView: View {
                             Text(currentRequest.name)
                                 .font(.title)
                                 .fontWeight(.black)
+                                .foregroundColor(.canopyText)
                                 .multilineTextAlignment(.center)
                             
                             Text("\"\(currentRequest.bio)\"")
-                                .font(.title3)
+                                .font(.title3) // 20pt base
                                 .italic()
-                                .foregroundColor(Color(white: 0.2))
+                                .foregroundColor(Color(white: 0.25))
                                 .multilineTextAlignment(.center)
                             
                             // Info Box
                             VStack(spacing: 16) {
                                 HStack {
                                     Text("Friends in Common:")
-                                        .font(.headline)
-                                        .bold()
-                                        .foregroundColor(Color(red: 0.1, green: 0.2, blue: 0.5))
+                                        .font(.title3)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.canopyNavy)
                                     Spacer()
                                     Text("\(currentRequest.friendsInCommon)")
                                         .font(.title2)
                                         .fontWeight(.black)
+                                        .foregroundColor(.canopyText)
                                 }
                                 .padding(.bottom, 12)
                                 .overlay(
                                     Rectangle()
                                         .frame(height: 2)
-                                        .foregroundColor(Color.blue.opacity(0.2)),
+                                        .foregroundColor(Color.canopyNavy.opacity(0.2)),
                                     alignment: .bottom
                                 )
                                 
                                 HStack {
                                     Text("Profile Created:")
-                                        .font(.headline)
-                                        .bold()
-                                        .foregroundColor(Color(red: 0.1, green: 0.2, blue: 0.5))
+                                        .font(.title3)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.canopyNavy)
                                     Spacer()
                                     Text(currentRequest.joinDate)
                                         .font(.title2)
                                         .fontWeight(.black)
+                                        .foregroundColor(.canopyText)
                                 }
                             }
-                            .padding()
-                            .background(Color.blue.opacity(0.05))
+                            .padding(24)
+                            .background(Color.canopyNavy.opacity(0.05))
                             .cornerRadius(16)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.blue.opacity(0.2), lineWidth: 4)
+                                    .stroke(Color.canopyNavy.opacity(0.2), lineWidth: 4)
                             )
                             .accessibilityElement(children: .combine)
                             
                             Spacer(minLength: 24)
                             
                             // Actions
-                            VStack(spacing: 16) {
+                            VStack(spacing: 24) {
                                 Button(action: { handleAction(id: "accept") }) {
                                     Text(scenario.actions.first { $0.id == "accept" }?.label ?? "Accept")
                                         .font(.title2)
                                         .fontWeight(.black)
                                         .foregroundColor(.white)
                                         .frame(maxWidth: .infinity, minHeight: 80)
-                                        .background(Color(red: 0.12, green: 0.3, blue: 0.6)) // blue-800
+                                        .background(Color.canopyNavy)
                                         .cornerRadius(16)
                                 }
+                                .buttonStyle(SpringSquishButtonStyle())
                                 .accessibilityHint("Accepts the friend request")
                                 
                                 Button(action: { handleAction(id: "decline") }) {
                                     Text(scenario.actions.first { $0.id == "decline" }?.label ?? "Decline")
                                         .font(.title2)
                                         .fontWeight(.black)
-                                        .foregroundColor(.primary)
+                                        .foregroundColor(.canopyText)
                                         .frame(maxWidth: .infinity, minHeight: 80)
-                                        .background(Color(white: 0.9))
+                                        .background(Color(white: 0.95))
                                         .cornerRadius(16)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 16)
-                                                .stroke(Color(white: 0.6), lineWidth: 2)
+                                                .stroke(Color(white: 0.7), lineWidth: 2)
                                         )
                                 }
+                                .buttonStyle(SpringSquishButtonStyle())
                                 .accessibilityHint("Declines and deletes the friend request")
                             }
                         }
-                        .padding(24)
+                        .padding(32)
                         .background(Color.white)
                     }
-                    .cornerRadius(40)
+                    .cornerRadius(32)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 40)
+                        RoundedRectangle(cornerRadius: 32)
                             .stroke(Color(white: 0.8), lineWidth: 4)
                     )
                     .shadow(color: Color.black.opacity(0.1), radius: 15, x: 0, y: 5)
-                    .padding(.horizontal)
-                    .animation(.spring(), value: currentIndex) // Animate request transitions
+                    .padding(.horizontal, 24)
+                    .animation(.spring(response: 0.4, dampingFraction: 0.8), value: currentIndex)
                 }
                 .padding(.vertical, 32)
             }
             .background(Color(white: 0.98).edgesIgnoringSafeArea(.all))
         } hintContent: {
             Text("Look at **Friends in Common** and the **Join Date**. Real friends usually have mutual connections and older accounts.")
-                .font(.title3)
+                .font(.title3) // 20pt base
+                .foregroundColor(.canopyText)
         }
         .overlay(
             Group {
@@ -286,7 +312,6 @@ public struct FakeFriendRequestView: View {
     
     private func handleAction(id: String) {
         if id == "accept" && currentRequest.isFake {
-            // TODO: PostHog event
             let fb = currentRequest.type == "stranger-scam" ? scenario.feedback.gentleFailureStranger : scenario.feedback.gentleFailureCloned
             feedback = FeedbackState(title: fb.title, message: fb.message, type: .failure)
         } else if id == "decline" && !currentRequest.isFake {
@@ -315,7 +340,10 @@ struct FeedbackModal: View {
     
     var body: some View {
         ZStack {
-            Color.black.opacity(0.8)
+            // Blur Backdrop
+            Rectangle()
+                .fill(Color.black.opacity(0.4))
+                .background(.ultraThinMaterial)
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture(perform: onDismiss)
             
@@ -328,12 +356,13 @@ struct FeedbackModal: View {
                         .multilineTextAlignment(.center)
                     
                     Text(feedback.message)
-                        .font(.title3)
+                        .font(.title3) // 20pt base
+                        .foregroundColor(.canopyText)
                         .padding(24)
                         .background(Color(white: 0.95))
-                        .cornerRadius(16)
+                        .cornerRadius(24)
                         .overlay(
-                            RoundedRectangle(cornerRadius: 16)
+                            RoundedRectangle(cornerRadius: 24)
                                 .stroke(Color(white: 0.9), lineWidth: 4)
                         )
                     
@@ -341,34 +370,33 @@ struct FeedbackModal: View {
                     SplitScreenComparative(
                         leftTitle: "Red Flags (Scam)",
                         leftContent: AnyView(
-                            VStack(alignment: .leading, spacing: 12) {
+                            VStack(alignment: .leading, spacing: 16) {
                                 Text("**Joined Today/Yesterday:** Scammers make new accounts constantly.")
                                 Text("**0 Friends in Common:** If it's your real friend, they should be connected to others you know.")
                                 Text("**Urgent/Weird Bios:** \"Had to make a new account\" or asking for help.")
                             }
-                            .font(.body)
                         ),
                         rightTitle: "Green Flags (Safe)",
                         rightContent: AnyView(
-                            VStack(alignment: .leading, spacing: 12) {
+                            VStack(alignment: .leading, spacing: 16) {
                                 Text("**Older Join Date:** E.g., \"Joined 2014\", meaning the account has history.")
                                 Text("**Mutual Friends:** Sharing several friends in common means they are likely part of your real-world community.")
                                 Text("**Normal Bio:** Mentions normal hobbies or work without asking for anything.")
                             }
-                            .font(.body)
                         )
                     )
-                    .padding(.vertical)
+                    .padding(.vertical, 8)
                     
                     Button(action: onDismiss) {
                         Text("Continue")
-                            .font(.title)
+                            .font(.title2)
                             .fontWeight(.black)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, minHeight: 88)
-                            .background(Color(red: 0.12, green: 0.3, blue: 0.6))
+                            .background(Color.canopyNavy)
                             .cornerRadius(16)
                     }
+                    .buttonStyle(SpringSquishButtonStyle())
                 }
                 .padding(32)
                 .background(Color.white)
@@ -385,9 +413,10 @@ struct FeedbackModal: View {
     
     private var titleColor: Color {
         switch feedback.type {
-        case .failure: return Color(red: 0.6, green: 0, blue: 0)
-        case .success: return Color(red: 0, green: 0.4, blue: 0)
-        case .info: return Color(red: 0.12, green: 0.3, blue: 0.6)
+        case .failure: return Color.canopyRed
+        case .success: return Color.canopyGreen
+        case .info: return Color.canopyNavy
         }
     }
 }
+
