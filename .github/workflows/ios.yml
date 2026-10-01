@@ -1,0 +1,25 @@
+name: iOS CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build and Test iOS
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+        
+    - name: Build and Test
+      run: |
+        cd apps/ios
+        xcodebuild test -project Canopy.xcodeproj -scheme Canopy -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest' | xcpretty && exit ${PIPESTATUS[0]}
