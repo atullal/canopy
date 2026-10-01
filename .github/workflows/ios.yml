@@ -1,0 +1,25 @@
+name: iOS CI
+
+on:
+  push:
+    branches: [ "main", "feat/fake-friend-request-ios" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build and Test iOS
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+        
+    - name: Build and Test Canopy
+      run: |
+        cd apps/ios/Canopy
+        swift test

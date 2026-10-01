@@ -1,0 +1,39 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "main", "feat/*" ]
+    paths:
+      - 'apps/android/**'
+      - '.github/workflows/android.yml'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'apps/android/**'
+      - '.github/workflows/android.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x apps/android/gradlew || true
+
+    - name: Build with Gradle
+      run: |
+        cd apps/android
+        if [ -f "gradlew" ]; then
+          ./gradlew build
+        else
+          echo "No gradlew found, skipping."
+        fi
