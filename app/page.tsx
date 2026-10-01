@@ -21,7 +21,7 @@ export default function Home() {
                 A safe, interactive environment to practice spotting scam emails. No real money or personal information is connected here.
               </p>
             </a>
-            
+
             <a 
               href="/fake-checkout" 
               className="group block border border-gray-200 rounded-xl p-6 hover:border-blue-500 hover:shadow-md transition-all"
@@ -33,7 +33,7 @@ export default function Home() {
                 A zero-risk sandbox where you can practice checking website addresses for tricks and choosing the safest payment method.
               </p>
             </a>
-            
+
             <a 
               href="/urgent-text-message" 
               className="group block border border-gray-200 rounded-xl p-6 hover:border-blue-500 hover:shadow-md transition-all"
@@ -81,6 +81,19 @@ export default function Home() {
                 A zero-risk sandbox where you can practice thinking critically about what personal information an app actually needs to do its job.
               </p>
             </a>
+
+            <a 
+              href="/fake-friend-request" 
+              className="group block border-red-300 bg-red-50 rounded-xl p-6 hover:border-red-500 hover:shadow-md transition-all"
+            >
+              <h3 className="text-xl font-bold mb-2 text-red-700 group-hover:text-red-900 transition-colors">
+                👥 Practice Friend Requests (V3) &rarr;
+              </h3>
+              <p className="text-gray-800">
+                A safe sandbox to practice identifying fake copycat social profiles. Uses the new V3 Split-Screen comparative UI and Hesitation Engine.
+              </p>
+            </a>
+
           </div>
         </div>
       </main>
