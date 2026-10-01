@@ -123,7 +123,7 @@ export default function StorageFullGallery() {
                     opacity: 1, 
                     scale: isBeingDeleted ? 0 : 1, 
                     y: isBeingDeleted ? 150 : 0, 
-                    rotate: isBeingDeleted ? (Math.random() * 20 - 10) : 0 
+                    rotate: isBeingDeleted ? (0) : 0 
                   }}
                   exit={{ opacity: 0, scale: 0.5 }}
                   transition={{ 

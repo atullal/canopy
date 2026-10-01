@@ -111,14 +111,14 @@ export default function UpdateScreen() {
                     onClick={() => handleAction('install')}
                     className="w-full bg-green-500 text-white border-4 border-green-700 font-black text-3xl py-6 rounded-2xl animate-pulse shadow-[0_10px_0_rgb(21,128,61)] hover:bg-green-400 active:shadow-[0_2px_0_rgb(21,128,61)] active:translate-y-2 focus:outline-none focus-visible:ring-8 focus-visible:ring-green-800 transition-all"
                   >
-                    {scenarioData.actions.find((a: any) => a.id === 'install')?.label || 'INSTALL NOW'}
+                    {scenarioData.actions.find((a: { id: string; label: string }) => a.id === 'install')?.label || 'INSTALL NOW'}
                   </motion.button>
                   <motion.button
                     whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.95 }}
                     onClick={() => handleAction('ignore')}
                     className="w-full bg-transparent text-red-900 underline font-bold text-xl py-6 min-h-[4.5rem] rounded-xl hover:bg-red-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-red-900"
                   >
-                    {scenarioData.actions.find((a: any) => a.id === 'ignore')?.label || 'Close'}
+                    {scenarioData.actions.find((a: { id: string; label: string }) => a.id === 'ignore')?.label || 'Close'}
                   </motion.button>
                 </div>
               </div>
@@ -146,14 +146,14 @@ export default function UpdateScreen() {
                     onClick={() => handleAction('install')}
                     className="w-full bg-blue-800 text-white font-semibold text-2xl py-5 rounded-2xl hover:bg-blue-900 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                   >
-                    {scenarioData.actions.find((a: any) => a.id === 'install')?.label || 'Install Update'}
+                    {scenarioData.actions.find((a: { id: string; label: string }) => a.id === 'install')?.label || 'Install Update'}
                   </motion.button>
                   <motion.button
                     whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                     onClick={() => handleAction('ignore')}
                     className="w-full bg-gray-100 text-gray-900 font-semibold text-xl py-5 rounded-2xl hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
                   >
-                    {scenarioData.actions.find((a: any) => a.id === 'ignore')?.label || 'Later'}
+                    {scenarioData.actions.find((a: { id: string; label: string }) => a.id === 'ignore')?.label || 'Later'}
                   </motion.button>
                 </div>
               </div>

@@ -87,7 +87,7 @@ export default function FakeFriendRequest() {
                   👤
                 </div>
                 <h2 className="text-3xl font-black text-black mb-3 text-center tracking-tight">{currentRequest.name}</h2>
-                <p className="text-gray-800 mb-8 text-center italic text-2xl leading-relaxed">\"{currentRequest.bio}\"</p>
+                <p className="text-gray-800 mb-8 text-center italic text-2xl leading-relaxed">&quot;{currentRequest.bio}&quot;</p>
                 
                 <div className="w-full bg-blue-50 border-4 border-blue-200 p-6 rounded-2xl mb-8 shadow-sm">
                   <div className="flex justify-between items-center mb-4 border-b-2 border-blue-200 pb-4">
@@ -107,7 +107,7 @@ export default function FakeFriendRequest() {
                     onClick={() => handleAction('accept')}
                     className="w-full bg-blue-800 text-white font-black py-6 px-4 rounded-2xl hover:bg-blue-900 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-800 min-h-[5rem] text-2xl shadow-md"
                   >
-                    {scenarioData.actions.find((a: any) => a.id === 'accept')?.label || 'Accept'}
+                    {scenarioData.actions.find((a: { id: string; label: string }) => a.id === 'accept')?.label || 'Accept'}
                   </motion.button>
                   <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -115,7 +115,7 @@ export default function FakeFriendRequest() {
                     onClick={() => handleAction('decline')}
                     className="w-full bg-gray-200 text-gray-900 font-black py-6 px-4 rounded-2xl hover:bg-gray-300 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-gray-600 min-h-[5rem] text-2xl shadow-sm border-2 border-gray-400"
                   >
-                    {scenarioData.actions.find((a: any) => a.id === 'decline')?.label || 'Decline'}
+                    {scenarioData.actions.find((a: { id: string; label: string }) => a.id === 'decline')?.label || 'Decline'}
                   </motion.button>
                 </div>
               </motion.div>
@@ -160,14 +160,14 @@ export default function FakeFriendRequest() {
                     leftContent={
                       <ul className="list-disc pl-8 space-y-4 text-gray-900 text-xl font-medium">
                         <li><strong className="font-black text-red-900">Joined Today/Yesterday:</strong> Scammers make new accounts constantly.</li>
-                        <li><strong className="font-black text-red-900">0 Friends in Common:</strong> If it's your real friend, they should be connected to others you know.</li>
-                        <li><strong className="font-black text-red-900">Urgent/Weird Bios:</strong> \"Had to make a new account\" or asking for help.</li>
+                        <li><strong className="font-black text-red-900">0 Friends in Common:</strong> If it&apos;s your real friend, they should be connected to others you know.</li>
+                        <li><strong className="font-black text-red-900">Urgent/Weird Bios:</strong> &quot;Had to make a new account&quot; or asking for help.</li>
                       </ul>
                     }
                     rightTitle="Green Flags (Safe)"
                     rightContent={
                       <ul className="list-disc pl-8 space-y-4 text-gray-900 text-xl font-medium">
-                        <li><strong className="font-black text-green-900">Older Join Date:</strong> E.g., \"Joined 2014\", meaning the account has history.</li>
+                        <li><strong className="font-black text-green-900">Older Join Date:</strong> E.g., &quot;Joined 2014&quot;, meaning the account has history.</li>
                         <li><strong className="font-black text-green-900">Mutual Friends:</strong> Sharing several friends in common means they are likely part of your real-world community.</li>
                         <li><strong className="font-black text-green-900">Normal Bio:</strong> Mentions normal hobbies or work without asking for anything.</li>
                       </ul>

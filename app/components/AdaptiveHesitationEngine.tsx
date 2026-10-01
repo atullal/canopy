@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 interface AdaptiveHesitationEngineProps {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ export default function AdaptiveHesitationEngine({ children, hintContent, idleTi
   const [showHint, setShowHint] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const resetTimer = () => {
+  const resetTimer = useCallback(() => {
     setShowHint(false);
     if (timerRef.current) {
       clearTimeout(timerRef.current);
@@ -20,11 +20,15 @@ export default function AdaptiveHesitationEngine({ children, hintContent, idleTi
     timerRef.current = setTimeout(() => {
       setShowHint(true);
     }, idleTimeMs);
-  };
+  }, [idleTimeMs]);
 
   useEffect(() => {
-    // Start the timer when the component mounts
-    resetTimer();
+    // We intentionally don't call resetTimer synchronously here to avoid cascading renders
+    // Instead we start a timer manually for the initial mount
+    const initialTimer = setTimeout(() => {
+      setShowHint(true);
+    }, idleTimeMs);
+    timerRef.current = initialTimer;
 
     // Reset the timer on user interaction
     const events = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll'];
@@ -42,7 +46,7 @@ export default function AdaptiveHesitationEngine({ children, hintContent, idleTi
         window.removeEventListener(event, handleActivity);
       });
     };
-  }, [idleTimeMs]);
+  }, [idleTimeMs, resetTimer]);
 
   return (
     <div className="relative w-full h-full">
@@ -51,7 +55,7 @@ export default function AdaptiveHesitationEngine({ children, hintContent, idleTi
         <div className="absolute bottom-4 right-4 max-w-sm bg-yellow-100 border-l-4 border-yellow-500 p-4 shadow-lg rounded z-50">
           <div className="flex justify-between items-start">
             <div className="flex-1">
-              <h4 className="font-bold text-yellow-800 mb-1 text-xl">Stuck? Here's a hint:</h4>
+              <h4 className="font-bold text-yellow-800 mb-1 text-xl">Stuck? Here&apos;s a hint:</h4>
               <div className="text-xl text-yellow-900">{hintContent}</div>
             </div>
             <button 

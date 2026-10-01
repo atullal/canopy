@@ -54,7 +54,7 @@ export default function Home() {
                 🖼️ Practice Photo Gallery: Storage Full &rarr;
               </h3>
               <p className="text-gray-600">
-                A zero-risk sandbox where you can practice making space by deleting unwanted photos, and learn how to use the 'Recently Deleted' folder.
+                A zero-risk sandbox where you can practice making space by deleting unwanted photos, and learn how to use the &apos;Recently Deleted&apos; folder.
               </p>
             </a>
 

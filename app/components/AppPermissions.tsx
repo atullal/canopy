@@ -124,14 +124,14 @@ export default function AppPermissions() {
                     onClick={() => handleAction('deny')}
                     className="w-full py-6 min-h-[4.5rem] text-blue-900 font-normal text-2xl border-b border-gray-500/50 transition-colors focus:outline-none focus-visible:bg-gray-200"
                   >
-                    {scenarioData.actions.find((a: any) => a.id === 'deny')?.label || "Don't Allow"}
+                    {scenarioData.actions.find((a: { id: string; label: string }) => a.id === 'deny')?.label || "Don't Allow"}
                   </motion.button>
                   <motion.button
                     whileTap={{ backgroundColor: 'rgba(0,0,0,0.05)' }}
                     onClick={() => handleAction('allow')}
                     className="w-full py-6 min-h-[4.5rem] text-blue-900 font-semibold text-2xl transition-colors focus:outline-none focus-visible:bg-gray-200"
                   >
-                    {scenarioData.actions.find((a: any) => a.id === 'allow')?.label || "Allow"}
+                    {scenarioData.actions.find((a: { id: string; label: string }) => a.id === 'allow')?.label || "Allow"}
                   </motion.button>
                 </div>
               </motion.div>
