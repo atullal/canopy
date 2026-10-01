@@ -66,7 +66,7 @@ export default function PhishingInbox() {
   };
 
   return (
-    <main className="max-w-5xl mx-auto p-4 md:p-8 font-sans text-gray-900 bg-gray-50 min-h-screen">
+    <main className="max-w-5xl mx-auto p-4 md:p-8 font-sans text-xl text-gray-900 bg-gray-50 min-h-screen">
       <header className="mb-8">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-black">
           {scenarioData.title}
@@ -82,7 +82,7 @@ export default function PhishingInbox() {
 
       <section className="flex flex-col lg:flex-row gap-8">
         {/* Inbox List */}
-        <div className="flex-1 border-2 border-gray-300 rounded-2xl overflow-hidden bg-white shadow-sm flex flex-col">
+        <div className="flex-1 border-2 border-gray-500 rounded-2xl overflow-hidden bg-white shadow-sm flex flex-col">
           <h2 className="sr-only">Inbox</h2>
           <ul className="flex flex-col w-full" role="listbox" aria-label="Emails">
             {scenarioData.emails.map((email) => {
@@ -96,11 +96,11 @@ export default function PhishingInbox() {
                       setSelectedEmailId(email.id);
                       setFeedback(null);
                     }}
-                    className={`w-full text-left p-6 min-h-[5rem] transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600 focus-visible:ring-inset
+                    className={`w-full text-left p-6 min-h-[5rem] sm:min-h-[5.5rem] transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600 focus-visible:ring-inset
                       ${isSelected ? 'bg-blue-50 border-l-8 border-l-blue-600' : 'bg-white hover:bg-gray-100 active:bg-gray-200 border-l-8 border-l-transparent'}`}
                   >
                     <div className="text-xl font-bold text-black mb-1 truncate">{email.senderName}</div>
-                    <div className={`text-lg truncate ${isSelected ? 'text-gray-900 font-medium' : 'text-gray-700'}`}>
+                    <div className={`text-lg truncate ${isSelected ? 'text-gray-900 font-medium' : 'text-gray-900'}`}>
                       {email.subject}
                     </div>
                   </button>
@@ -111,12 +111,12 @@ export default function PhishingInbox() {
         </div>
 
         {/* Email Reading Pane */}
-        <article className="flex-[2] border-2 border-gray-300 rounded-2xl p-6 md:p-8 bg-white shadow-sm flex flex-col">
-          <header className="border-b-2 border-gray-200 pb-6 mb-6">
+        <article className="flex-[2] border-2 border-gray-500 rounded-2xl p-6 md:p-8 bg-white shadow-sm flex flex-col">
+          <header className="border-b-2 border-gray-400 pb-6 mb-6">
             <h2 className="text-3xl font-bold mb-3 text-black leading-tight">{selectedEmail.subject}</h2>
             <div className="text-xl text-gray-800">
               <strong className="font-bold">From:</strong> {selectedEmail.senderName}{' '}
-              <span className="text-gray-600 font-medium">&lt;{selectedEmail.senderAddress}&gt;</span>
+              <span className="text-gray-900 font-medium">&lt;{selectedEmail.senderAddress}&gt;</span>
             </div>
           </header>
           
@@ -134,16 +134,16 @@ export default function PhishingInbox() {
             )}
           </div>
 
-          <footer className="flex flex-col sm:flex-row gap-4 border-t-2 border-gray-200 pt-6">
+          <footer className="flex flex-col sm:flex-row gap-4 border-t-2 border-gray-400 pt-6">
             <button 
               onClick={() => handleAction('scam')}
-              className="flex-1 bg-red-100 text-red-900 border-2 border-red-700 font-bold text-xl py-5 px-6 rounded-xl hover:bg-red-200 hover:border-red-800 active:bg-red-300 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-red-600 focus-visible:ring-offset-2 min-h-[4rem]"
+              className="flex-1 bg-red-100 text-red-900 border-2 border-red-700 font-bold text-xl py-5 px-6 rounded-xl hover:bg-red-200 hover:border-red-800 active:bg-red-300 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-red-600 focus-visible:ring-offset-2 min-h-[4rem] sm:min-h-[5rem] sm:min-h-[5.5rem]"
             >
               🚨 This is a Scam
             </button>
             <button 
               onClick={() => handleAction('safe')}
-              className="flex-1 bg-green-100 text-green-900 border-2 border-green-700 font-bold text-xl py-5 px-6 rounded-xl hover:bg-green-200 hover:border-green-800 active:bg-green-300 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-green-600 focus-visible:ring-offset-2 min-h-[4rem]"
+              className="flex-1 bg-green-100 text-green-900 border-2 border-green-700 font-bold text-xl py-5 px-6 rounded-xl hover:bg-green-200 hover:border-green-800 active:bg-green-300 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-green-600 focus-visible:ring-offset-2 min-h-[4rem] sm:min-h-[5rem] sm:min-h-[5.5rem]"
             >
               ✅ This is Safe
             </button>
@@ -179,7 +179,7 @@ export default function PhishingInbox() {
                 damping: 25, 
                 mass: 1 
               }}
-              className="relative bg-white border-4 border-gray-200 p-8 md:p-12 rounded-3xl max-w-2xl w-full text-center shadow-2xl"
+              className="relative bg-white border-4 border-gray-400 p-8 md:p-12 rounded-3xl max-w-2xl w-full text-center shadow-2xl"
             >
               <h3 className={`text-3xl md:text-4xl font-extrabold mb-6 ${feedback.type === 'success' ? 'text-green-800' : 'text-red-800'}`}>
                 {feedback.title}
@@ -190,7 +190,7 @@ export default function PhishingInbox() {
               <button 
                 onClick={() => setFeedback(null)}
                 autoFocus
-                className="w-full sm:w-auto min-w-[12rem] bg-blue-700 text-white font-bold text-2xl py-5 px-10 rounded-xl hover:bg-blue-800 active:bg-blue-900 active:scale-95 transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 focus-visible:ring-offset-4 shadow-md"
+                className="w-full sm:w-auto min-w-[12rem] bg-blue-900 text-white font-bold text-2xl py-5 px-10 rounded-xl hover:bg-blue-950 active:bg-blue-900 active:scale-95 transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 focus-visible:ring-offset-4 shadow-md"
               >
                 Continue
               </button>

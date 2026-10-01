@@ -67,7 +67,7 @@ export default function AppPermissions() {
   };
 
   return (
-    <main className="max-w-4xl mx-auto p-4 md:p-8 font-sans text-gray-900 bg-gray-50 min-h-screen">
+    <main className="max-w-4xl mx-auto p-4 md:p-8 font-sans text-xl text-gray-900 bg-gray-50 min-h-screen">
       <header className="mb-10 text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-black">
           {scenarioData.title}
@@ -112,24 +112,24 @@ export default function AppPermissions() {
                   <h3 className="font-semibold text-[22px] leading-tight mb-2 tracking-tight">
                     {currentChallenge.requestText.split('.')[0]}.
                   </h3>
-                  <p className="text-[17px] leading-snug font-medium text-gray-700">
+                  <p className="text-[17px] leading-snug font-medium text-gray-900">
                     {currentChallenge.requestText.split('.').slice(1).join('.').trim() || currentChallenge.requestText}
                   </p>
                 </div>
                 
                 {/* OS Dialog Buttons - Stacked for extreme tappability */}
-                <div className="flex flex-col border-t border-gray-300/50">
+                <div className="flex flex-col border-t border-gray-500/50">
                   <motion.button
                     whileTap={{ backgroundColor: 'rgba(0,0,0,0.05)' }}
                     onClick={() => handleAction('deny')}
-                    className="w-full py-4 text-blue-600 font-normal text-2xl border-b border-gray-300/50 transition-colors focus:outline-none focus-visible:bg-gray-200"
+                    className="w-full py-6 min-h-[4.5rem] text-blue-900 font-normal text-2xl border-b border-gray-500/50 transition-colors focus:outline-none focus-visible:bg-gray-200"
                   >
                     {scenarioData.actions.find((a: any) => a.id === 'deny')?.label || "Don't Allow"}
                   </motion.button>
                   <motion.button
                     whileTap={{ backgroundColor: 'rgba(0,0,0,0.05)' }}
                     onClick={() => handleAction('allow')}
-                    className="w-full py-4 text-blue-600 font-semibold text-2xl transition-colors focus:outline-none focus-visible:bg-gray-200"
+                    className="w-full py-6 min-h-[4.5rem] text-blue-900 font-semibold text-2xl transition-colors focus:outline-none focus-visible:bg-gray-200"
                   >
                     {scenarioData.actions.find((a: any) => a.id === 'allow')?.label || "Allow"}
                   </motion.button>
@@ -162,12 +162,12 @@ export default function AppPermissions() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ type: 'spring', stiffness: 300, damping: 25, mass: 1 }}
-              className="relative bg-white border-4 border-gray-200 p-8 md:p-12 rounded-3xl max-w-2xl w-full text-center shadow-2xl"
+              className="relative bg-white border-4 border-gray-400 p-8 md:p-12 rounded-3xl max-w-2xl w-full text-center shadow-2xl"
             >
               <h3 className={`text-4xl font-extrabold mb-8 ${feedback.type === 'failure' ? 'text-red-800' : feedback.type === 'success' ? 'text-green-800' : 'text-blue-800'}`}>
                 {feedback.title}
               </h3>
-              <div className="text-2xl text-gray-900 leading-relaxed whitespace-pre-wrap mb-10 text-left bg-gray-50 p-6 rounded-xl border border-gray-200">
+              <div className="text-2xl text-gray-900 leading-relaxed whitespace-pre-wrap mb-10 text-left bg-gray-50 p-6 rounded-xl border border-gray-400">
                 {feedback.message}
               </div>
               <motion.button 
@@ -175,7 +175,7 @@ export default function AppPermissions() {
                 whileTap={{ scale: 0.98 }}
                 onClick={handleModalClose}
                 autoFocus
-                className="w-full sm:w-auto min-w-[14rem] bg-blue-700 text-white font-bold text-3xl py-6 px-10 rounded-xl hover:bg-blue-800 active:bg-blue-900 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 shadow-md"
+                className="w-full sm:w-auto min-w-[14rem] bg-blue-900 text-white font-bold text-3xl py-6 px-10 rounded-xl hover:bg-blue-950 active:bg-blue-900 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 shadow-md"
               >
                 Continue
               </motion.button>

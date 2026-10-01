@@ -58,7 +58,7 @@ export default function UpdateScreen() {
   };
 
   return (
-    <main className="max-w-4xl mx-auto p-4 md:p-8 font-sans text-gray-900 bg-gray-50 min-h-screen">
+    <main className="max-w-4xl mx-auto p-4 md:p-8 font-sans text-xl text-gray-900 bg-gray-50 min-h-screen">
       <header className="mb-10 text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-black">
           {scenarioData.title}
@@ -84,7 +84,7 @@ export default function UpdateScreen() {
           {currentChallenge.type === 'browser-popup' ? (
             /* AGGRESSIVE, UGLY FAKE BROWSER POPUP */
             <div className="border-8 border-red-600 rounded-2xl bg-yellow-300 overflow-hidden shadow-[0_0_40px_rgba(220,38,38,0.5)]">
-              <div className="bg-red-700 p-4 border-b-4 border-red-900 flex items-center">
+              <div className="bg-red-900 p-4 border-b-4 border-red-900 flex items-center">
                 <div className="font-mono text-xl md:text-2xl font-black text-white tracking-widest break-all bg-red-900 px-4 py-3 rounded-lg border-2 border-red-400 w-full text-center shadow-inner">
                   {currentChallenge.urlBar}
                 </div>
@@ -116,7 +116,7 @@ export default function UpdateScreen() {
                   <motion.button
                     whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.95 }}
                     onClick={() => handleAction('ignore')}
-                    className="w-full bg-transparent text-red-900 underline font-bold text-xl py-4 rounded-xl hover:bg-red-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-red-900"
+                    className="w-full bg-transparent text-red-900 underline font-bold text-xl py-6 min-h-[4.5rem] rounded-xl hover:bg-red-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-red-900"
                   >
                     {scenarioData.actions.find((a: any) => a.id === 'ignore')?.label || 'Close'}
                   </motion.button>
@@ -125,18 +125,18 @@ export default function UpdateScreen() {
             </div>
           ) : (
             /* CALM, OFFICIAL SYSTEM SETTINGS */
-            <div className="border border-gray-300 rounded-[2.5rem] bg-white overflow-hidden shadow-lg">
-              <div className="bg-gray-50/80 backdrop-blur-md p-6 border-b border-gray-200 text-center">
+            <div className="border border-gray-500 rounded-[2.5rem] bg-white overflow-hidden shadow-lg">
+              <div className="bg-gray-50/80 backdrop-blur-md p-6 border-b border-gray-400 text-center">
                 <h2 className="font-semibold text-gray-800 text-2xl tracking-tight">⚙️ System Settings</h2>
               </div>
               
               <div className="p-10 flex flex-col items-center text-center min-h-[400px]">
-                <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-8 shadow-inner border border-gray-200">
+                <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-8 shadow-inner border border-gray-400">
                    <span className="text-5xl">💻</span>
                 </div>
                 
                 <h3 className="text-gray-900 text-3xl font-bold mb-4 tracking-tight">Software Update</h3>
-                <p className="text-gray-600 text-xl leading-relaxed mb-12 max-w-sm">
+                <p className="text-gray-900 text-xl leading-relaxed mb-12 max-w-sm">
                   {currentChallenge.message}
                 </p>
                 
@@ -144,14 +144,14 @@ export default function UpdateScreen() {
                   <motion.button
                     whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                     onClick={() => handleAction('install')}
-                    className="w-full bg-blue-600 text-white font-semibold text-2xl py-5 rounded-2xl hover:bg-blue-700 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+                    className="w-full bg-blue-800 text-white font-semibold text-2xl py-5 rounded-2xl hover:bg-blue-900 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                   >
                     {scenarioData.actions.find((a: any) => a.id === 'install')?.label || 'Install Update'}
                   </motion.button>
                   <motion.button
                     whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                     onClick={() => handleAction('ignore')}
-                    className="w-full bg-gray-100 text-gray-700 font-semibold text-xl py-5 rounded-2xl hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+                    className="w-full bg-gray-100 text-gray-900 font-semibold text-xl py-5 rounded-2xl hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
                   >
                     {scenarioData.actions.find((a: any) => a.id === 'ignore')?.label || 'Later'}
                   </motion.button>
@@ -183,18 +183,18 @@ export default function UpdateScreen() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ type: 'spring', stiffness: 300, damping: 25, mass: 1 }}
-              className="relative bg-white border-4 border-gray-200 p-8 md:p-12 rounded-3xl max-w-2xl w-full text-center shadow-2xl"
+              className="relative bg-white border-4 border-gray-400 p-8 md:p-12 rounded-3xl max-w-2xl w-full text-center shadow-2xl"
             >
               <h3 className={`text-4xl font-extrabold mb-8 ${feedback.type === 'failure' ? 'text-red-800' : feedback.type === 'success' ? 'text-green-800' : 'text-blue-800'}`}>
                 {feedback.title}
               </h3>
-              <div className="text-2xl text-gray-900 leading-relaxed whitespace-pre-wrap mb-10 text-left bg-gray-50 p-6 rounded-xl border border-gray-200">
+              <div className="text-2xl text-gray-900 leading-relaxed whitespace-pre-wrap mb-10 text-left bg-gray-50 p-6 rounded-xl border border-gray-400">
                 {feedback.message}
               </div>
               <button 
                 onClick={handleNextChallenge}
                 autoFocus
-                className="w-full sm:w-auto min-w-[14rem] bg-blue-700 text-white font-bold text-3xl py-6 px-10 rounded-xl hover:bg-blue-800 active:bg-blue-900 active:scale-95 transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 shadow-md"
+                className="w-full sm:w-auto min-w-[14rem] bg-blue-900 text-white font-bold text-3xl py-6 px-10 rounded-xl hover:bg-blue-950 active:bg-blue-900 active:scale-95 transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 shadow-md"
               >
                 Continue
               </button>

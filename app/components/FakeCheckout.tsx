@@ -78,7 +78,7 @@ export default function FakeCheckout() {
   };
 
   return (
-    <main className="max-w-4xl mx-auto p-4 md:p-8 font-sans text-gray-900 bg-gray-50 min-h-screen">
+    <main className="max-w-4xl mx-auto p-4 md:p-8 font-sans text-xl text-gray-900 bg-gray-50 min-h-screen">
       <header className="mb-8">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-black">
           {scenarioData.title}
@@ -99,10 +99,10 @@ export default function FakeCheckout() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-          className="border-4 border-gray-300 rounded-2xl bg-gray-50 overflow-hidden shadow-md"
+          className="border-4 border-gray-500 rounded-2xl bg-gray-50 overflow-hidden shadow-md"
         >
           {/* Extremely Prominent Browser Bar */}
-          <div className="bg-gray-200 p-4 sm:p-6 border-b-4 border-gray-300 flex items-center">
+          <div className="bg-gray-200 p-4 sm:p-6 border-b-4 border-gray-500 flex items-center">
             <div className="hidden sm:flex gap-3 mr-6">
               <div className="w-5 h-5 rounded-full bg-red-400"></div>
               <div className="w-5 h-5 rounded-full bg-yellow-400"></div>
@@ -110,11 +110,11 @@ export default function FakeCheckout() {
             </div>
             
             <div 
-              className="bg-white px-6 py-4 rounded-xl flex-1 flex items-center gap-4 border-4 border-gray-800 shadow-inner"
+              className="bg-white px-6 py-6 min-h-[4.5rem] rounded-xl flex-1 flex items-center gap-4 border-4 border-gray-800 shadow-inner"
               aria-label="Browser Address Bar"
               role="textbox"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-900 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
               </svg>
               <div className="font-mono text-2xl md:text-3xl font-extrabold text-black tracking-widest break-all">
@@ -125,7 +125,7 @@ export default function FakeCheckout() {
 
           {/* Page Content */}
           <div className="p-6 md:p-10 bg-white">
-            <h2 className="text-3xl md:text-4xl font-black mb-6 text-black border-b-2 border-gray-200 pb-4">
+            <h2 className="text-3xl md:text-4xl font-black mb-6 text-black border-b-2 border-gray-400 pb-4">
               Secure Checkout
             </h2>
             
@@ -145,7 +145,7 @@ export default function FakeCheckout() {
                       className={`flex items-center p-5 rounded-xl cursor-pointer transition-colors border-2 ${
                         isSelected 
                           ? 'bg-blue-100 border-blue-600' 
-                          : 'bg-white border-gray-300 hover:bg-gray-100'
+                          : 'bg-white border-gray-500 hover:bg-gray-100'
                       }`}
                     >
                       <input
@@ -160,7 +160,7 @@ export default function FakeCheckout() {
                       <div className={`w-8 h-8 rounded-full border-4 flex-shrink-0 mr-6 flex items-center justify-center transition-colors ${
                         isSelected ? 'border-blue-700 bg-white' : 'border-gray-400 bg-gray-50'
                       }`}>
-                        {isSelected && <div className="w-3 h-3 bg-blue-700 rounded-full" />}
+                        {isSelected && <div className="w-3 h-3 bg-blue-900 rounded-full" />}
                       </div>
                       <span className={`text-2xl ${isSelected ? 'font-bold text-blue-900' : 'font-medium text-gray-800'}`}>
                         {option.label}
@@ -174,13 +174,13 @@ export default function FakeCheckout() {
             <div className="flex flex-col sm:flex-row gap-6">
               <button
                 onClick={submitPayment}
-                className="flex-1 bg-green-100 text-green-900 border-2 border-green-700 font-bold text-2xl py-6 px-4 rounded-xl hover:bg-green-200 active:bg-green-300 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-green-600 min-h-[5rem] shadow-sm"
+                className="flex-1 bg-green-100 text-green-900 border-2 border-green-700 font-bold text-2xl py-6 px-4 rounded-xl hover:bg-green-200 active:bg-green-300 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-green-600 min-h-[5rem] sm:min-h-[5.5rem] shadow-sm"
               >
                 🛒 Submit Payment
               </button>
               <button
                 onClick={leaveWebsite}
-                className="flex-1 bg-red-100 text-red-900 border-2 border-red-700 font-bold text-2xl py-6 px-4 rounded-xl hover:bg-red-200 active:bg-red-300 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-red-600 min-h-[5rem] shadow-sm"
+                className="flex-1 bg-red-100 text-red-900 border-2 border-red-700 font-bold text-2xl py-6 px-4 rounded-xl hover:bg-red-200 active:bg-red-300 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-red-600 min-h-[5rem] sm:min-h-[5.5rem] shadow-sm"
               >
                 🛑 Leave this Website
               </button>
@@ -210,18 +210,18 @@ export default function FakeCheckout() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ type: 'spring', stiffness: 300, damping: 25, mass: 1 }}
-              className="relative bg-white border-4 border-gray-200 p-8 md:p-12 rounded-3xl max-w-3xl w-full text-center shadow-2xl"
+              className="relative bg-white border-4 border-gray-400 p-8 md:p-12 rounded-3xl max-w-3xl w-full text-center shadow-2xl"
             >
               <h3 className={`text-4xl md:text-5xl font-extrabold mb-8 ${feedback.type === 'success' ? 'text-green-800' : 'text-red-800'}`}>
                 {feedback.title}
               </h3>
-              <div className="text-2xl text-gray-900 leading-relaxed whitespace-pre-wrap mb-10 text-left bg-gray-50 p-6 rounded-xl border border-gray-200">
+              <div className="text-2xl text-gray-900 leading-relaxed whitespace-pre-wrap mb-10 text-left bg-gray-50 p-6 rounded-xl border border-gray-400">
                 {feedback.message}
               </div>
               <button 
                 onClick={handleNextChallenge}
                 autoFocus
-                className="w-full sm:w-auto min-w-[14rem] bg-blue-700 text-white font-bold text-3xl py-6 px-10 rounded-xl hover:bg-blue-800 active:bg-blue-900 active:scale-95 transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 shadow-md"
+                className="w-full sm:w-auto min-w-[14rem] bg-blue-900 text-white font-bold text-3xl py-6 px-10 rounded-xl hover:bg-blue-950 active:bg-blue-900 active:scale-95 transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 shadow-md"
               >
                 Continue
               </button>
