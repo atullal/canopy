@@ -63,5 +63,7 @@ export default function AdaptiveHesitationEngine({ children, hintContent, idleTi
             </button>
           </div>
         </div>
-      );
+      )}
+    </div>
+  );
 }
