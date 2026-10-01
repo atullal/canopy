@@ -1,7 +1,7 @@
 {
   "id": "urgent-text-message",
   "title": "Practice Text Messages",
-  "description": "Welcome to your Practice Phone! Read the text messages below. If it looks like a patterny message, delete it. If it looks like a normal message, you can reply. You cannot break anything here!",
+  "description": "Welcome to your Practice Phone! Read the text messages below. If it looks like a tricky message, delete it. If it looks like a normal message, you can reply. You cannot break anything here!",
   "actions": [
     {
       "id": "reply",

@@ -1,7 +1,7 @@
 {
   "id": "update-screen",
   "title": "Practice Updates",
-  "description": "Keeping your device updated is important for safety, but patterny messagemers often fake update screens. Look at the screens below. Decide if it is a real system update or a fake internet pattern. You cannot break anything here!",
+  "description": "Keeping your device updated is important for safety, but bad actors often fake update screens. Look at the screens below. Decide if it is a real system update or a fake internet pop-up. You cannot break anything here!",
   "actions": [
     {
       "id": "install",
