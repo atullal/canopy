@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import posthog from '../../utils/posthog';
 import scenarioData from '../../scenarios/fake-friend-request.json';
 import AdaptiveHesitationEngine from './AdaptiveHesitationEngine';
@@ -46,99 +47,148 @@ export default function FakeFriendRequest() {
   };
 
   const hintContent = (
-    <p>Look at <strong>Friends in Common</strong> and the <strong>Join Date</strong>. Real friends usually have mutual connections and older accounts.</p>
+    <p className="text-2xl leading-relaxed text-gray-900">
+      Look at <strong className="font-black">Friends in Common</strong> and the <strong className="font-black">Join Date</strong>. Real friends usually have mutual connections and older accounts.
+    </p>
   );
 
   return (
     <AdaptiveHesitationEngine hintContent={hintContent} idleTimeMs={10000}>
-      <div className="max-w-5xl mx-auto p-6 font-sans">
-        <h1 className="text-3xl font-bold mb-4">{scenarioData.title}</h1>
-        <div className="bg-green-100 border-2 border-green-500 p-4 rounded-lg text-lg mb-6 text-green-900">
-          {scenarioData.description}
-        </div>
+      <main className="max-w-4xl mx-auto p-4 md:p-8 font-sans text-xl text-gray-900 bg-gray-50 min-h-screen">
+        <header className="mb-10 text-center">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-black">
+            {scenarioData.title}
+          </h1>
+          <div 
+            role="region" 
+            aria-label="Scenario Description"
+            className="bg-white border-4 border-blue-200 p-6 rounded-2xl text-2xl leading-relaxed text-gray-900 shadow-sm inline-block text-left max-w-3xl"
+          >
+            {scenarioData.description}
+          </div>
+        </header>
 
-        <div className="border border-gray-300 rounded-xl bg-gray-50 overflow-hidden shadow-md max-w-sm mx-auto">
-          <div className="bg-blue-600 p-4 text-white font-bold text-center text-lg">
+        <div className="border-4 border-gray-300 rounded-[2.5rem] bg-gray-50 overflow-hidden shadow-xl max-w-md mx-auto flex flex-col min-h-[600px]">
+          <div className="bg-blue-900 p-6 text-white font-black text-center text-2xl border-b-4 border-blue-950 shadow-sm z-10">
             New Friend Request
           </div>
-          <div className="p-6 bg-white flex flex-col items-center">
-            <div className="w-32 h-32 bg-gray-200 rounded-full mb-4 flex items-center justify-center text-gray-400 text-5xl overflow-hidden border-4 border-white shadow-sm">
-              👤
-            </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">{currentRequest.name}</h2>
-            <p className="text-gray-600 mb-6 text-center italic">"{currentRequest.bio}"</p>
-            
-            <div className="w-full bg-gray-50 border border-gray-200 p-4 rounded-lg mb-6">
-              <div className="flex justify-between mb-3 border-b border-gray-200 pb-2">
-                <span className="text-gray-600 font-semibold">Friends in Common:</span>
-                <span className="text-gray-900 font-bold">{currentRequest.friendsInCommon}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600 font-semibold">Profile Created:</span>
-                <span className="text-gray-900 font-bold">{currentRequest.joinDate}</span>
-              </div>
-            </div>
+          
+          <div className="flex-1 overflow-hidden relative bg-white">
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={currentIndex}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ type: 'spring', stiffness: 250, damping: 25 }}
+                className="p-8 flex flex-col items-center h-full"
+              >
+                <div className="w-40 h-40 bg-gray-200 rounded-full mb-6 flex items-center justify-center text-gray-700 text-6xl overflow-hidden border-8 border-gray-100 shadow-inner">
+                  👤
+                </div>
+                <h2 className="text-3xl font-black text-black mb-3 text-center tracking-tight">{currentRequest.name}</h2>
+                <p className="text-gray-800 mb-8 text-center italic text-2xl leading-relaxed">\"{currentRequest.bio}\"</p>
+                
+                <div className="w-full bg-blue-50 border-4 border-blue-200 p-6 rounded-2xl mb-8 shadow-sm">
+                  <div className="flex justify-between items-center mb-4 border-b-2 border-blue-200 pb-4">
+                    <span className="text-blue-900 font-bold text-xl">Friends in Common:</span>
+                    <span className="text-black font-black text-2xl">{currentRequest.friendsInCommon}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-blue-900 font-bold text-xl">Profile Created:</span>
+                    <span className="text-black font-black text-2xl">{currentRequest.joinDate}</span>
+                  </div>
+                </div>
 
-            <div className="flex flex-col gap-3 w-full">
-              <button
-                onClick={() => handleAction('accept')}
-                className="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-xl hover:bg-blue-700 transition"
-              >
-                {scenarioData.actions.find((a: any) => a.id === 'accept')?.label}
-              </button>
-              <button
-                onClick={() => handleAction('decline')}
-                className="w-full bg-gray-200 text-gray-800 font-bold py-3 px-4 rounded-xl hover:bg-gray-300 transition"
-              >
-                {scenarioData.actions.find((a: any) => a.id === 'decline')?.label}
-              </button>
-            </div>
+                <div className="flex flex-col gap-4 w-full mt-auto">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => handleAction('accept')}
+                    className="w-full bg-blue-800 text-white font-black py-6 px-4 rounded-2xl hover:bg-blue-900 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-800 min-h-[5rem] text-2xl shadow-md"
+                  >
+                    {scenarioData.actions.find((a: any) => a.id === 'accept')?.label || 'Accept'}
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => handleAction('decline')}
+                    className="w-full bg-gray-200 text-gray-900 font-black py-6 px-4 rounded-2xl hover:bg-gray-300 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-gray-600 min-h-[5rem] text-2xl shadow-sm border-2 border-gray-400"
+                  >
+                    {scenarioData.actions.find((a: any) => a.id === 'decline')?.label || 'Decline'}
+                  </motion.button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
-        {/* Feedback Modal */}
-        {feedback && (
-          <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 overflow-y-auto">
-            <div className="bg-white p-6 md:p-8 rounded-2xl max-w-4xl w-full text-center shadow-xl my-8">
-              <h3 className={`text-3xl font-bold mb-4 ${feedback.type === 'failure' ? 'text-red-600' : feedback.type === 'success' ? 'text-green-600' : 'text-blue-600'}`}>
-                {feedback.title}
-              </h3>
-              <div className="text-xl text-gray-700 whitespace-pre-wrap mb-8 text-left leading-relaxed">
-                {feedback.message}
-              </div>
-
-              {/* Show SplitScreenComparative in feedback for learning */}
-              <div className="mb-8 text-left">
-                <SplitScreenComparative 
-                  leftTitle="Red Flags (Scam)"
-                  leftContent={
-                    <ul className="list-disc pl-6 space-y-3 text-gray-700 text-lg">
-                      <li><strong>Joined Today/Yesterday:</strong> Scammers make new accounts constantly.</li>
-                      <li><strong>0 Friends in Common:</strong> If it's your real friend, they should be connected to others you know.</li>
-                      <li><strong>Urgent/Weird Bios:</strong> "Had to make a new account" or asking for help.</li>
-                    </ul>
-                  }
-                  rightTitle="Green Flags (Safe)"
-                  rightContent={
-                    <ul className="list-disc pl-6 space-y-3 text-gray-700 text-lg">
-                      <li><strong>Older Join Date:</strong> E.g., "Joined 2014", meaning the account has history.</li>
-                      <li><strong>Mutual Friends:</strong> Sharing several friends in common means they are likely part of your real-world community.</li>
-                      <li><strong>Normal Bio:</strong> Mentions normal hobbies or work without asking for anything.</li>
-                    </ul>
-                  }
-                />
-              </div>
-
-              <button 
+        {/* Feedback Modal with Framer Motion */}
+        <AnimatePresence>
+          {feedback && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="fixed inset-0 bg-gray-900/90 backdrop-blur-md"
                 onClick={handleNext}
-                className="bg-blue-600 text-white font-bold py-4 px-8 rounded-xl hover:bg-blue-700 w-full transition text-xl"
+                aria-hidden="true"
+              />
+              
+              <motion.div 
+                role="alertdialog"
+                aria-modal="true"
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 25, mass: 1 }}
+                className="relative bg-white border-8 border-gray-300 p-8 md:p-12 rounded-[3rem] max-w-4xl w-full text-center shadow-2xl my-8 z-10"
               >
-                Continue
-              </button>
+                <h3 className={`text-4xl md:text-5xl font-extrabold mb-8 ${feedback.type === 'failure' ? 'text-red-800' : feedback.type === 'success' ? 'text-green-800' : 'text-blue-800'}`}>
+                  {feedback.title}
+                </h3>
+                <div className="text-2xl text-gray-900 whitespace-pre-wrap mb-10 text-left leading-relaxed bg-gray-100 p-8 rounded-2xl border-4 border-gray-200 shadow-inner">
+                  {feedback.message}
+                </div>
+
+                {/* Show SplitScreenComparative in feedback for learning */}
+                <div className="mb-10 text-left">
+                  <SplitScreenComparative 
+                    leftTitle="Red Flags (Scam)"
+                    leftContent={
+                      <ul className="list-disc pl-8 space-y-4 text-gray-900 text-xl font-medium">
+                        <li><strong className="font-black text-red-900">Joined Today/Yesterday:</strong> Scammers make new accounts constantly.</li>
+                        <li><strong className="font-black text-red-900">0 Friends in Common:</strong> If it's your real friend, they should be connected to others you know.</li>
+                        <li><strong className="font-black text-red-900">Urgent/Weird Bios:</strong> \"Had to make a new account\" or asking for help.</li>
+                      </ul>
+                    }
+                    rightTitle="Green Flags (Safe)"
+                    rightContent={
+                      <ul className="list-disc pl-8 space-y-4 text-gray-900 text-xl font-medium">
+                        <li><strong className="font-black text-green-900">Older Join Date:</strong> E.g., \"Joined 2014\", meaning the account has history.</li>
+                        <li><strong className="font-black text-green-900">Mutual Friends:</strong> Sharing several friends in common means they are likely part of your real-world community.</li>
+                        <li><strong className="font-black text-green-900">Normal Bio:</strong> Mentions normal hobbies or work without asking for anything.</li>
+                      </ul>
+                    }
+                  />
+                </div>
+
+                <motion.button 
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleNext}
+                  autoFocus
+                  className="w-full bg-blue-800 text-white font-black py-6 px-10 rounded-2xl hover:bg-blue-900 transition-colors focus:outline-none focus-visible:ring-8 focus-visible:ring-blue-600 min-h-[5.5rem] text-3xl shadow-xl"
+                >
+                  Continue
+                </motion.button>
+              </motion.div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </AnimatePresence>
+      </main>
     </AdaptiveHesitationEngine>
   );
 }
