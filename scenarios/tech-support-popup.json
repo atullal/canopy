@@ -1,0 +1,47 @@
+{
+  "id": "tech-support-popup",
+  "title": "Practice Safe Browsing",
+  "description": "Sometimes the internet shows rushing, scary pop-ups to make you panic. Look at the screens below and practice safely closing them without calling the number. You cannot break anything here!",
+  "actions": [
+    {
+      "id": "close",
+      "label": "🛑 Force Close Browser",
+      "type": "primary"
+    },
+    {
+      "id": "call",
+      "label": "📞 Call Support Number",
+      "type": "danger"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "popup-scam",
+      "visualStyle": "flashing red, full screen takeover",
+      "message": "URGENT SECURITY ALERT: Your computer has been locked due to illegal activity! Do not turn off your computer. Call Microsoft Support immediately at 1-800-555-0199.",
+      "isScam": true,
+      "justInTimeHint": "Notice how loud and rushing this screen is. Real companies do not lock your screen and demand you call them."
+    },
+    {
+      "id": "legit-warning",
+      "visualStyle": "calm, standard browser warning",
+      "message": "The site ahead contains malware. Attackers currently on example.com might attempt to install dangerous programs.",
+      "isScam": false,
+      "justInTimeHint": "This is a quiet, built-in browser safety warning. It gives you a choice to go back safely."
+    }
+  ],
+  "feedback": {
+    "gentleFailureCall": {
+      "title": "A Wonderful Discovery Step!",
+      "message": "When a screen flashes and yells, it is so natural to want to call for help! That is exactly what bad actors want you to do. But here in the simulator, you are perfectly safe. Real tech companies (like Microsoft or Apple) will never lock your screen and demand a phone call. The safest move is always to force the browser closed. Let's practice that!"
+    },
+    "gentleFailureIgnoreReal": {
+      "title": "Great Caution!",
+      "message": "It is always wonderful to be careful! This particular screen was just your web browser quietly protecting you from a bad website. It is completely safe to follow its advice and click 'Go Back'. Let's keep exploring!"
+    },
+    "success": {
+      "title": "Masterful Browsing!",
+      "message": "You stayed perfectly calm! By recognizing the rushing, flashing pattern and choosing to close the browser, you completely protected yourself. You are doing a fantastic job staying in control."
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "giveaway-post",
+  "title": "Practice Social Feed",
+  "description": "Sometimes bad actors take over a friend's account and post tricky messages. Look at the posts below. Practice deciding what is safe to click, and when it is better to call your friend to check. You cannot break anything here!",
+  "actions": [
+    {
+      "id": "click",
+      "label": "✅ Click the Link",
+      "type": "danger"
+    },
+    {
+      "id": "verify",
+      "label": "📞 Call Friend to Verify",
+      "type": "primary"
+    }
+  ],
+  "posts": [
+    {
+      "id": "post-1",
+      "author": "Martha (Your best friend)",
+      "content": "I can't believe it! I just got a $5,000 government grant for seniors, and it only took 5 minutes! Click here to claim yours before they run out! [Link: www.free-grants-now.com]",
+      "isScam": true,
+      "justInTimeHint": "Does Martha usually post about free money and government grants? Notice how it tries to rush you before they 'run out'."
+    },
+    {
+      "id": "post-2",
+      "author": "Robert Davis",
+      "content": "Look at the beautiful tomatoes coming in from the garden this year! [Photo of tomatoes]",
+      "isScam": false,
+      "justInTimeHint": "This looks like a wonderful, normal post from Robert about his hobbies."
+    }
+  ],
+  "feedback": {
+    "gentleFailureClick": {
+      "title": "A Perfect Learning Moment!",
+      "message": "It is so wonderful to trust our friends! But sometimes, bad actors take over a friend's account to post tricky links. Notice how Martha's post asked you to rush for free money? That is a common pattern. It is always safest to pause and call your friend directly to ask if they really posted it. You are doing great, let's try the next one!"
+    },
+    "gentleFailureVerifyReal": {
+      "title": "Wonderful Caution!",
+      "message": "It is always a fantastic instinct to verify things! In this case, Robert was just sharing a lovely garden photo, so there is no link to worry about. But your caution keeps you incredibly safe online. Let's keep going!"
+    },
+    "success": {
+      "title": "Brilliantly Done!",
+      "message": "You saw the rushing pattern for free money and chose to protect yourself! By deciding to call your friend instead of clicking the link, you made the safest possible choice. You are becoming a confident digital citizen!"
+    }
+  }
+}
