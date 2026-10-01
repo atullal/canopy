@@ -24,27 +24,29 @@
       "id": "challenge-1",
       "urlBar": "www.amaz0n-update-store.com",
       "isLegitimate": false,
-      "cartSummary": "1x Coffee Maker - $45.00"
+      "cartSummary": "1x Coffee Maker - $45.00",
+      "justInTimeHint": "Double-check the spelling in the address bar at the top."
     },
     {
       "id": "challenge-2",
       "urlBar": "www.amazon.com",
       "isLegitimate": true,
-      "cartSummary": "1x Coffee Maker - $45.00"
+      "cartSummary": "1x Coffee Maker - $45.00",
+      "justInTimeHint": "The address looks perfectly spelled. Which payment method protects you the most?"
     }
   ],
   "feedback": {
     "gentleFailureFakeSite": {
-      "title": "Oops! That one was a sneaky trick.",
-      "message": "If you look closely at the address bar, it says **'amaz0n-update-store.com'** instead of the real **'amazon.com'**. In the real world, this copycat website would steal your payment information. But **here in the simulator, you are completely safe!** You did not break anything or lose any money.\n\nAlways check the top of the screen to make sure the store's name is spelled perfectly. Let's take a deep breath and try another one!"
+      "title": "Excellent Practice!",
+      "message": "Spotting tiny spelling differences takes practice, and you are doing exactly what you need to learn! The address 'amaz0n-update-store.com' had a small typo. Always take your time to check the top of the screen. Let's try another one together!"
     },
     "gentleFailureUnsafePayment": {
-      "title": "You checked the website address, but...",
-      "message": "You chose a payment method that does not protect you very well. A Debit Card takes money directly out of your actual bank account immediately. If a mistake happens, it is very hard to get that money back. (And remember, Gift Cards should never be used to pay for everyday online shopping).\n\n**Credit Cards are the safest choice.** If a criminal steals a credit card number, they are spending the bank's money, not yours. The bank will usually cancel the fake charge for you. Let's try again!"
+      "title": "Great Attention to the Address!",
+      "message": "You correctly saw it was the real store, which is fantastic! For payment, remember that Credit Cards provide the strongest safety net since they use the bank's money. It is a great habit to use them for online shopping. Let's keep practicing!"
     },
     "success": {
-      "title": "Perfect!",
-      "message": "You did two very important things right:\n\n1. You checked the website address and saw it was the real, perfectly spelled store.\n2. You picked a Credit Card, which gives you the strongest protection if anything ever goes wrong.\n\nYou are becoming a very confident and safe online shopper. Great job!"
+      "title": "Perfectly Done!",
+      "message": "You checked the website address perfectly, and you picked the safest payment method. You are becoming a very confident online shopper!"
     }
   }
 }

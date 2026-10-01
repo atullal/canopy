@@ -1,7 +1,7 @@
 {
   "id": "urgent-text-message",
   "title": "Practice Text Messages",
-  "description": "Welcome to your Practice Phone! Read the text messages below. If it looks like a scam, delete it. If it looks like a normal message, you can reply. You cannot break anything here!",
+  "description": "Welcome to your Practice Phone! Read the text messages below. If it looks like a patterny message, delete it. If it looks like a normal message, you can reply. You cannot break anything here!",
   "actions": [
     {
       "id": "reply",
@@ -20,35 +20,45 @@
       "sender": "Unknown Number (555-0199)",
       "body": "POSTAL SERVICE: Your package is on hold because of a missing $1.50 delivery fee. Click here to pay immediately or your package will be destroyed.",
       "isScam": true,
-      "flags": ["Urgency", "Money"]
+      "flags": [
+        "Urgency",
+        "Money"
+      ],
+      "justInTimeHint": "Does this text try to rush you or ask for money?"
     },
     {
       "id": "msg-2",
       "sender": "Unknown Number (555-0244)",
       "body": "Hi, it's me. I got into a small accident and the police have me. Please don't tell mom and dad. I need $500 for bail in gift cards. Reply quickly please!",
       "isScam": true,
-      "flags": ["Urgency", "Secrecy", "Money"]
+      "flags": [
+        "Urgency",
+        "Secrecy",
+        "Money"
+      ],
+      "justInTimeHint": "Does this text try to rush you or ask for money?"
     },
     {
       "id": "msg-3",
       "sender": "Dr. Smith's Office (555-0800)",
       "body": "Reminder: You have an appointment with Dr. Smith tomorrow at 10:00 AM. Reply YES to confirm or NO to cancel.",
       "isScam": false,
-      "flags": []
+      "flags": [],
+      "justInTimeHint": "This looks like a standard, calm reminder."
     }
   ],
   "feedback": {
     "gentleFailureScamReply": {
-      "title": "Oops! That text message was a trick.",
-      "message": "In the real world, replying to that message or clicking its link could cause trouble. But **here in the simulator, you are completely safe!** You did not break anything or lose any money.\n\nRemember our Golden Rule: scammers try to make you panic. That message used **Urgency** and asked for **Money** (or to keep a **Secret**). Whenever you see those signs, the safest choice is to delete the message. If you are worried it might be real, ask a trusted family member for help. Let's take a deep breath and try the next one!"
+      "title": "A Valuable Practice Step!",
+      "message": "This simulator is exactly for this kind of practice! Notice how that text tried to make you rush. Whenever a message asks for quick action, taking a breath and deleting it is a wonderful, safe choice. You're doing great!"
     },
     "gentleFailureSafeDelete": {
-      "title": "You chose to delete that message. That is always the safest choice if you are unsure!",
-      "message": "However, that one was actually a normal, safe reminder from a doctor's office. Notice how it didn't ask for money, didn't ask you to keep a secret, and didn't try to make you panic. It is perfectly safe to reply to messages like that. Let's try another one!"
+      "title": "A Perfectly Safe Choice!",
+      "message": "Deleting a message when you are unsure is always a fantastic and safe instinct! That particular message was just a calm reminder from the doctor, but your caution is a great habit. Let's keep exploring!"
     },
     "success": {
-      "title": "Great job!",
-      "message": "You remembered the Golden Rule perfectly. By recognizing the signs of Urgency, Secrecy, and Money, you knew exactly which messages were tricks and safely deleted them. You are doing a wonderful job protecting yourself. Let's keep going!"
+      "title": "Brilliant Work!",
+      "message": "You remembered to look for urgency and secrecy, and you safely ignored the rushing messages. You are doing a wonderful job protecting your peace of mind!"
     }
   }
 }

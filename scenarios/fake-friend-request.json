@@ -23,7 +23,8 @@
       "friendsInCommon": 0,
       "joinDate": "Joined Today",
       "isFake": true,
-      "type": "cloned-friend"
+      "type": "cloned-friend",
+      "justInTimeHint": "Look at the 'Joined' date and 'Friends in Common'. Does it seem unusual for your best friend?"
     },
     {
       "id": "request-2",
@@ -33,7 +34,8 @@
       "friendsInCommon": 4,
       "joinDate": "Joined 2014",
       "isFake": false,
-      "type": "real-connection"
+      "type": "real-connection",
+      "justInTimeHint": "This profile has been around for a long time and shares friends in your community."
     },
     {
       "id": "request-3",
@@ -43,25 +45,26 @@
       "friendsInCommon": 0,
       "joinDate": "Joined Yesterday",
       "isFake": true,
-      "type": "stranger-scam"
+      "type": "stranger-scam",
+      "justInTimeHint": "Do you know this person in real life? Check how recently they joined."
     }
   ],
   "feedback": {
     "gentleFailureCloned": {
-      "title": "Oops! That was a copycat profile.",
-      "message": "In the real world, accepting that request could let a scammer pretend to be your friend. But **here in the simulator, you are completely safe!**\n\nScammers often copy a real friend's picture and name to trick you. Notice how this new 'Martha' account was created *today* and has *zero* friends in common? If a current friend suddenly sends a new request, it is always safest to click 'Decline', then call your real friend on the phone to ask if they made a new page. Let's try the next one!"
+      "title": "A Great Discovery Step!",
+      "message": "This simulator is perfect for practicing observation! Notice how this profile was created 'Today' with zero friends in common? When a known friend sends a new request, taking a moment to pause and ask them is a wonderful habit. You are learning so much!"
     },
     "gentleFailureStranger": {
-      "title": "Oops! That request was from a stranger.",
-      "message": "You accepted a request from someone you don't know who has *zero* mutual friends and just joined yesterday. In the real world, scammers often invent fake jobs (like 'overseas doctor') to build trust and eventually ask for money.\n\nIt is always safest to only accept friend requests from people you actually know in real life. Let's take a deep breath and try again!"
+      "title": "A Wonderful Moment to Practice!",
+      "message": "It is nice to be friendly, but online it is always wonderful to only connect with people you know. This person joined yesterday with no mutual friends. Taking your time and choosing 'Decline' keeps your social circle wonderfully secure. Let's try again!"
     },
     "gentleFailureDeclineReal": {
-      "title": "You clicked 'Decline'. That is always your right!",
-      "message": "It is completely fine to decline any request! You never have to connect with anyone if you don't want to.\n\nHowever, notice that Robert's profile was older (Joined 2014) and he shared 4 friends in common with you. This usually means it's a real person from your local community. Let's keep going!"
+      "title": "A Perfectly Valid Choice!",
+      "message": "It is completely fine to decline any request! You are in charge of your space. However, notice that this profile was older and had mutual friends, which usually means it's a real person. You are doing a brilliant job taking your time to look at the details!"
     },
     "success": {
-      "title": "Fantastic job!",
-      "message": "You successfully protected your social circle! By checking when the account was created and looking for 'Friends in Common', you easily spotted the fake copycat profile and the scammer.\n\nYou are learning exactly how to stay safe online. Wonderful work!"
+      "title": "Brilliantly Done!",
+      "message": "You successfully protected your social circle! By calmly checking the join dates and friends in common, you made fantastic, confident choices. You are becoming incredibly comfortable online!"
     }
   }
 }

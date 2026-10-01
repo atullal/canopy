@@ -19,51 +19,57 @@
       "id": "photo-1",
       "description": "Clear, smiling photo of a family at a birthday party.",
       "isKeeper": true,
-      "type": "family"
+      "type": "family",
+      "justInTimeHint": "This looks like a clear, wonderful memory to keep."
     },
     {
       "id": "photo-2",
       "description": "Completely blurry, unrecognizable smear of colors.",
       "isKeeper": false,
-      "type": "blurry"
+      "type": "blurry",
+      "justInTimeHint": "This one might be a bit blurry or accidental. It's safe to clear out space!"
     },
     {
       "id": "photo-3",
       "description": "Dark, blurry photo of the inside of a pocket or a foot.",
       "isKeeper": false,
-      "type": "accidental"
+      "type": "accidental",
+      "justInTimeHint": "This one might be a bit blurry or accidental. It's safe to clear out space!"
     },
     {
       "id": "photo-4",
       "description": "Clear picture of a pet dog sitting still.",
       "isKeeper": true,
-      "type": "pet"
+      "type": "pet",
+      "justInTimeHint": "This looks like a clear, wonderful memory to keep."
     },
     {
       "id": "photo-5",
       "description": "Picture of a garden flower (looks exactly like Photo 6).",
       "isKeeper": false,
-      "type": "duplicate"
+      "type": "duplicate",
+      "justInTimeHint": "This one might be a bit blurry or accidental. It's safe to clear out space!"
     },
     {
       "id": "photo-6",
       "description": "Picture of the exact same garden flower, but slightly brighter and better framed.",
       "isKeeper": true,
-      "type": "best-shot"
+      "type": "best-shot",
+      "justInTimeHint": "This looks like a clear, wonderful memory to keep."
     }
   ],
   "feedback": {
     "gentleFailureKeeperDeleted": {
-      "title": "Oops! You deleted a nice, clear photo.",
-      "message": "In real life, deleting a precious memory can feel scary. But **here in the simulator, nothing is permanently lost!**\n\nEven on your real phone, when you delete a photo, it doesn't vanish immediately. It goes to a safe place called the **'Recently Deleted'** folder for about a month. If you make a mistake, you can always go into that folder and put the picture back.\n\nTry clicking the blue [ ↩️ Undo (Recently Deleted) ] button to bring the photo back, and then try selecting only the blurry ones."
+      "title": "A Great Time to Learn About Undo!",
+      "message": "It is so natural to be cautious about deleting a clear photo! The wonderful news is that your device has a 'Recently Deleted' folder that keeps them safe for a whole month. You can always undo it! Try clicking the blue Undo button to practice bringing it back."
     },
     "gentleFailureNotEnoughDeleted": {
-      "title": "You are being very careful, which is great!",
-      "message": "However, your storage is still a bit too full. To make room for new memories, we need to let go of the accidents. Try to find the photo that is completely blurry, the picture of the foot, and the extra picture of the flower.\n\nRemember, it's safe to practice here. Let's try again!"
+      "title": "Wonderful Caution!",
+      "message": "You are being very careful with your photos, which is a great instinct! To make enough room for new memories, try selecting the ones that are completely blurry or accidental pocket shots. It's safe to practice here!"
     },
     "success": {
-      "title": "Wonderful job!",
-      "message": "You successfully cleared out the blurry mistakes and duplicates, leaving plenty of room for new, beautiful memories.\n\nRemember: managing your storage is like cleaning out a real closet. It's a normal part of owning a device, and the 'Recently Deleted' folder is always there to catch any accidental mistakes. You did great!"
+      "title": "Beautifully Done!",
+      "message": "You made plenty of room for new memories while keeping the clear, precious ones. And you now know the 'Recently Deleted' folder is always there to support you. Fantastic job!"
     }
   }
 }
