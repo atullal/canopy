@@ -12,9 +12,9 @@ public struct SpringSquishButtonStyle: ButtonStyle {
 }
 
 extension Color {
-    static let canopyNavy = Color(red: 0.12, green: 0.25, blue: 0.69) // #1E40AF
-    static let canopyRed = Color(red: 0.60, green: 0.11, blue: 0.11) // #991B1B
-    static let canopyGreen = Color(red: 0.08, green: 0.40, blue: 0.14) // Deep green
+    static let canopyNavy = Color(red: 0.10, green: 0.20, blue: 0.60) // #1E40AF
+    static let canopyRed = Color(red: 0.50, green: 0.08, blue: 0.08) // #991B1B
+    static let canopyGreen = Color(red: 0.05, green: 0.30, blue: 0.10) // Deep green
     static let canopyText = Color(white: 0.1) // Near black for contrast
 }
 
@@ -371,17 +371,17 @@ struct FeedbackModal: View {
                         leftTitle: "Red Flags (Scam)",
                         leftContent: AnyView(
                             VStack(alignment: .leading, spacing: 16) {
-                                Text("**Joined Today/Yesterday:** Scammers make new accounts constantly.")
-                                Text("**0 Friends in Common:** If it's your real friend, they should be connected to others you know.")
-                                Text("**Urgent/Weird Bios:** \"Had to make a new account\" or asking for help.")
+                                Text("**Joined Today/Yesterday:**").fontWeight(.black).foregroundColor(.canopyRed) + Text(" Scammers make new accounts constantly.")
+                                Text("**0 Friends in Common:**").fontWeight(.black).foregroundColor(.canopyRed) + Text(" If it's your real friend, they should be connected to others you know.")
+                                Text("**Urgent/Weird Bios:**").fontWeight(.black).foregroundColor(.canopyRed) + Text(" \"Had to make a new account\" or asking for help.")
                             }
                         ),
                         rightTitle: "Green Flags (Safe)",
                         rightContent: AnyView(
                             VStack(alignment: .leading, spacing: 16) {
-                                Text("**Older Join Date:** E.g., \"Joined 2014\", meaning the account has history.")
-                                Text("**Mutual Friends:** Sharing several friends in common means they are likely part of your real-world community.")
-                                Text("**Normal Bio:** Mentions normal hobbies or work without asking for anything.")
+                                Text("**Older Join Date:**").fontWeight(.black).foregroundColor(.canopyGreen) + Text(" E.g., \"Joined 2014\", meaning the account has history.")
+                                Text("**Mutual Friends:**").fontWeight(.black).foregroundColor(.canopyGreen) + Text(" Sharing several friends in common means they are likely part of your real-world community.")
+                                Text("**Normal Bio:**").fontWeight(.black).foregroundColor(.canopyGreen) + Text(" Mentions normal hobbies or work without asking for anything.")
                             }
                         )
                     )
