@@ -2,7 +2,7 @@ name: iOS CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feat/fake-friend-request-ios" ]
   pull_request:
     branches: [ "main" ]
 
@@ -19,7 +19,7 @@ jobs:
       with:
         xcode-version: latest-stable
         
-    - name: Build and Test
+    - name: Build and Test Canopy
       run: |
-        cd apps/ios
-        xcodebuild test -project Canopy.xcodeproj -scheme Canopy -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest' | xcpretty && exit ${PIPESTATUS[0]}
+        cd apps/ios/Canopy
+        swift test
