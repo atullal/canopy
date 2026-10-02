@@ -1,5 +1,7 @@
 package com.canopy.simulator.fakefriendrequest
 
+import android.provider.Settings
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -56,9 +58,14 @@ fun SquishButton(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
+    val context = LocalContext.current
+    val isReducedMotion = remember(context) {
+        Settings.Global.getFloat(context.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
+    }
+
     val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.95f else 1f,
-        animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+        targetValue = if (isPressed && !isReducedMotion) 0.95f else 1f,
+        animationSpec = if (isReducedMotion) snap() else spring(stiffness = Spring.StiffnessMediumLow),
         label = "squishScale"
     )
 
@@ -84,6 +91,10 @@ fun FakeFriendRequestScreen() {
     var feedback by remember { mutableStateOf<Feedback?>(null) }
     
     val currentRequest = sampleRequests[currentIndex]
+    val context = LocalContext.current
+    val isReducedMotion = remember(context) {
+        Settings.Global.getFloat(context.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
+    }
 
     val handleAction: (String) -> Unit = { actionId ->
         if (actionId == "accept" && currentRequest.isFake) {
@@ -153,8 +164,12 @@ fun FakeFriendRequestScreen() {
             AnimatedContent(
                 targetState = currentRequest,
                 transitionSpec = {
-                    fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + slideInHorizontally(spring(stiffness = Spring.StiffnessMediumLow)) { it } togetherWith
-                    fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + slideOutHorizontally(spring(stiffness = Spring.StiffnessMediumLow)) { -it }
+                    if (isReducedMotion) {
+                        fadeIn(snap()) togetherWith fadeOut(snap())
+                    } else {
+                        fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + slideInHorizontally(spring(stiffness = Spring.StiffnessMediumLow)) { it } togetherWith
+                        fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + slideOutHorizontally(spring(stiffness = Spring.StiffnessMediumLow)) { -it }
+                    }
                 },
                 label = "requestCard",
                 modifier = Modifier.weight(1f).fillMaxWidth()
@@ -266,8 +281,8 @@ fun FakeFriendRequestScreen() {
         
         AnimatedVisibility(
             visible = feedback != null,
-            enter = fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + slideInVertically(spring(stiffness = Spring.StiffnessMediumLow)) { it / 8 },
-            exit = fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + slideOutVertically(spring(stiffness = Spring.StiffnessMediumLow)) { it / 8 }
+            enter = if (isReducedMotion) fadeIn(snap()) else fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + slideInVertically(spring(stiffness = Spring.StiffnessMediumLow)) { it / 8 },
+            exit = if (isReducedMotion) fadeOut(snap()) else fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + slideOutVertically(spring(stiffness = Spring.StiffnessMediumLow)) { it / 8 }
         ) {
             feedback?.let { fb ->
                 FeedbackModal(fb, onDismiss = handleNext)
