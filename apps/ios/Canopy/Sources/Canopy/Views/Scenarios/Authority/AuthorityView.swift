@@ -79,13 +79,16 @@ public struct AuthorityView: View {
                                 .cornerRadius(12)
                                 .transition(reduceMotion ? .opacity : .slide)
                         } else {
-                            Button("Need a hint?") {
+                            Button(action: {
                                 withAnimation(reduceMotion ? nil : .default) {
                                     viewModel.showHint = true
                                 }
+                            }) {
+                                Text("Need a hint?")
+                                    .font(.callout)
+                                    .frame(minWidth: 44, minHeight: 44)
+                                    .contentShape(Rectangle())
                             }
-                            .font(.callout)
-                            .frame(minHeight: 44)
                             .padding(.top, 8)
                         }
                         
