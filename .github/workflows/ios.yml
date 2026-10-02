@@ -59,7 +59,7 @@ jobs:
         xcrun xcresulttool get --legacy --path TestResults.xcresult --format json > extracted_artifacts/test_results.json || true
         
         # Export attachments (screenshots, etc.) using xcresulttool
-        xcrun xcresulttool export --legacy --path TestResults.xcresult --output-dir extracted_artifacts/attachments --type directory || true
+        mint run xcparse attachments TestResults.xcresult extracted_artifacts/attachments || true
         
     - name: Upload Test Results
       if: always()
