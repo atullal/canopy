@@ -4,10 +4,12 @@ import ScenarioKit
 // MARK: - Motion & Styling
 public struct SpringSquishButtonStyle: ButtonStyle {
     public init() {}
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
+    
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
-            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: configuration.isPressed)
+            .scaleEffect(configuration.isPressed && !reduceMotion ? 0.95 : 1.0)
+            .animation(reduceMotion ? nil : .spring(response: 0.3, dampingFraction: 0.7), value: configuration.isPressed)
     }
 }
 
@@ -65,12 +67,18 @@ public struct AdaptiveHesitationEngine<Content: View, Hint: View>: View {
         .onDisappear { timer?.invalidate() }
     }
     
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
+
     private func resetTimer() {
         showHint = false
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: idleTime, repeats: false) { _ in
-            withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+            if reduceMotion {
                 showHint = true
+            } else {
+                withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                    showHint = true
+                }
             }
         }
     }
@@ -119,6 +127,7 @@ public struct FakeFriendRequestView: View {
     
     @State private var currentIndex = 0
     @State private var feedback: FeedbackState?
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
     
     struct FeedbackState: Identifiable {
         let id = UUID()
@@ -288,7 +297,7 @@ public struct FakeFriendRequestView: View {
                     )
                     .shadow(color: Color.black.opacity(0.1), radius: 15, x: 0, y: 5)
                     .padding(.horizontal, 24)
-                    .animation(.spring(response: 0.4, dampingFraction: 0.8), value: currentIndex)
+                    .animation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.8), value: currentIndex)
                 }
                 .padding(.vertical, 32)
             }
@@ -307,7 +316,7 @@ public struct FakeFriendRequestView: View {
                 }
             }
         )
-        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: feedback != nil)
+        .animation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.8), value: feedback != nil)
     }
     
     private func handleAction(id: String) {
