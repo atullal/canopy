@@ -1,0 +1,57 @@
+{
+  "id": "v4-inoculation-authority",
+  "title": "Practice Spotting Pressure",
+  "description": "Bad actors don't just use computer tricks—they use psychological patterns. They try to make you panic so you act before thinking. This is called 'False Urgency' or 'Authority Pressure'. Read the messages below. Your goal is to spot which messages are trying to manipulate your emotions, and which are calm and safe.",
+  "actions": [
+    {
+      "id": "manipulation",
+      "label": "🚨 This is trying to rush me",
+      "type": "danger"
+    },
+    {
+      "id": "safe",
+      "label": "✅ This is a calm message",
+      "type": "primary"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "challenge-1",
+      "sender": "Fraud Department",
+      "body": "SECURITY ALERT: Did you authorize a $1,200 transfer? If you did not, you MUST reply 'CANCEL' within 5 minutes or the money will be permanently lost and your account will be frozen.",
+      "isManipulation": true,
+      "manipulationType": "False Urgency & Fear",
+      "justInTimeHint": "Notice the time limit ('within 5 minutes'). How does this message want you to feel?"
+    },
+    {
+      "id": "challenge-2",
+      "sender": "Local Pharmacy",
+      "body": "Hello! Your prescription is ready for pickup at your convenience. Our hours are 9 AM to 6 PM. Have a wonderful day!",
+      "isManipulation": false,
+      "manipulationType": "None",
+      "justInTimeHint": "Read the tone of this message. Is there any pressure to act immediately?"
+    },
+    {
+      "id": "challenge-3",
+      "sender": "Federal Tax Agency",
+      "body": "FINAL NOTICE: Your file is under investigation for tax fraud. You are facing severe legal action. You must contact our inspector immediately to resolve this before an arrest warrant is issued.",
+      "isManipulation": true,
+      "manipulationType": "Authority Pressure & Fear",
+      "justInTimeHint": "This message is using big, alarming words ('arrest warrant', 'fraud'). Are they trying to stop you from thinking clearly?"
+    }
+  ],
+  "feedback": {
+    "gentleFailureMissedManipulation": {
+      "title": "A Perfect Learning Moment!",
+      "message": "It is so natural to want to resolve a concerning warning quickly! But let's look closer: this message was using a psychological pattern called 'False Urgency'. By using threatening words and tight time limits, bad actors try to force you into a rushed decision. Remember, real organizations will never force you to act in a panic. When you feel rushed, the safest move is to stop and breathe. Let's try another one!"
+    },
+    "gentleFailureFlaggedSafe": {
+      "title": "Wonderful Caution!",
+      "message": "It is always a fantastic instinct to be careful! However, notice how calm and polite this message was? There were no time limits, no threats, and no pressure. It's a standard, safe notification. Let's keep practicing how to tell the difference!"
+    },
+    "success": {
+      "title": "Brilliantly Done!",
+      "message": "You completely neutralized their psychological pattern! You saw right through the false urgency and the rushing authority language. By recognizing *how* they were trying to manipulate you, you took away all their power. You are doing a magnificent job staying in control of your digital life!"
+    }
+  }
+}
