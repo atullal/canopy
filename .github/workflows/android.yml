@@ -5,6 +5,10 @@ on:
     branches: [ "main", "feat/*android*" ]
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'apps/android/**'
+      - 'scenarios/**'
+      - '.github/workflows/android.yml'
 
 jobs:
   test:
