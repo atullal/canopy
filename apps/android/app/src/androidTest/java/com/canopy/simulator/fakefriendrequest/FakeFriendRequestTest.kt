@@ -6,6 +6,7 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.printToLog
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.performScrollTo
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,15 +29,23 @@ class FakeFriendRequestTest {
         // Initially displays Martha
         composeTestRule.onNodeWithText("Martha (Your best friend)").assertIsDisplayed()
         
-        // Accept the fake request
-        composeTestRule.onNodeWithText("✅ Accept Request").performClick()
+        // Accept the fake request - it might be off-screen so perform scroll
+        val acceptButton = composeTestRule.onNodeWithText("✅ Accept Request")
+        acceptButton.assertIsDisplayed()
+        acceptButton.performClick()
+        
+        composeTestRule.waitForIdle()
+        composeTestRule.onRoot().printToLog("FakeFriendRequestTest-Modal")
         
         // Should show failure modal
         composeTestRule.onNodeWithText("A Great Discovery Step!").assertIsDisplayed()
         
         // Continue to next request
-        composeTestRule.onNodeWithText("Continue").performClick()
+        val continueButton = composeTestRule.onNodeWithText("Continue")
+        continueButton.assertIsDisplayed()
+        continueButton.performClick()
         
+        composeTestRule.waitForIdle()
         // Now displays Robert Davis
         composeTestRule.onNodeWithText("Robert Davis").assertIsDisplayed()
     }
