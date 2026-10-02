@@ -31,7 +31,17 @@ fun AdaptiveHesitationEngine(
     Box(modifier = Modifier.fillMaxSize()) {
         content()
         
-        if (showHint) {
+        val context = androidx.compose.ui.platform.LocalContext.current
+        val isReducedMotion = remember(context) {
+            android.provider.Settings.Global.getFloat(context.contentResolver, android.provider.Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
+        }
+
+        androidx.compose.animation.AnimatedVisibility(
+            visible = showHint,
+            enter = if (isReducedMotion) androidx.compose.animation.fadeIn(androidx.compose.animation.core.snap()) else androidx.compose.animation.fadeIn() + androidx.compose.animation.slideInVertically { it },
+            exit = if (isReducedMotion) androidx.compose.animation.fadeOut(androidx.compose.animation.core.snap()) else androidx.compose.animation.fadeOut() + androidx.compose.animation.slideOutVertically { it },
+            modifier = Modifier.align(Alignment.BottomEnd)
+        ) {
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)

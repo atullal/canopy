@@ -4,6 +4,8 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.onAllNodesWithText
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,20 +22,69 @@ class FakeFriendRequestTest {
         composeTestRule.setContent {
             FakeFriendRequestScreen()
         }
+        
+        composeTestRule.waitForIdle()
 
-        // Initially displays Martha
-        composeTestRule.onNodeWithText("Martha (Your best friend)").assertIsDisplayed()
+        try {
+            // Initially displays Martha
+            composeTestRule.waitUntil(timeoutMillis = 5000) {
+                composeTestRule.onAllNodesWithText("Martha (Your best friend)", useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
+            }
+            val marthaNode = composeTestRule.onNodeWithText("Martha (Your best friend)", useUnmergedTree = true)
+            marthaNode.performScrollTo()
+            marthaNode.assertIsDisplayed()
+        } catch (e: AssertionError) {
+            throw AssertionError("Failed at Martha", e)
+        } catch (e: Exception) {
+            throw AssertionError("Timeout at Martha", e)
+        }
         
-        // Accept the fake request
-        composeTestRule.onNodeWithText("✅ Accept Request").performClick()
+        try {
+            // Accept the fake request
+            val acceptButton = composeTestRule.onNodeWithText("✅ Accept Request", useUnmergedTree = true)
+            acceptButton.performScrollTo()
+            acceptButton.assertIsDisplayed()
+            acceptButton.performClick()
+        } catch (e: AssertionError) {
+            throw AssertionError("Failed at Accept Request", e)
+        }
         
-        // Should show failure modal
-        composeTestRule.onNodeWithText("A Great Discovery Step!").assertIsDisplayed()
+        composeTestRule.waitForIdle()
         
-        // Continue to next request
-        composeTestRule.onNodeWithText("Continue").performClick()
+        try {
+            composeTestRule.waitUntil(timeoutMillis = 5000) {
+                composeTestRule.onAllNodesWithText("A Great Discovery Step!", useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
+            }
+            composeTestRule.onNodeWithText("A Great Discovery Step!", useUnmergedTree = true).assertIsDisplayed()
+        } catch (e: AssertionError) {
+            throw AssertionError("Failed at Modal Title", e)
+        } catch (e: Exception) {
+            throw AssertionError("Timeout at Modal Title", e)
+        }
         
-        // Now displays Robert Davis
-        composeTestRule.onNodeWithText("Robert Davis").assertIsDisplayed()
+        try {
+            // Continue to next request
+            val continueButton = composeTestRule.onNodeWithText("Continue", useUnmergedTree = true)
+            continueButton.performScrollTo()
+            continueButton.assertIsDisplayed()
+            continueButton.performClick()
+        } catch (e: AssertionError) {
+            throw AssertionError("Failed at Continue Button", e)
+        }
+        
+        composeTestRule.waitForIdle()
+        
+        try {
+            composeTestRule.waitUntil(timeoutMillis = 5000) {
+                composeTestRule.onAllNodesWithText("Robert Davis", useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
+            }
+            val robertNode = composeTestRule.onNodeWithText("Robert Davis", useUnmergedTree = true)
+            robertNode.performScrollTo()
+            robertNode.assertIsDisplayed()
+        } catch (e: AssertionError) {
+            throw AssertionError("Failed at Robert Davis", e)
+        } catch (e: Exception) {
+            throw AssertionError("Timeout at Robert Davis", e)
+        }
     }
 }
