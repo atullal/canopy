@@ -122,8 +122,7 @@ fun FakeFriendRequestScreen() {
         }
     ) {
         Column(
-            modifier = Modifier.verticalScroll(scrollState)
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize().verticalScroll(scrollState)
                 .background(Color(0xFFF9FAFB.toInt()))
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -164,7 +163,7 @@ fun FakeFriendRequestScreen() {
             ) { request ->
                 Box(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxWidth()
                         .border(4.dp, Color(0xFFD1D5DB.toInt()), RoundedCornerShape(40.dp))
                         .background(Color.White, RoundedCornerShape(40.dp))
                 ) {
@@ -186,7 +185,7 @@ fun FakeFriendRequestScreen() {
                         }
 
                         Column(
-            modifier = Modifier.fillMaxSize().verticalScroll(scrollState)
+                            modifier = Modifier.fillMaxWidth()
                                 .padding(24.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
@@ -280,7 +279,7 @@ fun FakeFriendRequestScreen() {
 
 @Composable
 fun FeedbackModal(feedback: Feedback, onDismiss: () -> Unit) {
-    val scrollState = rememberScrollState()
+    val modalScrollState = rememberScrollState()
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -289,7 +288,7 @@ fun FeedbackModal(feedback: Feedback, onDismiss: () -> Unit) {
         contentAlignment = Alignment.Center
     ) {
         Column(
-            modifier = Modifier.verticalScroll(scrollState)
+            modifier = Modifier.verticalScroll(modalScrollState)
                 .background(Color.White, RoundedCornerShape(40.dp))
                 .border(8.dp, Color(0xFFD1D5DB.toInt()), RoundedCornerShape(40.dp))
                 .padding(32.dp)
