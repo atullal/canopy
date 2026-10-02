@@ -1,0 +1,57 @@
+{
+  "id": "v4-inoculation-sunk-cost",
+  "title": "Practice Spotting The Sunk Cost Fallacy",
+  "description": "Sometimes bad actors spend weeks building a relationship with you, or trick you into investing a small amount of money. Then they ask for more. This psychological pattern is called the 'Sunk Cost Fallacy'. They hope you will keep paying because you feel you have already invested too much time or money to stop. Spot which situations are using this manipulation.",
+  "actions": [
+    {
+      "id": "manipulation",
+      "label": "🚨 This is a Sunk Cost trick",
+      "type": "danger"
+    },
+    {
+      "id": "safe",
+      "label": "✅ This is a normal request",
+      "type": "primary"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "challenge-1",
+      "sender": "Online Romance Partner",
+      "body": "My love, the airline just told me I need another $800 for a special travel permit to finally come see you. I know you already sent money for the ticket and the visa, but if you don't send this, all that money is wasted and we'll never meet. Please, just one last time!",
+      "isManipulation": true,
+      "manipulationType": "Sunk Cost & Romance",
+      "justInTimeHint": "Notice how they use the money you've already spent as a reason to ask for even more. Does this endless string of fees seem suspicious?"
+    },
+    {
+      "id": "challenge-2",
+      "sender": "Crypto Investment Platform",
+      "body": "Congratulations! Your $100 investment has grown to $5,000! To withdraw your earnings, you must first pay a $250 'Tax Release Fee'. Once paid, your funds will be released immediately.",
+      "isManipulation": true,
+      "manipulationType": "Sunk Cost & Fake Investment",
+      "justInTimeHint": "They want you to pay a fee to access your own money. They are using your excitement about the 'earnings' to trick you."
+    },
+    {
+      "id": "challenge-3",
+      "sender": "Local Community Center",
+      "body": "Friendly reminder: Your annual community center membership is expiring next week. The renewal fee is $25 for the year. You can pay online or at the front desk.",
+      "isManipulation": false,
+      "manipulationType": "None",
+      "justInTimeHint": "This is a standard, expected yearly fee for a local service you use, with no emotional manipulation or fake earnings involved."
+    }
+  ],
+  "feedback": {
+    "gentleFailureMissedManipulation": {
+      "title": "A Perfect Learning Moment!",
+      "message": "It is so hard to stop when you feel like you've already invested your heart or your money into something! This is the trap of the 'Sunk Cost Fallacy'. Bad actors string you along with endless small fees or sudden emergencies, hoping you won't want to 'lose' what you've already put in. The bravest and safest thing to do is to recognize the pattern and cut ties, no matter how much time has passed. You are learning powerful tools today!"
+    },
+    "gentleFailureFlaggedSafe": {
+      "title": "Wonderful Caution!",
+      "message": "It is always fantastic to be careful about requests for money! However, this was just a standard, expected yearly membership fee for a local community center. There were no emotional strings attached and no surprise fees to access your own funds. Let's keep practicing!"
+    },
+    "success": {
+      "title": "Brilliantly Done!",
+      "message": "You completely neutralized the 'Sunk Cost Fallacy'! You recognized that an endless string of travel fees and paying taxes to withdraw your own money are manipulative tricks. By stepping back and breaking the cycle, you protected your finances and your peace of mind. Truly fantastic work!"
+    }
+  }
+}

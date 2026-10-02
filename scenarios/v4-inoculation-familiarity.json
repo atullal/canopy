@@ -1,0 +1,57 @@
+{
+  "id": "v4-inoculation-familiarity",
+  "title": "Practice Spotting Fake Familiarity",
+  "description": "Bad actors can now use computer programs to copy the voices of your loved ones or pretend to be authority figures. This psychological pattern relies on 'Familiarity' to make you trust them instantly and act quickly. Read the scenarios below and spot which ones are trying to manipulate your trust.",
+  "actions": [
+    {
+      "id": "manipulation",
+      "label": "🚨 This is a manipulation trick",
+      "type": "danger"
+    },
+    {
+      "id": "safe",
+      "label": "✅ This is a safe message",
+      "type": "primary"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "challenge-1",
+      "sender": "Voicemail: Your Grandson",
+      "body": "[Voice Note] Grandma, it's me. I was in a car accident and I'm in jail. Please don't call my parents, they'll be furious. My lawyer says I need $1,000 in gift cards right now for bail. I'll pay you back tomorrow, I promise!",
+      "isManipulation": true,
+      "manipulationType": "Familiarity & Secrecy",
+      "justInTimeHint": "Even if the voice sounds familiar, notice how they demand secrecy ('don't call my parents') and strange payments (gift cards)."
+    },
+    {
+      "id": "challenge-2",
+      "sender": "Voicemail: Local Sheriff's Department",
+      "body": "[Voice Note] This is Deputy Johnson. You have an outstanding warrant for missing jury duty. To avoid immediate arrest, you must stay on the line and pay a $500 fine using a prepaid card.",
+      "isManipulation": true,
+      "manipulationType": "Authority Pressure",
+      "justInTimeHint": "They are using a trusted authority figure to cause panic. Would a real police officer ask you to pay fines with a prepaid card over the phone?"
+    },
+    {
+      "id": "challenge-3",
+      "sender": "Voicemail: Your Friend Susan",
+      "body": "[Voice Note] Hi! It's Susan. I was just calling to see if we're still on for lunch this Thursday at noon. Call me back when you get this. Bye!",
+      "isManipulation": false,
+      "manipulationType": "None",
+      "justInTimeHint": "This is a normal, calm message from a friend checking on plans, with no demands for money or secrecy."
+    }
+  ],
+  "feedback": {
+    "gentleFailureMissedManipulation": {
+      "title": "A Perfect Learning Moment!",
+      "message": "It is completely natural to trust a familiar voice or an authority figure like the police! This is exactly how the 'Familiarity' pattern works. Bad actors use fake voices or pretend to be authority figures to bypass your suspicion. But remember the warning signs: demanding secrecy, asking for strange payment methods like gift cards, or threatening immediate arrest. When in doubt, hang up and call your loved one or the police station directly using a trusted number. You are doing wonderfully!"
+    },
+    "gentleFailureFlaggedSafe": {
+      "title": "Wonderful Caution!",
+      "message": "It is always a fantastic instinct to be cautious with voicemails! However, notice how calm Susan's message was? There was no urgency, no secrecy, and no request for money. It is a completely safe, normal message. Let's keep practicing!"
+    },
+    "success": {
+      "title": "Brilliantly Done!",
+      "message": "You completely neutralized their 'Familiarity' trick! You recognized that a familiar voice demanding secrecy and gift cards is a huge warning sign, and you correctly spotted the fake police officer. By paying attention to the manipulative patterns rather than just the voice, you stayed perfectly safe. Magnificent work!"
+    }
+  }
+}
