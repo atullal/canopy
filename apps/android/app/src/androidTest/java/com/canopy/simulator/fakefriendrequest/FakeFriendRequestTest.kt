@@ -2,6 +2,8 @@ package com.canopy.simulator.fakefriendrequest
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.printToLog
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.assertIsDisplayed
 import org.junit.Rule
@@ -20,6 +22,8 @@ class FakeFriendRequestTest {
         composeTestRule.setContent {
             FakeFriendRequestScreen()
         }
+
+        composeTestRule.onRoot().printToLog("FakeFriendRequestTest")
 
         // Initially displays Martha
         composeTestRule.onNodeWithText("Martha (Your best friend)").assertIsDisplayed()
