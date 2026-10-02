@@ -27,4 +27,4 @@ jobs:
     - name: Build and Test App
       run: |
         cd apps/ios
-        xcodebuild test -project Canopy.xcodeproj -scheme CanopyHostApp -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=latest'
+        xcodebuild test -project Canopy.xcodeproj -scheme CanopyHostApp -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
