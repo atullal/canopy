@@ -21,6 +21,10 @@ let package = Package(
             dependencies: ["ScenarioKit"]),
         .testTarget(
             name: "CanopyTests",
-            dependencies: ["Canopy"])
+            dependencies: ["Canopy"]),
+        .testTarget(
+            name: "CanopyUITests",
+            dependencies: ["Canopy"],
+            path: "UITests/CanopyUITests")
     ]
 )
