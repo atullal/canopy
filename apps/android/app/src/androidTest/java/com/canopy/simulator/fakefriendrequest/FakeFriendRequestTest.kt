@@ -2,8 +2,6 @@ package com.canopy.simulator.fakefriendrequest
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onRoot
-import androidx.compose.ui.test.printToLog
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.performScrollTo
@@ -25,32 +23,53 @@ class FakeFriendRequestTest {
             FakeFriendRequestScreen()
         }
 
-        // Initially displays Martha
-        composeTestRule.onNodeWithText("Martha (Your best friend)").assertIsDisplayed()
-        
-        // Accept the fake request - it might be off-screen so perform scroll
-        val acceptButton = composeTestRule.onNodeWithText("✅ Accept Request")
-        acceptButton.performScrollTo()
-        acceptButton.assertIsDisplayed()
-        acceptButton.performClick()
-        
-        composeTestRule.waitForIdle()
-        
-        // Wait until it appears (we shouldn't need to do this explicitly in Compose, but just in case)
-        composeTestRule.waitUntil(timeoutMillis = 5000) {
-            composeTestRule.onAllNodesWithText("A Great Discovery Step!").fetchSemanticsNodes().isNotEmpty()
+        try {
+            // Initially displays Martha
+            composeTestRule.onNodeWithText("Martha (Your best friend)").assertIsDisplayed()
+        } catch (e: AssertionError) {
+            throw AssertionError("Failed at Martha", e)
         }
-        val titleNode = composeTestRule.onNodeWithText("A Great Discovery Step!")
-        titleNode.assertIsDisplayed()
         
-        // Continue to next request
-        val continueButton = composeTestRule.onNodeWithText("Continue")
-        continueButton.performScrollTo()
-        continueButton.assertIsDisplayed()
-        continueButton.performClick()
+        try {
+            // Accept the fake request
+            val acceptButton = composeTestRule.onNodeWithText("✅ Accept Request")
+            acceptButton.performScrollTo()
+            acceptButton.assertIsDisplayed()
+            acceptButton.performClick()
+        } catch (e: AssertionError) {
+            throw AssertionError("Failed at Accept Request", e)
+        }
         
         composeTestRule.waitForIdle()
-        // Now displays Robert Davis
-        composeTestRule.onNodeWithText("Robert Davis").assertIsDisplayed()
+        
+        try {
+            composeTestRule.waitUntil(timeoutMillis = 5000) {
+                composeTestRule.onAllNodesWithText("A Great Discovery Step!").fetchSemanticsNodes().isNotEmpty()
+            }
+            composeTestRule.onNodeWithText("A Great Discovery Step!").assertIsDisplayed()
+        } catch (e: AssertionError) {
+            throw AssertionError("Failed at Modal Title", e)
+        } catch (e: Exception) {
+            throw AssertionError("Timeout at Modal Title", e)
+        }
+        
+        try {
+            // Continue to next request
+            val continueButton = composeTestRule.onNodeWithText("Continue")
+            continueButton.performScrollTo()
+            continueButton.assertIsDisplayed()
+            continueButton.performClick()
+        } catch (e: AssertionError) {
+            throw AssertionError("Failed at Continue Button", e)
+        }
+        
+        composeTestRule.waitForIdle()
+        
+        try {
+            // Now displays Robert Davis
+            composeTestRule.onNodeWithText("Robert Davis").assertIsDisplayed()
+        } catch (e: AssertionError) {
+            throw AssertionError("Failed at Robert Davis", e)
+        }
     }
 }
