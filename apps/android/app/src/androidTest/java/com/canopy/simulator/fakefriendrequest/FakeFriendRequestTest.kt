@@ -31,17 +31,19 @@ class FakeFriendRequestTest {
         
         // Accept the fake request - it might be off-screen so perform scroll
         val acceptButton = composeTestRule.onNodeWithText("✅ Accept Request")
+        acceptButton.performScrollTo()
         acceptButton.assertIsDisplayed()
         acceptButton.performClick()
         
         composeTestRule.waitForIdle()
         composeTestRule.onRoot().printToLog("FakeFriendRequestTest-Modal")
         
-        // Should show failure modal
+        // Should show failure modal (It uses "A Great Discovery Step!" for cloned-friend)
         composeTestRule.onNodeWithText("A Great Discovery Step!").assertIsDisplayed()
         
         // Continue to next request
         val continueButton = composeTestRule.onNodeWithText("Continue")
+        continueButton.performScrollTo()
         continueButton.assertIsDisplayed()
         continueButton.performClick()
         

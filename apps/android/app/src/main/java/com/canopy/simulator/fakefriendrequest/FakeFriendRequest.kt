@@ -1,3 +1,5 @@
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 package com.canopy.simulator.fakefriendrequest
 
 import androidx.compose.animation.*
@@ -80,6 +82,7 @@ fun SquishButton(
 
 @Composable
 fun FakeFriendRequestScreen() {
+    val scrollState = rememberScrollState()
     var currentIndex by remember { mutableIntStateOf(0) }
     var feedback by remember { mutableStateOf<Feedback?>(null) }
     
@@ -119,7 +122,7 @@ fun FakeFriendRequestScreen() {
         }
     ) {
         Column(
-            modifier = Modifier
+            modifier = Modifier.verticalScroll(scrollState)
                 .fillMaxSize()
                 .background(Color(0xFFF9FAFB))
                 .padding(24.dp),
@@ -278,6 +281,7 @@ fun FakeFriendRequestScreen() {
 
 @Composable
 fun FeedbackModal(feedback: Feedback, onDismiss: () -> Unit) {
+    val scrollState = rememberScrollState()
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -286,7 +290,7 @@ fun FeedbackModal(feedback: Feedback, onDismiss: () -> Unit) {
         contentAlignment = Alignment.Center
     ) {
         Column(
-            modifier = Modifier
+            modifier = Modifier.verticalScroll(scrollState)
                 .background(Color.White, RoundedCornerShape(40.dp))
                 .border(8.dp, Color(0xFFD1D5DB), RoundedCornerShape(40.dp))
                 .padding(32.dp)
