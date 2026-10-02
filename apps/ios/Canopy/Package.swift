@@ -22,5 +22,9 @@ let package = Package(
         .testTarget(
             name: "CanopyTests",
             dependencies: ["Canopy"]),
+        .testTarget(
+            name: "CanopyUITests",
+            dependencies: ["Canopy"],
+            path: "UITests/CanopyUITests")
     ]
 )
