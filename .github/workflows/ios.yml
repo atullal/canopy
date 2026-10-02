@@ -19,18 +19,18 @@ jobs:
       with:
         xcode-version: latest-stable
 
-    - name: Install Xcodegen
-      run: brew install xcodegen
-
-    - name: Generate Xcode Project
-      run: |
-        cd apps/ios
-        xcodegen generate
-
     - name: Run Canopy Unit Tests
       run: |
         cd apps/ios/Canopy
         swift test
+
+    - name: Install Xcodegen
+      run: brew install xcodegen
+
+    - name: Generate Xcode Project for UI Tests
+      run: |
+        cd apps/ios
+        xcodegen generate
 
     - name: Run Canopy UI Tests and Accessibility Audit
       run: |
@@ -38,7 +38,7 @@ jobs:
         xcodebuild test \
           -project Canopy.xcodeproj \
           -scheme CanopyUITests \
-          -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest' \
+          -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=latest' \
           -resultBundlePath TestResults.xcresult \
           -enableCodeCoverage YES \
           -testLanguage en \
