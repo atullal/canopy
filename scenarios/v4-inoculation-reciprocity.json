@@ -1,0 +1,57 @@
+{
+  "id": "v4-inoculation-reciprocity",
+  "title": "Practice Spotting Fake Favors",
+  "description": "A powerful psychological pattern is called 'Reciprocity'. Bad actors offer you something for free, or do you an unexpected 'favor', so you feel obligated to give them something in return—like your personal information or a small fee. Your goal is to spot which messages are using fake favors to manipulate you.",
+  "actions": [
+    {
+      "id": "manipulation",
+      "label": "🚨 This is a fake favor (Reciprocity)",
+      "type": "danger"
+    },
+    {
+      "id": "safe",
+      "label": "✅ This is a safe message",
+      "type": "primary"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "challenge-1",
+      "sender": "Customer Rewards Center",
+      "body": "Congratulations! You have been selected to receive a FREE $100 supermarket gift card as a thank you for your loyalty. Just pay $1.50 for shipping using your credit card to claim your reward now.",
+      "isManipulation": true,
+      "manipulationType": "Reciprocity & Hidden Fee",
+      "justInTimeHint": "They are offering you something incredibly valuable for 'free', but asking for your credit card. Does this feel like a trick to make you feel special?"
+    },
+    {
+      "id": "challenge-2",
+      "sender": "Helpful Tech Support",
+      "body": "Hello, I am a support agent. I noticed your computer has been running slowly lately. I can fix this for you right now for absolutely free as a courtesy. Just download this remote access app so I can connect to your screen.",
+      "isManipulation": true,
+      "manipulationType": "Reciprocity & Unsolicited Help",
+      "justInTimeHint": "This person is offering unexpected, free help. Are they trying to make you feel grateful so you let them into your computer?"
+    },
+    {
+      "id": "challenge-3",
+      "sender": "City Public Library",
+      "body": "Next Tuesday at 2:00 PM, the library is hosting a free community class on how to use email. No registration is required. We hope to see you there!",
+      "isManipulation": false,
+      "manipulationType": "None",
+      "justInTimeHint": "This is a public event hosted by a known community organization. Notice how they don't ask for your credit card or personal information?"
+    }
+  ],
+  "feedback": {
+    "gentleFailureMissedManipulation": {
+      "title": "A Perfect Learning Moment!",
+      "message": "It is so natural to appreciate a kind favor or a free gift! This is why the 'Reciprocity' pattern is so tricky. Bad actors use fake gifts or unsolicited help to make you feel special or grateful, hoping you will drop your guard and give them your credit card or access to your device in return. Remember, if a stranger offers a huge favor out of nowhere, it is safest to walk away. You are doing great, let's keep going!"
+    },
+    "gentleFailureFlaggedSafe": {
+      "title": "Wonderful Caution!",
+      "message": "It is always fantastic to question free things! However, this message was from a known, public community center (the library) offering a public class, and importantly, they didn't ask you for any money, passwords, or remote access in exchange. It is completely safe. Let's practice another one!"
+    },
+    "success": {
+      "title": "Brilliantly Done!",
+      "message": "You completely neutralized their 'Reciprocity' trick! You recognized that the 'free gift' and the 'unsolicited help' were just psychological patterns designed to make you feel obligated. By staying sharp and refusing the fake favor, you kept your information totally secure. Magnificent work!"
+    }
+  }
+}
