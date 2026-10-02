@@ -5,12 +5,6 @@ on:
     branches: [ "main", "feat/*android*" ]
   pull_request:
     branches: [ "main" ]
-    paths:
-      - 'apps/android/**'
-      - 'scenarios/**'
-    paths-ignore:
-      - 'apps/web/**'
-      - 'apps/ios/**'
 
 jobs:
   test:
@@ -33,14 +27,6 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x apps/android/gradlew || true
-
-    - name: Check gradlew exists
-      run: |
-        cd apps/android
-        if [ ! -f "gradlew" ]; then
-          gradle wrapper --gradle-version 8.6
-        fi
-        ./gradlew wrapper --gradle-version 8.6
         
     - name: Run Unit Tests and Lint
       run: |
