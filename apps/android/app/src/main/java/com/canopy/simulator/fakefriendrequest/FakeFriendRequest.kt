@@ -1,9 +1,10 @@
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.rememberScrollState
 package com.canopy.simulator.fakefriendrequest
 
-import android.provider.Settings
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -60,14 +61,9 @@ fun SquishButton(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val context = LocalContext.current
-    val isReducedMotion = remember(context) {
-        Settings.Global.getFloat(context.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
-    }
-
     val scale by animateFloatAsState(
-        targetValue = if (isPressed && !isReducedMotion) 0.95f else 1f,
-        animationSpec = if (isReducedMotion) snap() else spring(stiffness = Spring.StiffnessMediumLow),
+        targetValue = if (isPressed) 0.95f else 1f,
+        animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
         label = "squishScale"
     )
 
@@ -94,10 +90,6 @@ fun FakeFriendRequestScreen() {
     var feedback by remember { mutableStateOf<Feedback?>(null) }
     
     val currentRequest = sampleRequests[currentIndex]
-    val context = LocalContext.current
-    val isReducedMotion = remember(context) {
-        Settings.Global.getFloat(context.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
-    }
 
     val handleAction: (String) -> Unit = { actionId ->
         if (actionId == "accept" && currentRequest.isFake) {
@@ -128,13 +120,13 @@ fun FakeFriendRequestScreen() {
             Text(
                 text = "Look at Friends in Common and the Join Date. Real friends usually have mutual connections and older accounts.",
                 fontSize = 20.sp,
-                color = Color(0xFF111827)
+                color = Color(0xFF111827.toInt())
             )
         }
     ) {
         Column(
             modifier = Modifier.fillMaxSize().verticalScroll(scrollState)
-                .background(Color(0xFFF9FAFB))
+                .background(Color(0xFFF9FAFB.toInt()))
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -149,7 +141,7 @@ fun FakeFriendRequestScreen() {
             Box(
                 modifier = Modifier
                     .background(Color.White, RoundedCornerShape(16.dp))
-                    .border(4.dp, Color(0xFFBFDBFE), RoundedCornerShape(16.dp))
+                    .border(4.dp, Color(0xFFBFDBFE.toInt()), RoundedCornerShape(16.dp))
                     .padding(24.dp)
                     .fillMaxWidth()
             ) {
@@ -157,7 +149,7 @@ fun FakeFriendRequestScreen() {
                     text = "Welcome to your Practice Social Feed! You have a few new friend requests. Look closely at their profiles to decide if they are real people you know, or if they might be a fake copycat profile. You cannot break anything here!",
                     fontSize = 20.sp,
                     lineHeight = 28.sp,
-                    color = Color(0xFF111827)
+                    color = Color(0xFF111827.toInt())
                 )
             }
 
@@ -166,27 +158,23 @@ fun FakeFriendRequestScreen() {
             AnimatedContent(
                 targetState = currentRequest,
                 transitionSpec = {
-                    if (isReducedMotion) {
-                        fadeIn(snap()) togetherWith fadeOut(snap())
-                    } else {
-                        fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + slideInHorizontally(spring(stiffness = Spring.StiffnessMediumLow)) { it } togetherWith
-                        fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + slideOutHorizontally(spring(stiffness = Spring.StiffnessMediumLow)) { -it }
-                    }
+                    fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + slideInHorizontally(spring(stiffness = Spring.StiffnessMediumLow)) { it } togetherWith
+                    fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + slideOutHorizontally(spring(stiffness = Spring.StiffnessMediumLow)) { -it }
                 },
                 label = "requestCard",
                 modifier = Modifier.fillMaxWidth()
             ) { request ->
                 Box(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .border(4.dp, Color(0xFFD1D5DB), RoundedCornerShape(40.dp))
+                        .fillMaxWidth()
+                        .border(4.dp, Color(0xFFD1D5DB.toInt()), RoundedCornerShape(40.dp))
                         .background(Color.White, RoundedCornerShape(40.dp))
                 ) {
                     Column {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(Color(0xFF1E3A8A), RoundedCornerShape(topStart = 36.dp, topEnd = 36.dp))
+                                .background(Color(0xFF1E3A8A.toInt()), RoundedCornerShape(topStart = 36.dp, topEnd = 36.dp))
                                 .padding(24.dp)
                         ) {
                             Text(
@@ -200,14 +188,15 @@ fun FakeFriendRequestScreen() {
                         }
 
                         Column(
-                            modifier = Modifier.fillMaxWidth().padding(24.dp),
+                            modifier = Modifier.fillMaxWidth()
+                                .padding(24.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Box(
                                 modifier = Modifier
                                     .size(120.dp)
-                                    .background(Color(0xFFE5E7EB), CircleShape)
-                                    .border(8.dp, Color(0xFFF3F4F6), CircleShape),
+                                    .background(Color(0xFFE5E7EB.toInt()), CircleShape)
+                                    .border(8.dp, Color(0xFFF3F4F6.toInt()), CircleShape),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text("👤", fontSize = 60.sp)
@@ -225,7 +214,7 @@ fun FakeFriendRequestScreen() {
                                 text = "\"${request.bio}\"",
                                 fontSize = 20.sp,
                                 fontStyle = FontStyle.Italic,
-                                color = Color(0xFF1F2937),
+                                color = Color(0xFF1F2937.toInt()),
                                 textAlign = TextAlign.Center
                             )
 
@@ -234,15 +223,15 @@ fun FakeFriendRequestScreen() {
                             Column(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .background(Color(0xFFEFF6FF), RoundedCornerShape(16.dp))
-                                    .border(4.dp, Color(0xFFBFDBFE), RoundedCornerShape(16.dp))
+                                    .background(Color(0xFFEFF6FF.toInt()), RoundedCornerShape(16.dp))
+                                    .border(4.dp, Color(0xFFBFDBFE.toInt()), RoundedCornerShape(16.dp))
                                     .padding(24.dp)
                             ) {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
-                                    Text("Friends in Common:", color = Color(0xFF1E3A8A), fontWeight = FontWeight.Black, fontSize = 20.sp)
+                                    Text("Friends in Common:", color = Color(0xFF1E3A8A.toInt()), fontWeight = FontWeight.Black, fontSize = 20.sp)
                                     Text(request.friendsInCommon.toString(), color = Color.Black, fontWeight = FontWeight.Black, fontSize = 24.sp)
                                 }
                                 Spacer(modifier = Modifier.height(16.dp))
@@ -250,7 +239,7 @@ fun FakeFriendRequestScreen() {
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
-                                    Text("Profile Created:", color = Color(0xFF1E3A8A), fontWeight = FontWeight.Black, fontSize = 20.sp)
+                                    Text("Profile Created:", color = Color(0xFF1E3A8A.toInt()), fontWeight = FontWeight.Black, fontSize = 20.sp)
                                     Text(request.joinDate, color = Color.Black, fontWeight = FontWeight.Black, fontSize = 24.sp)
                                 }
                             }
@@ -260,7 +249,7 @@ fun FakeFriendRequestScreen() {
                             SquishButton(
                                 onClick = { handleAction("accept") },
                                 modifier = Modifier.fillMaxWidth(),
-                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E40AF))
+                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E40AF.toInt()))
                             ) {
                                 Text("✅ Accept Request", fontSize = 24.sp, fontWeight = FontWeight.Black, color = Color.White)
                             }
@@ -268,10 +257,10 @@ fun FakeFriendRequestScreen() {
                             SquishButton(
                                 onClick = { handleAction("decline") },
                                 modifier = Modifier.fillMaxWidth(),
-                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE5E7EB)),
-                                border = androidx.compose.foundation.BorderStroke(2.dp, Color(0xFF9CA3AF))
+                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE5E7EB.toInt())),
+                                border = androidx.compose.foundation.BorderStroke(2.dp, Color(0xFF9CA3AF.toInt()))
                             ) {
-                                Text("❌ Decline & Delete", fontSize = 24.sp, fontWeight = FontWeight.Black, color = Color(0xFF111827))
+                                Text("❌ Decline & Delete", fontSize = 24.sp, fontWeight = FontWeight.Black, color = Color(0xFF111827.toInt()))
                             }
                         }
                     }
@@ -281,11 +270,10 @@ fun FakeFriendRequestScreen() {
         
         AnimatedVisibility(
             visible = feedback != null,
-            enter = if (isReducedMotion) fadeIn(snap()) else fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + slideInVertically(spring(stiffness = Spring.StiffnessMediumLow)) { it / 8 },
-            exit = if (isReducedMotion) fadeOut(snap()) else fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + slideOutVertically(spring(stiffness = Spring.StiffnessMediumLow)) { it / 8 }
+            enter = fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + slideInVertically(spring(stiffness = Spring.StiffnessMediumLow)) { it / 8 },
+            exit = fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + slideOutVertically(spring(stiffness = Spring.StiffnessMediumLow)) { it / 8 }
         ) {
-            val fb = feedback
-            if (fb != null) {
+            feedback?.let { fb ->
                 FeedbackModal(fb, onDismiss = handleNext)
             }
         }
@@ -294,23 +282,24 @@ fun FakeFriendRequestScreen() {
 
 @Composable
 fun FeedbackModal(feedback: Feedback, onDismiss: () -> Unit) {
+    val modalScrollState = rememberScrollState()
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xE6111827)) // Very dark semi-transparent for backdrop blur effect
+            .background(Color(0xFF111827.toInt())) // Very dark semi-transparent for backdrop blur effect
             .padding(24.dp),
         contentAlignment = Alignment.Center
     ) {
         Column(
-            modifier = Modifier
+            modifier = Modifier.verticalScroll(modalScrollState)
                 .background(Color.White, RoundedCornerShape(40.dp))
-                .border(8.dp, Color(0xFFD1D5DB), RoundedCornerShape(40.dp))
+                .border(8.dp, Color(0xFFD1D5DB.toInt()), RoundedCornerShape(40.dp))
                 .padding(32.dp)
         ) {
             val titleColor = when (feedback.type) {
-                "failure" -> Color(0xFF991B1B)
-                "success" -> Color(0xFF166534)
-                else -> Color(0xFF1E40AF)
+                "failure" -> Color(0xFF991B1B.toInt())
+                "success" -> Color(0xFF166534.toInt())
+                else -> Color(0xFF1E40AF.toInt())
             }
 
             Text(
@@ -323,8 +312,8 @@ fun FeedbackModal(feedback: Feedback, onDismiss: () -> Unit) {
 
             Box(
                 modifier = Modifier
-                    .background(Color(0xFFF3F4F6), RoundedCornerShape(16.dp))
-                    .border(4.dp, Color(0xFFE5E7EB), RoundedCornerShape(16.dp))
+                    .background(Color(0xFFF3F4F6.toInt()), RoundedCornerShape(16.dp))
+                    .border(4.dp, Color(0xFFE5E7EB.toInt()), RoundedCornerShape(16.dp))
                     .padding(24.dp)
                     .fillMaxWidth()
             ) {
@@ -332,7 +321,7 @@ fun FeedbackModal(feedback: Feedback, onDismiss: () -> Unit) {
                     text = feedback.message,
                     fontSize = 24.sp,
                     lineHeight = 32.sp,
-                    color = Color(0xFF111827)
+                    color = Color(0xFF111827.toInt())
                 )
             }
 
@@ -342,17 +331,17 @@ fun FeedbackModal(feedback: Feedback, onDismiss: () -> Unit) {
                 leftTitle = "Red Flags (Scam)",
                 leftContent = {
                     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        Text("Joined Today/Yesterday: Scammers make new accounts constantly.", fontSize = 20.sp, color = Color(0xFF111827))
-                        Text("0 Friends in Common: If it's your real friend, they should be connected to others you know.", fontSize = 20.sp, color = Color(0xFF111827))
-                        Text("Urgent/Weird Bios: 'Had to make a new account' or asking for help.", fontSize = 20.sp, color = Color(0xFF111827))
+                        Text("Joined Today/Yesterday: Scammers make new accounts constantly.", fontSize = 20.sp, color = Color(0xFF111827.toInt()))
+                        Text("0 Friends in Common: If it's your real friend, they should be connected to others you know.", fontSize = 20.sp, color = Color(0xFF111827.toInt()))
+                        Text("Urgent/Weird Bios: 'Had to make a new account' or asking for help.", fontSize = 20.sp, color = Color(0xFF111827.toInt()))
                     }
                 },
                 rightTitle = "Green Flags (Safe)",
                 rightContent = {
                     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        Text("Older Join Date: E.g., 'Joined 2014', meaning the account has history.", fontSize = 20.sp, color = Color(0xFF111827))
-                        Text("Mutual Friends: Sharing several friends in common means they are likely part of your real-world community.", fontSize = 20.sp, color = Color(0xFF111827))
-                        Text("Normal Bio: Mentions normal hobbies or work without asking for anything.", fontSize = 20.sp, color = Color(0xFF111827))
+                        Text("Older Join Date: E.g., 'Joined 2014', meaning the account has history.", fontSize = 20.sp, color = Color(0xFF111827.toInt()))
+                        Text("Mutual Friends: Sharing several friends in common means they are likely part of your real-world community.", fontSize = 20.sp, color = Color(0xFF111827.toInt()))
+                        Text("Normal Bio: Mentions normal hobbies or work without asking for anything.", fontSize = 20.sp, color = Color(0xFF111827.toInt()))
                     }
                 }
             )
@@ -362,7 +351,7 @@ fun FeedbackModal(feedback: Feedback, onDismiss: () -> Unit) {
             SquishButton(
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E40AF))
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E40AF.toInt()))
             ) {
                 Text("Continue", fontSize = 28.sp, fontWeight = FontWeight.Black, color = Color.White)
             }
