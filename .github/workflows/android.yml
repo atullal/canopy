@@ -32,7 +32,7 @@ jobs:
       run: |
         cd apps/android
         if [ ! -f "gradlew" ]; then
-          gradle wrapper
+          gradle wrapper --gradle-version 8.6
         fi
         
     - name: Run Unit Tests and Lint
