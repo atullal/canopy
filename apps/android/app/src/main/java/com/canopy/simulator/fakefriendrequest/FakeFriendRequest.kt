@@ -87,6 +87,7 @@ fun SquishButton(
 
 @Composable
 fun FakeFriendRequestScreen() {
+    val scrollState = rememberScrollState()
     var currentIndex by remember { mutableIntStateOf(0) }
     var feedback by remember { mutableStateOf<Feedback?>(null) }
     
@@ -130,8 +131,7 @@ fun FakeFriendRequestScreen() {
         }
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize().verticalScroll(scrollState)
                 .background(Color(0xFFF9FAFB))
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -172,7 +172,7 @@ fun FakeFriendRequestScreen() {
                     }
                 },
                 label = "requestCard",
-                modifier = Modifier.weight(1f).fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
             ) { request ->
                 Box(
                     modifier = Modifier
@@ -198,9 +198,7 @@ fun FakeFriendRequestScreen() {
                         }
 
                         Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(24.dp),
+                            modifier = Modifier.fillMaxWidth().padding(24.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Box(
@@ -255,7 +253,7 @@ fun FakeFriendRequestScreen() {
                                 }
                             }
 
-                            Spacer(modifier = Modifier.weight(1f))
+                            Spacer(modifier = Modifier.height(24.dp))
 
                             SquishButton(
                                 onClick = { handleAction("accept") },
