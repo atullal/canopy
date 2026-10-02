@@ -27,6 +27,10 @@ jobs:
     - name: Install Tools
       run: |
         brew install xcodegen
+        
+        # Install xcparse via Mint (Swift package manager for CLI tools)
+        brew install mint
+        mint install ChargePoint/xcparse@2.3.1
 
     - name: Generate Xcode Project for UI Tests
       run: |
@@ -51,11 +55,11 @@ jobs:
         cd apps/ios
         mkdir -p extracted_artifacts
         
-        # xcresulttool is built into Xcode to extract logs and attachments
-        xcrun xcresulttool get --path TestResults.xcresult --format json > extracted_artifacts/test_results.json || true
+        # Use Mint to run xcparse to extract attachments (screenshots/audit)
+        mint run xcparse attachments TestResults.xcresult extracted_artifacts || true
         
-        # Export attachments (screenshots, etc.) using xcresulttool
-        xcrun xcresulttool export --path TestResults.xcresult --output-dir extracted_artifacts/attachments --type directory || true
+        # Also extract raw test logs
+        xcrun xcresulttool get --path TestResults.xcresult --format json > extracted_artifacts/test_results.json || true
         
     - name: Upload Test Results
       if: always()
