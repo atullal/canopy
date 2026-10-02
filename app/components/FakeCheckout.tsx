@@ -137,7 +137,7 @@ export default function FakeCheckout() {
             <div className="mb-12">
               <h3 className="text-2xl font-bold mb-6 text-black">How would you like to pay?</h3>
               <div className="space-y-4" role="radiogroup" aria-label="Payment Options">
-                {scenarioData.paymentOptions.map((option: { id: string; label: string; isSafe: boolean }) => {
+                {scenarioData.paymentOptions.map((option: { id: string; label: string; isSafe: boolean; type?: string; description?: string }) => {
                   const isSelected = selectedPayment === option.id;
                   return (
                     <label 
