@@ -160,7 +160,7 @@ fun FakeFriendRequestScreen() {
                     fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + slideOutHorizontally(spring(stiffness = Spring.StiffnessMediumLow)) { -it }
                 },
                 label = "requestCard",
-                modifier = Modifier.weight(1f).fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
             ) { request ->
                 Box(
                     modifier = Modifier
@@ -186,8 +186,7 @@ fun FakeFriendRequestScreen() {
                         }
 
                         Column(
-                            modifier = Modifier
-                                .fillMaxSize()
+            modifier = Modifier.fillMaxSize().verticalScroll(scrollState)
                                 .padding(24.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
@@ -243,7 +242,7 @@ fun FakeFriendRequestScreen() {
                                 }
                             }
 
-                            Spacer(modifier = Modifier.weight(1f))
+                            Spacer(modifier = Modifier.height(24.dp))
 
                             SquishButton(
                                 onClick = { handleAction("accept") },
