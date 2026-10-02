@@ -269,8 +269,8 @@ fun FakeFriendRequestScreen() {
         
         AnimatedVisibility(
             visible = feedback != null,
-            enter = fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + slideInVertically(spring(stiffness = Spring.StiffnessMediumLow)) { it / 8 },
-            exit = fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + slideOutVertically(spring(stiffness = Spring.StiffnessMediumLow)) { it / 8 }
+            enter = fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + slideInVertically(spring(stiffness = Spring.StiffnessMediumLow)) { (it / 8).toInt() },
+            exit = fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + slideOutVertically(spring(stiffness = Spring.StiffnessMediumLow)) { (it / 8).toInt() }
         ) {
             feedback?.let { fb ->
                 FeedbackModal(fb, onDismiss = handleNext)
