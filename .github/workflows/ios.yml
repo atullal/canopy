@@ -55,11 +55,11 @@ jobs:
         cd apps/ios
         mkdir -p extracted_artifacts
         
-        # Use Mint to run xcparse to extract attachments (screenshots/audit)
-        mint run xcparse attachments TestResults.xcresult extracted_artifacts || true
-        
         # Also extract raw test logs
-        xcrun xcresulttool get --path TestResults.xcresult --format json > extracted_artifacts/test_results.json || true
+        xcrun xcresulttool get --legacy --path TestResults.xcresult --format json > extracted_artifacts/test_results.json || true
+        
+        # Export attachments (screenshots, etc.) using xcresulttool
+        xcrun xcresulttool export --legacy --path TestResults.xcresult --output-dir extracted_artifacts/attachments --type directory || true
         
     - name: Upload Test Results
       if: always()
