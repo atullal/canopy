@@ -100,7 +100,7 @@ fun FakeFriendRequestScreen() {
         }
     }
 
-    val handleNext = {
+    val handleNext: () -> Unit = {
         feedback = null
         if (currentIndex + 1 < sampleRequests.size) {
             currentIndex++
