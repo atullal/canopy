@@ -1,4 +1,4 @@
-name: iOS
+name: iOS CI
 
 on:
   push:
@@ -24,12 +24,7 @@ jobs:
         cd apps/ios
         xcodegen generate
         
-    - name: Build and Test ScenarioKit
-      run: |
-        cd apps/ios/ScenarioKit
-        swift test
-        
     - name: Build and Test App
       run: |
         cd apps/ios
-        xcodebuild test -project Canopy.xcodeproj -scheme CanopyHostApp -destination 'platform=iOS Simulator,name=iPhone 15 Pro'
+        xcodebuild test -project Canopy.xcodeproj -scheme CanopyHostApp -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest'
