@@ -27,8 +27,6 @@ jobs:
     - name: Install Tools
       run: |
         brew install xcodegen
-        brew tap chargepoint/xcparse
-        brew install xcparse
 
     - name: Generate Xcode Project for UI Tests
       run: |
@@ -52,10 +50,13 @@ jobs:
       run: |
         cd apps/ios
         mkdir -p extracted_artifacts
-        xcparse attachments TestResults.xcresult extracted_artifacts || true
-        # Also extract raw text logs just in case xcparse misses audit text
+        
+        # xcresulttool is built into Xcode to extract logs and attachments
         xcrun xcresulttool get --path TestResults.xcresult --format json > extracted_artifacts/test_results.json || true
-
+        
+        # Export attachments (screenshots, etc.) using xcresulttool
+        xcrun xcresulttool export --path TestResults.xcresult --output-dir extracted_artifacts/attachments --type directory || true
+        
     - name: Upload Test Results
       if: always()
       uses: actions/upload-artifact@v4
