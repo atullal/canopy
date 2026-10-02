@@ -1,3 +1,5 @@
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.rememberScrollState
 package com.canopy.simulator.fakefriendrequest
 
 import android.provider.Settings
