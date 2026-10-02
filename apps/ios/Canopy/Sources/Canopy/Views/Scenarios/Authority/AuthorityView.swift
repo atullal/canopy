@@ -56,7 +56,7 @@ public struct AuthorityView: View {
             VStack(spacing: 24) {
                 if let feedback = viewModel.feedbackMessage {
                     FeedbackBanner(message: feedback)
-                        .accessibilityFocused(true, for: .notification) // Hypothetical approach
+                        .accessibilityAddTraits(.isHeader) // Hypothetical approach
                 }
                 
                 if !viewModel.isComplete {
