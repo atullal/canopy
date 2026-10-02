@@ -22,12 +22,21 @@ class FakeFriendRequestTest {
         composeTestRule.setContent {
             FakeFriendRequestScreen()
         }
+        
+        composeTestRule.waitForIdle()
 
         try {
             // Initially displays Martha
-            composeTestRule.onNodeWithText("Martha (Your best friend)").assertIsDisplayed()
+            composeTestRule.waitUntil(timeoutMillis = 5000) {
+                composeTestRule.onAllNodesWithText("Martha (Your best friend)").fetchSemanticsNodes().isNotEmpty()
+            }
+            val marthaNode = composeTestRule.onNodeWithText("Martha (Your best friend)")
+            marthaNode.performScrollTo()
+            marthaNode.assertIsDisplayed()
         } catch (e: AssertionError) {
             throw AssertionError("Failed at Martha", e)
+        } catch (e: Exception) {
+            throw AssertionError("Timeout at Martha", e)
         }
         
         try {
@@ -66,10 +75,16 @@ class FakeFriendRequestTest {
         composeTestRule.waitForIdle()
         
         try {
-            // Now displays Robert Davis
-            composeTestRule.onNodeWithText("Robert Davis").assertIsDisplayed()
+            composeTestRule.waitUntil(timeoutMillis = 5000) {
+                composeTestRule.onAllNodesWithText("Robert Davis").fetchSemanticsNodes().isNotEmpty()
+            }
+            val robertNode = composeTestRule.onNodeWithText("Robert Davis")
+            robertNode.performScrollTo()
+            robertNode.assertIsDisplayed()
         } catch (e: AssertionError) {
             throw AssertionError("Failed at Robert Davis", e)
+        } catch (e: Exception) {
+            throw AssertionError("Timeout at Robert Davis", e)
         }
     }
 }
