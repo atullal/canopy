@@ -42,7 +42,7 @@ export default function FakeCheckout() {
       });
     } else {
       // Real site: check payment method
-      const paymentOption = scenarioData.paymentOptions.find((p: { id: string; name: string }) => p.id === selectedPayment);
+      const paymentOption = scenarioData.paymentOptions.find((p: { id: string; label: string; isSafe: boolean }) => p.id === selectedPayment);
       if (!paymentOption?.isSafe) {
         posthog.capture('scam_clicked', { challengeId: currentChallenge.id, reason: 'unsafe_payment_method', paymentMethod: selectedPayment });
         setFeedback({
@@ -137,7 +137,7 @@ export default function FakeCheckout() {
             <div className="mb-12">
               <h3 className="text-2xl font-bold mb-6 text-black">How would you like to pay?</h3>
               <div className="space-y-4" role="radiogroup" aria-label="Payment Options">
-                {scenarioData.paymentOptions.map((option: { id: string; name: string; description: string; type: string }) => {
+                {scenarioData.paymentOptions.map((option: { id: string; label: string; isSafe: boolean }) => {
                   const isSelected = selectedPayment === option.id;
                   return (
                     <label 
