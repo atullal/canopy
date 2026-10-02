@@ -1,61 +1,55 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface AdaptiveHesitationEngineProps {
   children: React.ReactNode;
-  hintContent: React.ReactNode;
-  idleTimeMs?: number; // Defaults to 10 seconds (10000)
+  hintContent: React.ReactNode | null; // Nullable if we prefer voice-only
+  idleTimeMs?: number; 
+  onIdle?: () => void; // New callback for triggering voice events
 }
 
-export default function AdaptiveHesitationEngine({ children, hintContent, idleTimeMs = 10000 }: AdaptiveHesitationEngineProps) {
+export default function AdaptiveHesitationEngine({ children, hintContent, idleTimeMs = 10000, onIdle }: AdaptiveHesitationEngineProps) {
   const [showHint, setShowHint] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const resetTimer = useCallback(() => {
+  const resetTimer = () => {
     setShowHint(false);
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
     timerRef.current = setTimeout(() => {
-      setShowHint(true);
+      if (hintContent) {
+        setShowHint(true);
+      }
+      if (onIdle) {
+        onIdle();
+      }
     }, idleTimeMs);
-  }, [idleTimeMs]);
+  };
 
   useEffect(() => {
-    // We intentionally don't call resetTimer synchronously here to avoid cascading renders
-    // Instead we start a timer manually for the initial mount
-    const initialTimer = setTimeout(() => {
-      setShowHint(true);
-    }, idleTimeMs);
-    timerRef.current = initialTimer;
+    resetTimer();
 
-    // Reset the timer on user interaction
     const events = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll'];
     const handleActivity = () => resetTimer();
 
-    events.forEach(event => {
-      window.addEventListener(event, handleActivity);
-    });
+    events.forEach(event => window.addEventListener(event, handleActivity));
 
     return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-      events.forEach(event => {
-        window.removeEventListener(event, handleActivity);
-      });
+      if (timerRef.current) clearTimeout(timerRef.current);
+      events.forEach(event => window.removeEventListener(event, handleActivity));
     };
-  }, [idleTimeMs, resetTimer]);
+  }, [idleTimeMs, hintContent, onIdle]);
 
   return (
     <div className="relative w-full h-full">
       {children}
-      {showHint && (
+      {showHint && hintContent && (
         <div className="absolute bottom-4 right-4 max-w-sm bg-yellow-100 border-l-4 border-yellow-500 p-4 shadow-lg rounded z-50">
           <div className="flex justify-between items-start">
             <div className="flex-1">
-              <h4 className="font-bold text-yellow-800 mb-1 text-xl">Stuck? Here&apos;s a hint:</h4>
+              <h4 className="font-bold text-yellow-800 mb-1 text-xl">Stuck? Here's a hint:</h4>
               <div className="text-xl text-yellow-900">{hintContent}</div>
             </div>
             <button 
