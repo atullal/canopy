@@ -1,0 +1,25 @@
+
+name: Canopy
+options:
+  bundleIdPrefix: com.canopy
+packages:
+  CanopyPkg:
+    path: Canopy
+  ScenarioKitPkg:
+    path: ScenarioKit
+targets:
+  CanopyHostApp:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources: CanopyHostApp
+    dependencies:
+      - package: CanopyPkg
+  CanopyUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources: Canopy/UITests
+    dependencies:
+      - target: CanopyHostApp
+
