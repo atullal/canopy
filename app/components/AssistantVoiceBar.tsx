@@ -89,21 +89,21 @@ export default function AssistantVoiceBar({ textToSpeak, targetHighlightId, onSp
           animate={{ y: 0 }}
           exit={{ y: '100%' }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="fixed bottom-0 left-0 right-0 bg-white border-t-4 border-blue-500 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] p-6 z-50 rounded-t-3xl max-w-4xl mx-auto"
+          className="fixed bottom-0 left-0 right-0 bg-blue-950 border-t-8 border-blue-600 shadow-[0_-20px_60px_rgba(0,0,0,0.4)] p-8 md:p-10 z-[100] rounded-t-[3rem] max-w-4xl mx-auto"
         >
           <div className="flex items-center gap-6">
-            <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 relative">
-              <span className="text-3xl">🎙️</span>
+            <div className="w-24 h-24 rounded-full bg-blue-900 border-4 border-blue-400 flex items-center justify-center flex-shrink-0 relative shadow-inner">
+              <span className="text-5xl drop-shadow-md">🎙️</span>
               {isSpeaking && (
                 <motion.div
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-                  className="absolute inset-0 rounded-full border-4 border-blue-400 opacity-50"
+                  className="absolute inset-0 rounded-full border-8 border-yellow-400 opacity-60"
                 />
               )}
             </div>
             <div className="flex-1">
-              <p className="text-2xl text-gray-800 font-medium leading-relaxed">
+              <p className="text-3xl md:text-4xl text-white font-black leading-tight tracking-wide">
                 {textToSpeak}
               </p>
             </div>
