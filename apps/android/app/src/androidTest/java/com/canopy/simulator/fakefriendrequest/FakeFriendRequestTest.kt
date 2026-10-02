@@ -28,9 +28,9 @@ class FakeFriendRequestTest {
         try {
             // Initially displays Martha
             composeTestRule.waitUntil(timeoutMillis = 5000) {
-                composeTestRule.onAllNodesWithText("Martha (Your best friend)").fetchSemanticsNodes().isNotEmpty()
+                composeTestRule.onAllNodesWithText("Martha (Your best friend)", useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
             }
-            val marthaNode = composeTestRule.onNodeWithText("Martha (Your best friend)")
+            val marthaNode = composeTestRule.onNodeWithText("Martha (Your best friend)", useUnmergedTree = true)
             marthaNode.performScrollTo()
             marthaNode.assertIsDisplayed()
         } catch (e: AssertionError) {
@@ -41,7 +41,7 @@ class FakeFriendRequestTest {
         
         try {
             // Accept the fake request
-            val acceptButton = composeTestRule.onNodeWithText("✅ Accept Request")
+            val acceptButton = composeTestRule.onNodeWithText("✅ Accept Request", useUnmergedTree = true)
             acceptButton.performScrollTo()
             acceptButton.assertIsDisplayed()
             acceptButton.performClick()
@@ -53,9 +53,9 @@ class FakeFriendRequestTest {
         
         try {
             composeTestRule.waitUntil(timeoutMillis = 5000) {
-                composeTestRule.onAllNodesWithText("A Great Discovery Step!").fetchSemanticsNodes().isNotEmpty()
+                composeTestRule.onAllNodesWithText("A Great Discovery Step!", useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
             }
-            composeTestRule.onNodeWithText("A Great Discovery Step!").assertIsDisplayed()
+            composeTestRule.onNodeWithText("A Great Discovery Step!", useUnmergedTree = true).assertIsDisplayed()
         } catch (e: AssertionError) {
             throw AssertionError("Failed at Modal Title", e)
         } catch (e: Exception) {
@@ -64,7 +64,7 @@ class FakeFriendRequestTest {
         
         try {
             // Continue to next request
-            val continueButton = composeTestRule.onNodeWithText("Continue")
+            val continueButton = composeTestRule.onNodeWithText("Continue", useUnmergedTree = true)
             continueButton.performScrollTo()
             continueButton.assertIsDisplayed()
             continueButton.performClick()
@@ -76,9 +76,9 @@ class FakeFriendRequestTest {
         
         try {
             composeTestRule.waitUntil(timeoutMillis = 5000) {
-                composeTestRule.onAllNodesWithText("Robert Davis").fetchSemanticsNodes().isNotEmpty()
+                composeTestRule.onAllNodesWithText("Robert Davis", useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
             }
-            val robertNode = composeTestRule.onNodeWithText("Robert Davis")
+            val robertNode = composeTestRule.onNodeWithText("Robert Davis", useUnmergedTree = true)
             robertNode.performScrollTo()
             robertNode.assertIsDisplayed()
         } catch (e: AssertionError) {

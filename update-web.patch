@@ -1,0 +1,86 @@
+--- app/components/FakeFriendRequest.tsx
++++ app/components/FakeFriendRequest.tsx
+@@ -2,7 +2,7 @@
+ 
+ import React, { useState } from 'react';
+-import { motion, AnimatePresence } from 'framer-motion';
++import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+ import posthog from '../../utils/posthog';
+ import scenarioData from '../../scenarios/fake-friend-request.json';
+@@ -10,6 +10,7 @@
+ export default function FakeFriendRequest() {
+   const [currentIndex, setCurrentIndex] = useState(0);
+   const [feedback, setFeedback] = useState<{ title: string; message: string; type: 'success' | 'failure' | 'info' } | null>(null);
++  const shouldReduceMotion = useReducedMotion();
+ 
+   const currentRequest = scenarioData.requests[currentIndex];
+@@ -75,10 +76,10 @@
+             <AnimatePresence mode="wait">
+               <motion.div 
+                 key={currentIndex}
+-                initial={{ opacity: 0, x: 50 }}
++                initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 50 }}
+                 animate={{ opacity: 1, x: 0 }}
+-                exit={{ opacity: 0, x: -50 }}
+-                transition={{ type: 'spring', stiffness: 250, damping: 25 }}
++                exit={{ opacity: 0, x: shouldReduceMotion ? 0 : -50 }}
++                transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 250, damping: 25 }}
+                 className="p-8 flex flex-col items-center h-full"
+               >
+                 <div className="w-40 h-40 bg-gray-200 rounded-full mb-6 flex items-center justify-center text-gray-700 text-6xl overflow-hidden border-8 border-gray-100 shadow-inner">
+@@ -100,8 +101,8 @@
+ 
+                 <div className="flex flex-col gap-4 w-full mt-auto">
+                   <motion.button
+-                    whileHover={{ scale: 1.02 }}
+-                    whileTap={{ scale: 0.95 }}
++                    whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
++                    whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
+                     onClick={() => handleAction('accept')}
+                     className="w-full bg-blue-800 text-white font-black py-6 px-4 rounded-2xl hover:bg-blue-900 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-800 min-h-[5rem] text-2xl shadow-md"
+                   >
+@@ -109,8 +110,8 @@
+                   </motion.button>
+                   <motion.button
+-                    whileHover={{ scale: 1.02 }}
+-                    whileTap={{ scale: 0.95 }}
++                    whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
++                    whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
+                     onClick={() => handleAction('decline')}
+                     className="w-full bg-gray-200 text-gray-900 font-black py-6 px-4 rounded-2xl hover:bg-gray-300 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-gray-600 min-h-[5rem] text-2xl shadow-sm border-2 border-gray-400"
+                   >
+@@ -128,7 +129,7 @@
+               <motion.div 
+                 initial={{ opacity: 0 }}
+                 animate={{ opacity: 1 }}
+                 exit={{ opacity: 0 }}
+-                transition={{ duration: 0.3 }}
++                transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3 }}
+                 className="fixed inset-0 bg-gray-900/90 backdrop-blur-md"
+                 onClick={handleNext}
+                 aria-hidden="true"
+@@ -136,10 +137,10 @@
+               
+               <motion.div 
+                 role="alertdialog"
+                 aria-modal="true"
+-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
++                initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.95, y: shouldReduceMotion ? 0 : 20 }}
+                 animate={{ opacity: 1, scale: 1, y: 0 }}
+-                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+-                transition={{ type: 'spring', stiffness: 300, damping: 25, mass: 1 }}
++                exit={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.95, y: shouldReduceMotion ? 0 : 10 }}
++                transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 25, mass: 1 }}
+                 className="relative bg-white border-8 border-gray-300 p-8 md:p-12 rounded-[3rem] max-w-4xl w-full text-center shadow-2xl my-8 z-10"
+               >
+                 <h3 className={`text-4xl md:text-5xl font-extrabold mb-8 ${feedback.type === 'failure' ? 'text-red-800' : feedback.type === 'success' ? 'text-green-800' : 'text-blue-800'}`}>
+@@ -176,8 +177,8 @@
+ 
+                 <motion.button 
+-                  whileHover={{ scale: 1.02 }}
+-                  whileTap={{ scale: 0.98 }}
++                  whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
++                  whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+                   onClick={handleNext}
+                   autoFocus
+                   className="w-full bg-blue-800 text-white font-black py-6 px-10 rounded-2xl hover:bg-blue-900 transition-colors focus:outline-none focus-visible:ring-8 focus-visible:ring-blue-600 min-h-[5.5rem] text-3xl shadow-xl"
