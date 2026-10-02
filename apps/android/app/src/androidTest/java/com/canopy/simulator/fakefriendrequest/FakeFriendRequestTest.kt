@@ -8,7 +8,6 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.onAllNodesWithText
-import androidx.compose.ui.test.assertCountEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,17 +36,12 @@ class FakeFriendRequestTest {
         
         composeTestRule.waitForIdle()
         
-        // The issue is likely that "A Great Discovery Step!" isn't the actual text shown
-        // Let's assert ANY failure text based on our FakeFriendRequestScreen logic
-        // In FakeFriendRequestScreen: if (actionId == "accept" && currentRequest.isFake) 
-        // uses "A Great Discovery Step!" (since type="cloned-friend")
-        // However, there is a possibility the modal animation takes time. 
-        
         // Wait until it appears (we shouldn't need to do this explicitly in Compose, but just in case)
         composeTestRule.waitUntil(timeoutMillis = 5000) {
             composeTestRule.onAllNodesWithText("A Great Discovery Step!").fetchSemanticsNodes().isNotEmpty()
         }
-        composeTestRule.onNodeWithText("A Great Discovery Step!").assertIsDisplayed()
+        val titleNode = composeTestRule.onNodeWithText("A Great Discovery Step!")
+        titleNode.assertIsDisplayed()
         
         // Continue to next request
         val continueButton = composeTestRule.onNodeWithText("Continue")
