@@ -34,8 +34,7 @@ jobs:
         if [ ! -f "gradlew" ]; then
           gradle wrapper --gradle-version 8.6
         fi
-        cat apps/android/gradle/wrapper/gradle-wrapper.properties
-        cd apps/android && ./gradlew wrapper --gradle-version 8.6
+        ./gradlew wrapper --gradle-version 8.6
         
     - name: Run Unit Tests and Lint
       run: |
