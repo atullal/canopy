@@ -37,9 +37,13 @@ fun SquishButton(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val isReducedMotion = remember(context) {
+        android.provider.Settings.Global.getFloat(context.contentResolver, android.provider.Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
+    }
     val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.95f else 1f,
-        animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+        targetValue = if (isPressed && !isReducedMotion) 0.95f else 1f,
+        animationSpec = if (isReducedMotion) snap() else spring(stiffness = Spring.StiffnessMediumLow),
         label = "squishScale"
     )
 
@@ -137,9 +141,13 @@ fun V4InoculationAuthority(
 
             Spacer(modifier = Modifier.height(32.dp))
 
+            val context = androidx.compose.ui.platform.LocalContext.current
+            val isReducedMotion2 = remember(context) {
+                android.provider.Settings.Global.getFloat(context.contentResolver, android.provider.Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
+            }
             AnimatedVisibility(
                 visible = !showFeedback,
-                exit = fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + shrinkVertically(spring(stiffness = Spring.StiffnessMediumLow))
+                exit = if (isReducedMotion2) fadeOut(snap()) else fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + shrinkVertically(spring(stiffness = Spring.StiffnessMediumLow))
             ) {
                 Column {
                     scenario.actions.forEach { action ->
@@ -170,7 +178,7 @@ fun V4InoculationAuthority(
 
             AnimatedVisibility(
                 visible = showFeedback,
-                enter = fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + expandVertically(spring(stiffness = Spring.StiffnessMediumLow))
+                enter = if (isReducedMotion2) fadeIn(snap()) else fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + expandVertically(spring(stiffness = Spring.StiffnessMediumLow))
             ) {
                 val isCorrect = (selectedActionId == "manipulation" && challenge.isManipulation) ||
                                (selectedActionId == "safe" && !challenge.isManipulation)

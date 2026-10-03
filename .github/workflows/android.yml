@@ -38,4 +38,23 @@ jobs:
         target: google_apis
         arch: x86_64
         profile: pixel_6
-        script: cd apps/android && ./gradlew connectedAndroidTest
+        script: |
+          set +e
+          cd apps/android
+          ./gradlew connectedAndroidTest
+          EXIT_CODE=$?
+          mkdir -p app/build/reports/androidTests/connected/screenshots
+          adb pull /sdcard/Android/data/com.canopy.simulator/files/screenshots app/build/reports/androidTests/connected/ || true
+          exit $EXIT_CODE
+    - name: Upload Screenshots
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: android-screenshots
+        path: apps/android/app/build/reports/androidTests/connected/screenshots/
+    - name: Upload ATF Output
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: android-atf-report
+        path: apps/android/app/build/reports/androidTests/connected/
