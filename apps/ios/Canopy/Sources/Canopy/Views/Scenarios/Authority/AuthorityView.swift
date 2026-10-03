@@ -73,7 +73,7 @@ public struct AuthorityView: View {
                         if viewModel.showHint {
                             Text(challenge.justInTimeHint)
                                 .font(.callout)
-                                .foregroundColor(.secondary)
+                                .foregroundColor(.primary)
                                 .padding()
                                 .background(Color.secondary.opacity(0.1))
                                 .cornerRadius(12)
@@ -121,7 +121,7 @@ private struct FeedbackBanner: View {
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.blue.opacity(0.1))
+        .background(Color(red: 0.1, green: 0.2, blue: 0.6).opacity(0.1))
         .cornerRadius(12)
         .padding(.horizontal)
     }
@@ -205,7 +205,7 @@ private struct PrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
-            .background(Color.blue)
+            .background(Color(red: 0.1, green: 0.2, blue: 0.6))
             .foregroundColor(.white)
             .cornerRadius(12)
             .opacity(configuration.isPressed ? 0.8 : 1.0)
@@ -216,12 +216,12 @@ private struct DangerButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
-            .background(Color.red.opacity(0.1))
-            .foregroundColor(.red)
+            .background(Color(red: 0.6, green: 0.0, blue: 0.0).opacity(0.1))
+            .foregroundColor(Color(red: 0.6, green: 0.0, blue: 0.0))
             .cornerRadius(12)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.red, lineWidth: 2)
+                    .stroke(Color(red: 0.6, green: 0.0, blue: 0.0), lineWidth: 2)
             )
             .opacity(configuration.isPressed ? 0.8 : 1.0)
     }
