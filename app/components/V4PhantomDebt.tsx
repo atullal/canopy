@@ -90,13 +90,13 @@ export default function V4PhantomDebt() {
                 onClick={() => handleAction('manipulation')}
                 className="flex-1 bg-red-100 text-red-800 border-4 border-red-300 font-bold text-2xl py-4 px-6 rounded-2xl hover:bg-red-200 hover:border-red-400 active:scale-95 transition-all shadow-md focus:ring-4 focus:ring-red-300"
               >
-                {scenarioData.actions.find((a: any) => a.id === 'manipulation')?.label}
+                {scenarioData.actions.find((a: { id: string; label: string; type: string }) => a.id === 'manipulation')?.label}
               </button>
               <button
                 onClick={() => handleAction('safe')}
                 className="flex-1 bg-green-600 text-white font-bold text-2xl py-4 px-6 rounded-2xl hover:bg-green-700 active:scale-95 transition-all shadow-md focus:ring-4 focus:ring-green-400"
               >
-                {scenarioData.actions.find((a: any) => a.id === 'safe')?.label}
+                {scenarioData.actions.find((a: { id: string; label: string; type: string }) => a.id === 'safe')?.label}
               </button>
             </div>
           </div>
@@ -147,4 +147,3 @@ export default function V4PhantomDebt() {
     </AdaptiveHesitationEngine>
   );
 }
-
