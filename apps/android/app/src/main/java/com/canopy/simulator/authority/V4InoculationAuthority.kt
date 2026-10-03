@@ -1,8 +1,11 @@
 package com.canopy.simulator.authority
 
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,15 +15,48 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.canopy.core.scenario.V4AuthorityScenario
 import com.canopy.simulator.fakefriendrequest.AdaptiveHesitationEngine
+
+
+@Composable
+fun SquishButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    colors: ButtonColors,
+    content: @Composable RowScope.() -> Unit
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.95f else 1f,
+        animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+        label = "squishScale"
+    )
+
+    Button(
+        onClick = onClick,
+        modifier = modifier
+            .heightIn(min = 80.dp)
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            },
+        interactionSource = interactionSource,
+        shape = RoundedCornerShape(16.dp),
+        colors = colors,
+        content = content
+    )
+}
 
 @Composable
 fun V4InoculationAuthority(
@@ -52,13 +88,14 @@ fun V4InoculationAuthority(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
+                .background(Color(0xFFF9FAFB))
                 .padding(24.dp)
         ) {
             Text(
                 text = scenario.title,
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
+                fontSize = 36.sp,
+                fontWeight = FontWeight.Black,
+                color = Color.Black,
                 modifier = Modifier.semantics { heading() }
             )
 
@@ -67,59 +104,74 @@ fun V4InoculationAuthority(
             Text(
                 text = scenario.description,
                 fontSize = 20.sp,
-                color = MaterialTheme.colorScheme.onBackground
+                lineHeight = 28.sp,
+                color = Color(0xFF111827)
             )
 
             Spacer(modifier = Modifier.height(32.dp))
 
             // The Message Card
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White, RoundedCornerShape(24.dp))
+                    .border(4.dp, Color(0xFFE5E7EB), RoundedCornerShape(24.dp))
+                    .padding(24.dp)
             ) {
-                Column(modifier = Modifier.padding(24.dp)) {
+                Column {
                     Text(
                         text = "From: ${challenge.sender}",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp
+                        fontWeight = FontWeight.Black,
+                        fontSize = 20.sp,
+                        color = Color.Black
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     Text(
                         text = challenge.body,
-                        fontSize = 20.sp,
-                        lineHeight = 28.sp
+                        fontSize = 24.sp,
+                        lineHeight = 32.sp,
+                        color = Color(0xFF111827)
                     )
                 }
             }
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            if (!showFeedback) {
-                scenario.actions.forEach { action ->
-                    val isDanger = action.type == "danger"
-                    val buttonColor = if (isDanger) Color(0xFFDC2626) else Color(0xFF059669) // red-600 / emerald-600
-                    
-                    Button(
-                        onClick = {
-                            selectedActionId = action.id
-                            showFeedback = true
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 16.dp)
-                            .heightIn(min = 64.dp), // AAA tap target
-                        colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Text(
-                            text = action.label,
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
+            AnimatedVisibility(
+                visible = !showFeedback,
+                exit = fadeOut(spring(stiffness = Spring.StiffnessMediumLow)) + shrinkVertically(spring(stiffness = Spring.StiffnessMediumLow))
+            ) {
+                Column {
+                    scenario.actions.forEach { action ->
+                        val isDanger = action.type == "danger"
+                        val buttonColor = if (isDanger) Color(0xFFB91C1C) else Color(0xFF047857) // red-700 / emerald-700
+                        
+                        SquishButton(
+                            onClick = {
+                                selectedActionId = action.id
+                                showFeedback = true
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 16.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = buttonColor)
+                        ) {
+                            Text(
+                                text = action.label,
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight.Black,
+                                color = Color.White,
+                                textAlign = TextAlign.Center
+                            )
+                        }
                     }
                 }
-            } else {
+            }
+
+            AnimatedVisibility(
+                visible = showFeedback,
+                enter = fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) + expandVertically(spring(stiffness = Spring.StiffnessMediumLow))
+            ) {
                 val isCorrect = (selectedActionId == "manipulation" && challenge.isManipulation) ||
                                (selectedActionId == "safe" && !challenge.isManipulation)
                 
@@ -129,44 +181,44 @@ fun V4InoculationAuthority(
                     else -> scenario.feedback.gentleFailureFlaggedSafe
                 }
 
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(
-                        containerColor = if (isCorrect) Color(0xFFECFDF5) else Color(0xFFFEF2F2) // emerald-50 / red-50
-                    )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(if (isCorrect) Color(0xFFECFDF5) else Color(0xFFFEF2F2), RoundedCornerShape(24.dp))
+                        .border(4.dp, if (isCorrect) Color(0xFF6EE7B7) else Color(0xFFFCA5A5), RoundedCornerShape(24.dp))
+                        .padding(32.dp)
                 ) {
-                    Column(modifier = Modifier.padding(24.dp)) {
+                    Column {
                         Text(
                             text = feedbackMsg.title,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Black,
+                            fontSize = 32.sp,
                             color = if (isCorrect) Color(0xFF065F46) else Color(0xFF991B1B) // emerald-800 / red-800
                         )
-                        Spacer(modifier = Modifier.height(12.dp))
+                        Spacer(modifier = Modifier.height(16.dp))
                         Text(
                             text = feedbackMsg.message,
-                            fontSize = 20.sp,
+                            fontSize = 24.sp,
+                            lineHeight = 32.sp,
                             color = if (isCorrect) Color(0xFF065F46) else Color(0xFF991B1B)
                         )
-                        Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(modifier = Modifier.height(32.dp))
                         
-                        Button(
+                        SquishButton(
                             onClick = {
                                 showFeedback = false
                                 selectedActionId = null
                                 currentChallengeIndex++
                             },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .heightIn(min = 64.dp),
+                            modifier = Modifier.fillMaxWidth(),
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = if (isCorrect) Color(0xFF059669) else Color(0xFFDC2626)
+                                containerColor = if (isCorrect) Color(0xFF047857) else Color(0xFFB91C1C)
                             )
                         ) {
                             Text(
                                 text = if (currentChallengeIndex < scenario.challenges.size - 1) "Next Challenge" else "Finish Practice",
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold,
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight.Black,
                                 color = Color.White
                             )
                         }
