@@ -46,7 +46,7 @@ export default function AdaptiveHesitationEngine({ children, hintContent, idleTi
     <div className="relative w-full h-full">
       {children}
       {showHint && hintContent && (
-        <div className="absolute bottom-4 right-4 max-w-sm bg-yellow-100 border-l-4 border-yellow-500 p-4 shadow-lg rounded z-50">
+        <div className="absolute bottom-4 right-4 max-w-sm bg-yellow-100 border-l-4 border-yellow-500 p-4 shadow-lg rounded z-50 transition-all duration-300 motion-safe:animate-[slideIn_0.3s_ease-out] motion-reduce:animate-none">
           <div className="flex justify-between items-start">
             <div className="flex-1">
               <h4 className="font-bold text-yellow-800 mb-1 text-xl">Stuck? Here's a hint:</h4>
@@ -54,7 +54,7 @@ export default function AdaptiveHesitationEngine({ children, hintContent, idleTi
             </div>
             <button 
               onClick={() => setShowHint(false)}
-              className="ml-4 text-yellow-700 hover:text-yellow-900 font-bold min-w-[56px] min-h-[56px] flex items-center justify-center bg-yellow-200 rounded-full hover:bg-yellow-300 transition"
+              className="ml-4 text-yellow-700 hover:text-yellow-900 font-bold min-w-[56px] min-h-[56px] flex items-center justify-center bg-yellow-200 rounded-full hover:bg-yellow-300 focus:outline-none focus:ring-4 focus:ring-yellow-400 transition-all duration-200 motion-safe:hover:scale-[1.1] motion-safe:active:scale-[0.95] motion-reduce:transform-none"
               aria-label="Dismiss hint"
             >
               ✕

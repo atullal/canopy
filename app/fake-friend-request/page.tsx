@@ -6,8 +6,8 @@ export const metadata = {
 
 export default function FakeFriendRequestPage() {
   return (
-    <main className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-8">
       <FakeFriendRequest />
-    </main>
+    </div>
   );
 }
