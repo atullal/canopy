@@ -184,7 +184,8 @@ private struct ActionArea: View {
             Button(action: { onAction(true) }) {
                 Text(manipAction.label)
                     .font(.headline)
-                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .buttonStyle(DangerButtonStyle())
         }
@@ -194,7 +195,8 @@ private struct ActionArea: View {
             Button(action: { onAction(false) }) {
                 Text(safeAction.label)
                     .font(.headline)
-                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .buttonStyle(PrimaryButtonStyle())
         }
