@@ -65,6 +65,7 @@ public struct AuthorityView: View {
                         .foregroundColor(.primary)
                         .multilineTextAlignment(.leading)
                         .padding(.horizontal)
+                        .fixedSize(horizontal: false, vertical: true)
                         .accessibilityAddTraits(.isHeader) // Provide context
                     
                     if let challenge = viewModel.currentChallenge {
@@ -78,6 +79,7 @@ public struct AuthorityView: View {
                                 .padding()
                                 .background(Color.primary.opacity(0.1))
                                 .cornerRadius(12)
+                                .fixedSize(horizontal: false, vertical: true)
                                 .transition(reduceMotion ? .opacity : .slide)
                         } else {
                             Button(action: {
@@ -89,6 +91,7 @@ public struct AuthorityView: View {
                                     .font(.callout)
                                     .foregroundColor(.primary)
                                     .frame(minWidth: 44, minHeight: 44)
+                                    .fixedSize(horizontal: false, vertical: true)
                                     .contentShape(Rectangle())
                             }
                             .padding(.top, 8)
@@ -119,9 +122,11 @@ private struct FeedbackBanner: View {
             Text(message.title)
                 .font(.headline)
                 .foregroundColor(.primary)
+                .fixedSize(horizontal: false, vertical: true)
             Text(message.message)
                 .font(.body)
                 .foregroundColor(.primary)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -146,11 +151,13 @@ private struct ChallengeCard: View {
                 Text(challenge.sender)
                     .font(.headline)
                     .foregroundColor(.primary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             
             Text(challenge.body)
                 .font(.body)
                 .foregroundColor(.primary)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
