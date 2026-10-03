@@ -75,12 +75,12 @@ export default function AuthorityScenario({ data }: { data: ScenarioData }) {
 
   if (feedback) {
     return (
-      <div className="max-w-4xl mx-auto mt-10 p-8 bg-blue-50 border-l-8 border-blue-600 rounded-lg shadow-md">
+      <div className="max-w-4xl mx-auto mt-10 p-8 bg-blue-50 border-l-8 border-blue-600 rounded-lg shadow-md transition-all duration-300 motion-safe:animate-[fadeIn_0.3s_ease-out] motion-reduce:animate-none">
         <h2 className="text-3xl font-bold text-blue-900 mb-6">{feedback.title}</h2>
         <p className="text-xl text-blue-800 leading-relaxed mb-8">{feedback.message}</p>
         <button 
           onClick={resetFeedback}
-          className="min-w-[56px] min-h-[56px] px-8 bg-blue-600 text-white text-xl font-bold rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition"
+          className="min-w-[56px] min-h-[56px] px-8 bg-blue-600 text-white text-xl font-bold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-200 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98] motion-reduce:transform-none"
         >
           Continue Practice
         </button>
@@ -100,7 +100,7 @@ export default function AuthorityScenario({ data }: { data: ScenarioData }) {
           leftContent={
             <div className="flex flex-col h-full">
               <div className="bg-gray-100 p-4 border-b border-gray-300 rounded-t-lg">
-                <h3 className="text-2xl font-bold text-gray-900">Message from: {currentChallenge.sender}</h3>
+                <h2 className="text-2xl font-bold text-gray-900">Message from: {currentChallenge.sender}</h2>
               </div>
               <div className="p-6 flex-1 flex items-center justify-center bg-gray-50 rounded-b-lg">
                 <p className="text-2xl text-gray-800 font-medium leading-relaxed">"{currentChallenge.body}"</p>
@@ -109,12 +109,12 @@ export default function AuthorityScenario({ data }: { data: ScenarioData }) {
           }
           rightContent={
             <div className="flex flex-col justify-center h-full space-y-6">
-              <h3 className="text-2xl font-bold text-gray-900 text-center mb-4">What should you do?</h3>
+              <h2 className="text-2xl font-bold text-gray-900 text-center mb-4">What should you do?</h2>
               {data.actions.map(action => (
                 <button
                   key={action.id}
                   onClick={() => handleAction(action.id)}
-                  className={`w-full min-h-[64px] text-xl font-bold rounded-lg transition px-6 ${
+                  className={`w-full min-h-[64px] text-xl font-bold rounded-lg transition-all duration-200 px-6 focus:outline-none motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98] motion-reduce:transform-none ${
                     action.type === 'danger' 
                       ? 'bg-red-100 text-red-900 border-2 border-red-500 hover:bg-red-200 focus:ring-4 focus:ring-red-300' 
                       : 'bg-green-100 text-green-900 border-2 border-green-500 hover:bg-green-200 focus:ring-4 focus:ring-green-300'
