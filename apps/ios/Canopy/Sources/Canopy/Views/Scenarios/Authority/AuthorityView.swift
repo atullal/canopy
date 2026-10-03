@@ -62,6 +62,7 @@ public struct AuthorityView: View {
                 if !viewModel.isComplete {
                     Text(viewModel.scenario.description)
                         .font(.body)
+                        .foregroundColor(.primary)
                         .multilineTextAlignment(.leading)
                         .padding(.horizontal)
                         .accessibilityAddTraits(.isHeader) // Provide context
@@ -75,7 +76,7 @@ public struct AuthorityView: View {
                                 .font(.callout)
                                 .foregroundColor(.primary)
                                 .padding()
-                                .background(Color.secondary.opacity(0.1))
+                                .background(Color.primary.opacity(0.1))
                                 .cornerRadius(12)
                                 .transition(reduceMotion ? .opacity : .slide)
                         } else {
@@ -86,6 +87,7 @@ public struct AuthorityView: View {
                             }) {
                                 Text("Need a hint?")
                                     .font(.callout)
+                                    .foregroundColor(.primary)
                                     .frame(minWidth: 44, minHeight: 44)
                                     .contentShape(Rectangle())
                             }
@@ -116,12 +118,14 @@ private struct FeedbackBanner: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(message.title)
                 .font(.headline)
+                .foregroundColor(.primary)
             Text(message.message)
                 .font(.body)
+                .foregroundColor(.primary)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(red: 0.1, green: 0.2, blue: 0.6).opacity(0.1))
+        .background(Color.primary.opacity(0.1))
         .cornerRadius(12)
         .padding(.horizontal)
     }
@@ -136,23 +140,23 @@ private struct ChallengeCard: View {
                 Image(systemName: "person.circle.fill")
                     .resizable()
                     .frame(width: 44, height: 44)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.primary)
                     .accessibilityHidden(true)
                 
                 Text(challenge.sender)
                     .font(.headline)
+                    .foregroundColor(.primary)
             }
             
             Text(challenge.body)
                 .font(.body)
-                // Adaptive Typography: >= 20px reading context. SwiftUI .body defaults to 17pt, but scales dynamically.
-                // We ensure it's readable.
+                .foregroundColor(.primary)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+        .shadow(color: .primary.opacity(0.1), radius: 8, x: 0, y: 4)
         .padding(.horizontal)
     }
 }
@@ -207,8 +211,8 @@ private struct PrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
-            .background(Color(red: 0.1, green: 0.2, blue: 0.6))
-            .foregroundColor(.white)
+            .background(Color.primary)
+            .foregroundColor(Color(UIColor.systemBackground))
             .cornerRadius(12)
             .opacity(configuration.isPressed ? 0.8 : 1.0)
     }
@@ -218,13 +222,14 @@ private struct DangerButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
-            .background(Color(red: 0.6, green: 0.0, blue: 0.0).opacity(0.1))
-            .foregroundColor(Color(red: 0.6, green: 0.0, blue: 0.0))
+            .background(Color(UIColor.systemBackground))
+            .foregroundColor(Color.primary)
             .cornerRadius(12)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color(red: 0.6, green: 0.0, blue: 0.0), lineWidth: 2)
+                    .stroke(Color.primary, lineWidth: 2)
             )
             .opacity(configuration.isPressed ? 0.8 : 1.0)
     }
 }
+
