@@ -43,7 +43,7 @@
   "feedback": {
     "gentleFailureMissedManipulation": {
       "title": "A Perfect Learning Moment!",
-      "message": "It is so natural to want to resolve a concerning warning quickly! But let's look closer: this message was using a psychological pattern called 'False Urgency'. By using threatening words and tight time limits, bad actors try to force you into a rushed decision. Remember, real organizations will never force you to act in a panic. When you feel rushed, the safest move is to stop and breathe. Let's try another one!"
+      "message": "It is so natural to want to resolve a concerning warning quickly! But let's look closer: this message was using a psychological pattern called 'False Urgency'. By using threatening words and tight time limits, bad actors try to force you into a rushed decision. Remember, real organizations will never force you to act in a panic. When you feel rushed, the safest move is to stop, breathe, and verify by calling a number you already know. Let's try another one!"
     },
     "gentleFailureFlaggedSafe": {
       "title": "Wonderful Caution!",
