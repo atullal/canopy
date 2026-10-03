@@ -94,6 +94,18 @@ export default function Home() {
               </p>
             </a>
 
+
+            <a 
+              href="/v4-phantom-debt" 
+              className="group block border-orange-300 bg-orange-50 rounded-xl p-6 hover:border-orange-500 hover:shadow-md transition-all"
+            >
+              <h3 className="text-xl font-bold mb-2 text-orange-700 group-hover:text-orange-900 transition-colors">
+                🧾 Practice Fake Bills (V4) &rarr;
+              </h3>
+              <p className="text-gray-800">
+                A safe sandbox to practice spotting fake bills and the Phantom Debt psychological pattern.
+              </p>
+            </a>
           </div>
         </div>
       </main>
