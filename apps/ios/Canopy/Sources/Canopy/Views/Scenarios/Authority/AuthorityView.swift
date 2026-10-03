@@ -85,6 +85,7 @@ public struct AuthorityView: View {
                                 }
                             }
                             .font(.callout)
+                            .frame(minHeight: 44)
                             .padding(.top, 8)
                         }
                         
