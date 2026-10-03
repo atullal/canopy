@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import AdaptiveHesitationEngine from './AdaptiveHesitationEngine';
 import SplitScreenCompare from './SplitScreenCompare';
+import posthog from '../../utils/posthog';
 
 type ActionType = "primary" | "danger";
 
@@ -56,6 +57,7 @@ export default function AuthorityScenario({ data }: { data: ScenarioData }) {
           setFeedback(data.feedback.success);
         }
       } else {
+        posthog.capture('scam_clicked', { challengeId: currentChallenge.id, reason: 'flagged_safe_as_manipulation' });
         setFeedback(data.feedback.gentleFailureFlaggedSafe);
       }
     } else if (actionId === 'safe') {
@@ -66,6 +68,7 @@ export default function AuthorityScenario({ data }: { data: ScenarioData }) {
           setFeedback(data.feedback.success);
         }
       } else {
+        posthog.capture('scam_clicked', { challengeId: currentChallenge.id, reason: 'missed_manipulation' });
         setFeedback(data.feedback.gentleFailureMissedManipulation);
       }
     }
