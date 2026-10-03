@@ -10,5 +10,5 @@
 2. **C (Assistive Technology):** The heading order violation in `AuthorityScenario.tsx` was fixed by changing `<h3>` to `<h2>`.
 
 ## Evidence
-- Web CI run: [SUCCESS](https://github.com/atullal/canopy/actions/runs/37142713220/job/111260276416)
+- Web CI run: [SUCCESS](https://github.com/atullal/canopy/actions/runs/37143514776/job/111262669439)
 - Tests passed locally for `__tests__/AuthorityScenario.test.tsx`.
